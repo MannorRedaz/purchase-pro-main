@@ -1,18 +1,5 @@
 # 项目排除路径
 /web/node_modules/
 /spring-boot/target/
+/spring-boot/.idea/
 
-.DS_Store
-node_modules/
-/dist/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# Editor directories and files
-.idea
-.vscode
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
