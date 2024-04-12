@@ -1,5 +1,7 @@
 package cn.mono.purchase.service.impl;
 
+import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.StrUtil;
 import cn.mono.purchase.dto.Login;
 import cn.mono.purchase.dto.Message;
 import cn.mono.purchase.mapper.*;
@@ -12,6 +14,9 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+import static cn.mono.purchase.constants.Constants.ACCOUNT_NOT_EXIST;
+import static cn.mono.purchase.constants.Constants.PASSWORD_OR_USERNAME_NOTEMPTY;
+
 /**
  * @author nihao
  * @time 2021/3/13
@@ -23,7 +28,7 @@ public class LoginServiceImpl implements LoginService {
     @Autowired
     PresidentMapper presidentMapper;
     @Autowired
-    School_administratorMapper school_administratorMapper;
+    School_administratorMapper schoolAdministratorMapper;
     @Autowired
     SupperMapper supperMapper;
     @Autowired
@@ -34,19 +39,17 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public Message supplierLogin(Login supplier) {
-//        System.out.println(supplier);
         message.clear();
-        if(supplier.getPwd()==null||supplier.getName()==null){
+        if (StrUtil.isEmpty(supplier.getName())||StrUtil.isEmpty(supplier.getPwd())){
             message.setSuccess(false);
-            message.setMsg("账号或密码不能为空");
+            message.setMsg(PASSWORD_OR_USERNAME_NOTEMPTY);
             return message;
         }
-        //why supplierMapper.selectByName(supplier.getName());
         Supplier supplier1 = supplierMapper.selectByName(supplier.getName());
 
-        if (supplier1==null){
+        if (ObjectUtil.isEmpty(supplier1)){
             message.setSuccess(false);
-            message.setMsg("该账号不存在");
+            message.setMsg(ACCOUNT_NOT_EXIST);
             return message;
         }
         if (supplier1.getPwd().equals(supplier.getPwd())){
@@ -94,7 +97,7 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public Message schoolAdministratorLogin(Login school_administrator) {
         message.clear();
-        SchoolAdministrator school_administrator1 = school_administratorMapper.selectByName(school_administrator.getName());
+        SchoolAdministrator school_administrator1 = schoolAdministratorMapper.selectByName(school_administrator.getName());
         List<SchoolAdministrator> list = new ArrayList<>();
         if (school_administrator1==null){
             message.setSuccess(false);
@@ -134,9 +137,7 @@ public class LoginServiceImpl implements LoginService {
             message.setP(2);
         }else {
             message.setSuccess(false);
-
-                message.setMsg("密码或验证码不正确");
-
+            message.setMsg("密码或验证码不正确");
         }
         return message;
     }
@@ -152,7 +153,6 @@ public class LoginServiceImpl implements LoginService {
             return message;
         }
         if (supper.getPwd().equals(supper1.getPwd())){
-            System.out.println("supper success"+supper1.getName());
             list.add(supper1);
             message.setDate(list);
             message.setSuccess(true);
@@ -169,7 +169,7 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public Message administerLogin(Login login) {
         message.clear();
-        System.out.println("administerLogin");
+        
         if(login.getPwd()==null||login.getName()==null){
             message.setSuccess(false);
             message.setMsg("账号或密码不能为空");

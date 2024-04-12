@@ -110,14 +110,14 @@ public class SupplierController {
     }
 
     // 供应商申请结果接口
-    @RequestMapping(value = "supResult ", method = RequestMethod.POST)
+    @RequestMapping(value = "supResult", method = RequestMethod.POST)
     @ResponseBody
     public Message supResult(@RequestBody int sid) {
         return supplierService.supResult(sid);
     }
 
     // 供应商申请结果接口
-    @RequestMapping(value = "infoUpdate ", method = RequestMethod.POST)
+    @RequestMapping(value = "infoUpdate", method = RequestMethod.POST)
     //@PostMapping("supplierLogin")
     @ResponseBody
     public Message infoUpdate(@RequestBody Supplier supplier) {
@@ -125,7 +125,7 @@ public class SupplierController {
     }
 
     // 供应商入围申请
-    @RequestMapping(value = "applyShortList ", method = RequestMethod.POST)
+    @RequestMapping(value = "applyShortList", method = RequestMethod.POST)
     @ResponseBody
     public Message applyShortList(@RequestBody ApplyForShortlist afs) {
         return supplierService.applyShortList(afs);

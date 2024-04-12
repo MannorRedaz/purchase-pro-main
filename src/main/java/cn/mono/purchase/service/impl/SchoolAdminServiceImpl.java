@@ -325,9 +325,9 @@ public class SchoolAdminServiceImpl implements SchoolAdminService {
 
         AcademyCategory academy_category = new AcademyCategory();
         academy_category.setAcademy_name(preAdmin.getAcademy_name());
-        System.out.println("fgjaiogj");
+        
 
-        System.out.println("fgjaiogj"+preAdmin.getSid());
+        
         academy_category.setSid(preAdmin.getSid());
 
         academy_category.setBudget(preAdmin.getBudget());
@@ -372,8 +372,8 @@ public class SchoolAdminServiceImpl implements SchoolAdminService {
             return msg;
         }
 
-        System.out.println("nihao");
-        System.out.println(president.getName());
+        
+        
         try {
             presidentMapper.selectByName(president.getName());
         }
@@ -428,7 +428,7 @@ public class SchoolAdminServiceImpl implements SchoolAdminService {
     public Message deletePresident(int id) {
         int i = 0;
         try {
-            System.out.println("yes"+id);
+            
             i = presidentMapper.deleteByPrimaryKey(id);
         }catch (Exception e){
             msg = new Message();
@@ -489,7 +489,7 @@ public class SchoolAdminServiceImpl implements SchoolAdminService {
         purchaser.setCount(preAdmin.getCount());
         purchaser.setName(preAdmin.getName());
         purchaser.setSid(1);
-        System.out.println(academy_category.getCid());
+        
         President president = presidentMapper.selectByCid(academy_category.getCid()).get(0);
         purchaser.setPrid(president.getId());
         purchaser.setPwd("123456");
@@ -579,7 +579,7 @@ public class SchoolAdminServiceImpl implements SchoolAdminService {
 
     @Override
     public Message supplyApprove(int id) {
-        System.out.println("supplyApprove");
+        
         ApplyForShortlist i = apply_for_shortlistMapper.selectByPrimaryKey(id);
         i.setSchool_administrator_access(1);
         i.setAcademy_access("1");
@@ -662,19 +662,19 @@ public class SchoolAdminServiceImpl implements SchoolAdminService {
     @Override
     public Message selectDetail(Selecte selecte) {
         //查询历史订单
-        System.out.println("adskgjoa");
+        
 
-        System.out.println(selecte.toString());
+        
 
         List<PurchasingItems> purchasing_items = purchasing_itemsMapper.selectAll();
         List<PurchasingItems> purchasing_items1 = new ArrayList<>();
-        System.out.println("adskgjoa");
+        
 //只要有结果的
         for (PurchasingItems item : purchasing_items
         ) {
             try{
                 if (item.getIs_result() == 1) {
-                    System.out.println(item.toString());
+                    
                     purchasing_items1.add(item);
                 }
             }
@@ -689,7 +689,7 @@ public class SchoolAdminServiceImpl implements SchoolAdminService {
         }
         purchasing_items1.clear();
         int i = 0;
-        System.out.println(selecte.getAcademy());
+        
         //判断是否需要学院的筛选
         if (selecte.getAcademy() != null) {
             AcademyCategory academy_category = academy_categoryMapper.selectByName(selecte.getAcademy());
@@ -712,10 +712,10 @@ public class SchoolAdminServiceImpl implements SchoolAdminService {
         }
 
         //list list1 null 数组越界get(0)
-        System.out.println("683");
+        
 //这里有问题
         if (selecte.getValue1().size()>0) {
-            System.out.println("683"+selecte.getValue1().size());
+            
 
             for (PurchasingItems item : purchasing_items
             ) { if(item==null)break;
@@ -743,7 +743,7 @@ public class SchoolAdminServiceImpl implements SchoolAdminService {
             purchasing_items1.clear();
 
         }
-        System.out.println("712");
+        
 
 
 
@@ -755,16 +755,16 @@ public class SchoolAdminServiceImpl implements SchoolAdminService {
             if (result != null)
                 count = count + result.getReality_price();//17900
         }
-        System.out.println("总金额"+count);
+        
         msg = new Message();
         msg.setSuccess(true);
         msg.setMsg("查询到" + purchasing_items.size() + "条记录");
         msg.setStatus((int) count);
         msg.setDate(purchasing_items);
 
-        System.out.println("gighgui");
-        System.out.println("获取到"+purchasing_items.size());
-        System.out.println(purchasing_items.toString());
+        
+        
+        
         return msg;
     }
 

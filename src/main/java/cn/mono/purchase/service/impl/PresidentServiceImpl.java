@@ -351,7 +351,7 @@ public class PresidentServiceImpl implements PresidentService {
     @Override
     public Message selectDetail(Selecte selecte) {
 
-        System.out.println(selecte.toString());
+        
         List<PurchasingItems> purchasing_items = purchasing_itemsMapper.selectAll();
         List<PurchasingItems> purchasing_items1 = new ArrayList<>();
         int i = 0;
@@ -389,7 +389,7 @@ public class PresidentServiceImpl implements PresidentService {
             for (PurchasingItems p : purchasing_items
             ) {
                 if (p.getAcceess() == 11 && p.getPurchase_name() != null && p.getPurchase_name().length() > 0) {
-                    System.out.println("p.getPurchase_name()" + p.getPurchase_name());
+                    
                     purchasing_items1.add(p);
                 }
             }
@@ -405,10 +405,10 @@ public class PresidentServiceImpl implements PresidentService {
             ) {
                 int res2 = item.getPublish_time().compareTo(selecte.getValue1().get(0));
                 int res1 = item.getPublish_time().compareTo(c);
-                System.out.println(c);
-                System.out.println(res1);
-                System.out.println(res2);
-                System.out.println(c); //2020 2021 res2 2020 0 res1 2021 1
+                
+                
+                
+                 //2020 2021 res2 2020 0 res1 2021 1
                 if (res2 >= 0 && res1 <= 0) {
                     purchasing_items1.add(item);
                 }
@@ -503,7 +503,7 @@ public class PresidentServiceImpl implements PresidentService {
 
     @Override
     public Message purchaseScreen(Selecte selecte) {
-        System.out.println(selecte.toString());
+        
         List<PurchasingItems> purchasing_items = purchasing_itemsMapper.selectAll();
         List<PurchasingItems> purchasing_items1 = new ArrayList<>();
         int i = 0;
@@ -530,7 +530,7 @@ public class PresidentServiceImpl implements PresidentService {
 
 
         //list list1 null
-        System.out.println(selecte.getValue1());
+        
         for (PurchasingItems p : purchasing_items) {
             if (p.getAcceess() == 11 && p.getPurchase_name() != null && p.getPurchase_name().length() > 0) {
                 purchasing_items1.add(p);

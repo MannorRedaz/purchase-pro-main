@@ -78,10 +78,10 @@ public class SupplierServiceImpl implements SupplierService {
         //查询某个采购的所有记录
         List<BiddingApplication> bidding_applications = bidding_applicationMapper.selectByPurchaingItemId(ba.getPurid());
         //判断申请人员是否为同一人员，且商品名相同
-        System.out.println(ba.getId());
+        
         ba.setId(null);
         List<BiddingApplication> bs = bidding_applicationMapper.selectBySid(ba.getId());
-        System.out.println("zheli" + bs.toString());
+        
         if (bs.size() > 0) {
             msg = new Message();
             msg.setSuccess(false);
@@ -269,8 +269,8 @@ public class SupplierServiceImpl implements SupplierService {
 
         File file = new File("D:\\R_normal_soft\\idea\\study\\ssm\\supplyFile\\supSupplyFile\\" + afs.getSid() + ".pdf");
         File file1 = new File("D:\\R_normal_soft\\idea\\study\\ssm\\supplyFile\\supSupplyFile\\" + afs.getSid() + ".doc");
-        System.out.println("nihao");
-        System.out.println(afs.getSid());
+        
+        
 
         if (!file.exists() && !file1.exists()) {
             msg = new Message();
@@ -411,11 +411,11 @@ public class SupplierServiceImpl implements SupplierService {
     @Override
     public Message getResultListBySupplierId(int sid) {
 
-        System.out.println("155819257hjkdhsfauhghsajkl");
-        System.out.println(sid + "155819257hjkdhsfauhghsajkl");
+        
+        
         List<Result> list = resultMapper.selectBySupplierId(sid);
-        System.out.println(list);
-        System.out.println();
+        
+        
         if (list != null) {
             msg = new Message();
             msg.setSuccess(true);
@@ -447,7 +447,7 @@ public class SupplierServiceImpl implements SupplierService {
 
     @Override
     public Message applyListScreen(Selecte selecte) {
-        System.out.println(selecte.toString());
+        
         //selecte.getAcademy()
         //查询该供应商的申请
         List<BiddingApplication> bidding_applications = bidding_applicationMapper.selectBySupplierId(Integer.valueOf(selecte.getType()));
@@ -587,16 +587,16 @@ public class SupplierServiceImpl implements SupplierService {
         //查询结果订单
         List<Result> results = resultMapper.selectBySupplierId(sid);
         List<SupplierDetail> supplierDetails = new ArrayList<>();
-        System.out.println("length=" + purchasing_items.size());
+        
         for (BiddingApplication bd : bidding_applications) {
-            System.out.println("下一条");
+            
             SupplierDetail supplierDetail = new SupplierDetail();
             for (int len = 0; len < purchasing_items.size(); len++) {
-                System.out.println(bd.getPurid());
-                System.out.println("=?" + purchasing_items.get(len).getId());
+                
+                
                 if (bd.getPurid().toString().equals(purchasing_items.get(len).getId().toString())) {//这个订单
 
-                    System.out.println("符合" + " " + purchasing_items.get(len).getId());
+                    
                     supplierDetail.setBoardName(purchasing_items.get(len).getPurchase_name());
                     supplierDetail.setReallyPrice(bd.getRealy_price());
                     supplierDetail.setProductName(purchasing_items.get(len).getProduct_name());
@@ -612,7 +612,7 @@ public class SupplierServiceImpl implements SupplierService {
                         supplierDetail.setB(1);
                         for (Result re : results) {
                             if (re.getPid().toString().equals(purchasing_items.get(len).getId().toString())) {
-                                // System.out.println(re.getSid()+"uye"+sid);
+                                // 
 
                                 if (re.getSid().toString().equals(sidI.toString())) {
                                     supplierDetail.setB(2);
@@ -657,7 +657,7 @@ public class SupplierServiceImpl implements SupplierService {
         List<Result> results = resultMapper.selectBySupplierId(Integer.valueOf(selecte.getType()));
         List<SupplierDetail> supplierDetails = new ArrayList<>();
         List<SupplierDetail> supplierDetails1 = new ArrayList<>();
-        System.out.println(selecte.toString());
+        
         int acid = -1;
         if (selecte.getAcademy() != null) {
             for (AcademyCategory ac : academy_categories) {

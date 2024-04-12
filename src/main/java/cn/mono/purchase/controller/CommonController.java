@@ -83,7 +83,7 @@ public class CommonController {
     }
 
     // 产品类别接口
-    @RequestMapping(value = "getMinimumPrice ")
+    @RequestMapping(value = "getMinimumPrice")
     @ResponseBody
     public Message getMinimumPrice(int id) {
         return baseAcademyService.getMinimumPrice(id);
@@ -176,7 +176,7 @@ public class CommonController {
     @RequestMapping(value = "boardScreen", method = RequestMethod.POST)
     @ResponseBody
     public Message boardScreen(@RequestBody Selecte selecte) {
-        System.out.println(selecte.toString());
+        
         return baseAcademyService.boardScreen(selecte);
     }
 
@@ -184,7 +184,7 @@ public class CommonController {
     @RequestMapping(value = "boardScreen1", method = RequestMethod.POST)
     @ResponseBody
     public Message boardScreen1(@RequestBody Selecte selecte) {
-        System.out.println(selecte.toString());
+        
         return baseAcademyService.boardScreen1(selecte);
     }
 
@@ -257,7 +257,7 @@ public class CommonController {
             e.printStackTrace();
             return "上传错误";
         }
-        System.out.println(dirPath + newFileName);
+        
         return newFileName;
     }
 
@@ -271,7 +271,7 @@ public class CommonController {
     @CrossOrigin("*")
     @RequestMapping("downloadResultFile")
     public void downloadResultFile(int id, HttpServletResponse response) throws Exception {
-        System.out.println("downLoad4" + id);
+        
         String name = new String((baseAcademyService.getFileName(id) + ".pdf").getBytes("UTF-8"), "iso-8859-1");
         // Step4 利用FileUtils将文件转成byte数组
         String filename = id + ".pdf";
@@ -343,8 +343,8 @@ public class CommonController {
         response.setHeader("Content-Disposition", "attachment;filename=" + name);
         File file = null;
         id = purchasing_itemsMapper.selectByPrimaryKey(id).getErrol_type();
-        System.out.println(id);
-        System.out.println("id?");
+        
+        
         try {
             try {
                 filename = id + ".docx";
@@ -445,7 +445,7 @@ public class CommonController {
         }
         message.setSuccess(true);
         message.setMsg("上传成功");
-        System.out.println(dirPath + newFileName);
+        
         return message;
     }
 
@@ -461,7 +461,7 @@ public class CommonController {
             message.setMsg("上传错误");
             return message;
         }
-//        System.out.println("uploadPurchaseFile");
+//        
         //获取上传文件的原始名称
         String originalFilename = file.getOriginalFilename();
         //设置上传文件的保存地址目录
@@ -481,8 +481,8 @@ public class CommonController {
 
         //获取最大id
         id = supplierService.getPurchaseMaxID().getStatus().toString();
-//        System.out.println(id);
-//        System.out.println("id");
+//        
+//        
 
 
         String newFileName = id + "." + suffix;
@@ -508,7 +508,7 @@ public class CommonController {
         }
         message.setSuccess(true);
         message.setMsg("上传成功");
-        System.out.println(dirPath + newFileName);
+        
         return message;
     }
 
@@ -562,7 +562,7 @@ public class CommonController {
         }
         message.setSuccess(true);
         message.setMsg("上传成功");
-        System.out.println(dirPath + newFileName);
+        
         return message;
     }
 }

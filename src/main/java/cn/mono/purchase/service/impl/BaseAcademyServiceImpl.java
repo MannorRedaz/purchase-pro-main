@@ -149,7 +149,7 @@ public class BaseAcademyServiceImpl implements BaseAcademyService {
         for (PurchasingItems p : purchasing_items) {
 
             if (p.getAcceess() == 11 && p.getPurchase_name() != null && p.getPurchase_name().length() > 0) {
-                System.out.println("p.getPurchase_name()" + p.getPurchase_name());
+                
                 list.add(p);
             }
         }
@@ -281,7 +281,7 @@ public class BaseAcademyServiceImpl implements BaseAcademyService {
 
     @Override
     public Message boardScreen(Selecte selecte) {
-        System.out.println(selecte.toString());
+        
         List<PurchasingItems> purchasing_items = purchasingItemsMapper.selectAll();
         List<PurchasingItems> purchasing_items1 = new ArrayList<>();
         int i = 0;
@@ -412,7 +412,7 @@ public class BaseAcademyServiceImpl implements BaseAcademyService {
 
     @Override
     public Message addPurBoard(PurchasingItems purchasing_items) {
-        System.out.println(purchasing_items.getId() + "我有id吗");
+        
         purchasing_items.setPublish_time(new Date());
         int i = purchasingItemsMapper.updateByPrimaryKey(purchasing_items);
         if (i == 1) {
@@ -434,7 +434,7 @@ public class BaseAcademyServiceImpl implements BaseAcademyService {
 
     @Override
     public Message getBoardListByCid(int cid) {
-        System.out.println(cid);
+        
         List<PurchasingItems> list = new ArrayList<>();
         List<PurchasingItems> purchasing_items = null;
         if (cid == 0) {
@@ -583,7 +583,7 @@ public class BaseAcademyServiceImpl implements BaseAcademyService {
         }
 
         File file = new File("D:\\R_normal_soft\\idea\\study\\ssm\\boardFile\\resultFile\\" + id + ".pdf");
-        System.out.println("D:\\R_normal_soft\\idea\\study\\ssm\\boardFile\\reultFile\\" + id + ".pdf");
+        
         if (!file.exists()) {
             message = new Message();
             message.setSuccess(false);
@@ -644,7 +644,7 @@ public class BaseAcademyServiceImpl implements BaseAcademyService {
 
     @Override
     public Message boardScreen1(Selecte selecte) {
-        System.out.println(selecte.toString());
+        
         //selecte.getAcademy()
         List<PurchasingItems> purchasing_items = purchasingItemsMapper.selectAll();
         List<PurchasingItems> purchasing_items1 = new ArrayList<>();
@@ -765,8 +765,8 @@ public class BaseAcademyServiceImpl implements BaseAcademyService {
 
     @Override
     public Message getChartList(int id) {
-        System.out.println(id);
-        System.out.println(id);
+        
+        
 
         message = new Message();
         try {
@@ -908,7 +908,7 @@ public class BaseAcademyServiceImpl implements BaseAcademyService {
 //        }
 
         File file = new File("D:\\R_normal_soft\\idea\\study\\ssm\\boardFile\\resultFile\\" + ba.getPurid() + ".pdf");
-        System.out.println("D:\\R_normal_soft\\idea\\study\\ssm\\boardFile\\reultFile\\" + ba.getPurid() + ".pdf");
+        
         if (!file.exists()) {
             message = new Message();
             message.setSuccess(false);

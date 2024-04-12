@@ -22,21 +22,20 @@ public class SchoolAdminController {
     @Autowired
     SchoolAdminService schoolAdminService;
     // 删除入围公告
-    @RequestMapping(value = "deleteApplyBoard ")
+    @RequestMapping(value = "deleteApplyBoard")
     @ResponseBody
     public Message deleteApplyBoard(int   id) {
-        System.out.println(id);
         return schoolAdminService.deleteApplyBoard( id);
     }
     // 添加入围公告
-    @RequestMapping(value = "addApplyBoard ", method = RequestMethod.POST)
+    @RequestMapping(value = "addApplyBoard", method = RequestMethod.POST)
     @ResponseBody
     public Message addApplyBoard(@RequestBody ApplyBoard ab) {
         return schoolAdminService.addApplyBoard( ab);
     }
 
     // 供应商申请结果接口
-    @RequestMapping(value = "infoUpdate ", method = RequestMethod.POST)
+    @RequestMapping(value = "infoUpdate", method = RequestMethod.POST)
     @ResponseBody
     public Message infoUpdate(@RequestBody SchoolAdministrator school_administrator) {
         return schoolAdminService.infoUpdate(school_administrator);

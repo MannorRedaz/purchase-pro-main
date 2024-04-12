@@ -42,11 +42,9 @@ public class PurchaserServiceImpl implements PurchaserService {
         int i = 0;
         pi.setAcceess(0);
         pi.setErrol_type(purchasing_itemsMapper.selectLastInsert().getId()+1);
-        System.out.println(pi.getErrol_type());
 
-        System.out.println("pi.getErrol_type()");
         i = purchasing_itemsMapper.insert(pi);
-        System.out.println(pi);
+        
         if (i != 0) {
             msg = new Message();
             msg.setSuccess(true);
@@ -226,13 +224,13 @@ public class PurchaserServiceImpl implements PurchaserService {
     @Override
     public Message purchaseScreen(Selecte selecte) {
 
-        System.out.println(selecte.toString());
+        
         List<PurchasingItems> purchasing_items = purchasing_itemsMapper.selectAll();
         List<PurchasingItems> purchasing_items1 = new ArrayList<>();
         int i = 0;
         //判断是否需要学院的筛选
-        System.out.println("229");
-        System.out.println(purchasing_items.size());
+        
+        
 
         if (selecte.getAcademy()!= null) {
             AcademyCategory academy_category = academy_categoryMapper.selectByName(selecte.getAcademy());
@@ -253,8 +251,8 @@ public class PurchaserServiceImpl implements PurchaserService {
 
             }
         }
-        System.out.println("249");
-        System.out.println(purchasing_items.size());
+        
+        
 
         if (selecte.getCategories() != null) {
             ProductCategory product_category = product_categoryMapper.selectByName(selecte.getCategories());
@@ -264,7 +262,7 @@ public class PurchaserServiceImpl implements PurchaserService {
                 for (PurchasingItems item : purchasing_items
                 ) {
                     if (product_category.getPid() == item.getPid()) {
-                        System.out.println(i1++);
+                        
                         purchasing_items1.add(item);
                     }
                 }
@@ -279,7 +277,7 @@ public class PurchaserServiceImpl implements PurchaserService {
             }
         }
 
-        System.out.println("275");System.out.println(purchasing_items.size());
+        
         //list list1 null
         for(PurchasingItems p:purchasing_items){
             if(p.getAcceess()==11&&p.getPurchase_name()!=null&&p.getPurchase_name().length()>0){
@@ -292,10 +290,10 @@ public class PurchaserServiceImpl implements PurchaserService {
             purchasing_items.add(item);
         }
         purchasing_items1.clear();
-        System.out.println("284");
-        System.out.println(purchasing_items.size());
+        
+        
 
-        System.out.println(selecte.getValue1());
+        
         if (selecte.getValue1().get(0) != null || selecte.getValue1().get(1) != null) {
             int m = selecte.getValue1().get(1).compareTo(selecte.getValue1().get(0));
 
@@ -348,13 +346,13 @@ public class PurchaserServiceImpl implements PurchaserService {
     @Override
     public Message purchaseScreen1(Selecte selecte) {
 
-        System.out.println(selecte.toString());
+        
         List<PurchasingItems> purchasing_items = purchasing_itemsMapper.selectAll();
         List<PurchasingItems> purchasing_items1 = new ArrayList<>();
         int i = 0;
         //判断是否需要学院的筛选
-        System.out.println("229");
-        System.out.println(purchasing_items.size());
+        
+        
 
         if (selecte.getAcademy()!= null) {
             AcademyCategory academy_category = academy_categoryMapper.selectByName(selecte.getAcademy());
@@ -375,8 +373,8 @@ public class PurchaserServiceImpl implements PurchaserService {
 
             }
         }
-        System.out.println("249");
-        System.out.println(purchasing_items.size());
+        
+        
 
         if (selecte.getCategories() != null) {
             ProductCategory product_category = product_categoryMapper.selectByName(selecte.getCategories());
@@ -386,7 +384,7 @@ public class PurchaserServiceImpl implements PurchaserService {
                 for (PurchasingItems item : purchasing_items
                 ) {
                     if (product_category.getPid() == item.getPid()) {
-                        System.out.println(i1++);
+                        
                         purchasing_items1.add(item);
                     }
                 }
@@ -403,10 +401,10 @@ public class PurchaserServiceImpl implements PurchaserService {
 
 
         purchasing_items1.clear();
-        System.out.println("284");
-        System.out.println(purchasing_items.size());
+        
+        
 
-        System.out.println(selecte.getValue1());
+        
         if (selecte.getValue1().get(0) != null || selecte.getValue1().get(1) != null) {
             int m = selecte.getValue1().get(1).compareTo(selecte.getValue1().get(0));
 

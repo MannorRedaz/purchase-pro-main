@@ -8,6 +8,10 @@ public class Message {
 	private List date;
 	private Integer status = 0;
 
+	//代表是何种用户
+	private int  p;
+
+
 	public Integer getStatus() {
 		return status;
 	}
@@ -16,7 +20,6 @@ public class Message {
 		this.status = status;
 	}
 
-	private int  p;//代表是何种用户
 
 	public int getP() {
 		return p;
@@ -80,7 +83,6 @@ public class Message {
 
 	public Message() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 

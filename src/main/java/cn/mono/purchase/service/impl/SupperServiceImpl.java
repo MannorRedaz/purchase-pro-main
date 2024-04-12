@@ -125,14 +125,14 @@ public class SupperServiceImpl implements SupperService {
         try {
             school_categoryMapper.insert(school_category);
         }catch (Exception e){
-            System.out.println("yes,出问题了125");
+            
             msg=new Message();
             msg.setSuccess(false);
             msg.setMsg("该学校已有管理员");
             msg.setStatus(0);
             return msg;
         }
-        System.out.println("yes,出问题了132");
+        
         if(school_administratorMapper.selectByName((sa.getName()))!=null){
             msg=new Message();
             msg.setSuccess(false);
@@ -141,7 +141,7 @@ public class SupperServiceImpl implements SupperService {
             return msg;
         }
 
-        System.out.println("yes,出问题了141");
+        
         school_category=school_categoryMapper.selectByName(sa.getSchoolName());
         if(school_category==null){
             msg=new Message();
@@ -150,7 +150,7 @@ public class SupperServiceImpl implements SupperService {
             msg.setStatus(0);
             return msg;
         }
-        System.out.println("yes,出问题了158");
+        
         SchoolAdministrator school_administrator = new SchoolAdministrator();
         school_administrator.setSid(school_category.getSid());
         school_administrator.setContract_name(sa.getContract_name());

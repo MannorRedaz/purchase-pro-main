@@ -30,7 +30,7 @@ public class RegisterImpl implements Register {
 
     @Override
     public Message administerCheck(String name) {
-        System.out.println(name);
+        
         String pwd = mutiTableSelectMapper.selectCheckByName(name);
         if (name==null){
             message.setSuccess(false);
@@ -50,7 +50,7 @@ public class RegisterImpl implements Register {
     @Override
     public Message supplierCheckUser(String name) {
         name = name.substring(0,name.length()-1);
-        System.out.println(name);
+        
         message.clear();
         if (name==null){
             message.setSuccess(false);

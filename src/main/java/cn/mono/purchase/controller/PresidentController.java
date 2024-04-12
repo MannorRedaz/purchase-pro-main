@@ -110,14 +110,14 @@ public class PresidentController {
 //        return supplierService.applyShortListSelect()
 //    }
 // 供应商入围更新
-    @RequestMapping(value = "applyShortUpdate ", method = RequestMethod.POST)
+    @RequestMapping(value = "applyShortUpdate", method = RequestMethod.POST)
     @ResponseBody
     public Message applyShortUpdate(@RequestBody ApplyForShortlist afs) {
         return supplierService.applyShortListUpdate(afs);
     }
 
     //入围申请删除
-    @RequestMapping(value = "applyShortListDelete ", method = RequestMethod.POST)
+    @RequestMapping(value = "applyShortListDelete", method = RequestMethod.POST)
     @ResponseBody
     public Message applyShortListDelete(@RequestBody int id) {
         return supplierService.applyShortListDelete(id);
@@ -155,7 +155,7 @@ public class PresidentController {
     }
 
     // 供应商申请结果接口
-    @RequestMapping(value = "infoUpdate ", method = RequestMethod.POST)
+    @RequestMapping(value = "infoUpdate", method = RequestMethod.POST)
     @ResponseBody
     public Message infoUpdate(@RequestBody President president) {
         return presidentService.infoUpdate(president);

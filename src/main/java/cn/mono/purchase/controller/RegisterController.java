@@ -54,9 +54,9 @@ public class RegisterController {
     @RequestMapping(value = "supplierRegister",method = RequestMethod.POST)
     @ResponseBody
     public Message supplierRegister(@RequestBody Supplier supplier)  {
-        System.out.println(supplier.toString());
 
-        System.out.println(supplier.getPwd());
+
+
         return register.supplierRegister(supplier);
        // return null;
     }
