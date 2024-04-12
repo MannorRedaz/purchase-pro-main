@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.Purchasing_itemsMapper">
+  <resultMap id="BaseResultMap" type="pojo.Purchasing_items">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="cid" jdbcType="INTEGER" property="cid" />
+    <result column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="sid" jdbcType="INTEGER" property="sid" />
+    <result column="deadline" jdbcType="VARCHAR" property="deadline" />
+    <result column="product_name" jdbcType="VARCHAR" property="product_name" />
+    <result column="highest_price" jdbcType="INTEGER" property="highest_price" />
+    <result column="specified" jdbcType="INTEGER" property="specified" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, cid, pid, sid, deadline, product_name, highest_price, specified
+  </sql>
+  <select id="selectAll" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from purchasing_items
+
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from purchasing_items
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from purchasing_items
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="pojo.Purchasing_items">
+    insert into purchasing_items (id, cid, pid, 
+      sid, deadline, product_name, 
+      highest_price, specified)
+    values (#{id,jdbcType=INTEGER}, #{cid,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, 
+      #{sid,jdbcType=INTEGER}, #{deadline,jdbcType=VARCHAR}, #{product_name,jdbcType=VARCHAR}, 
+      #{highest_price,jdbcType=INTEGER}, #{specified,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="pojo.Purchasing_items">
+    insert into purchasing_items
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="cid != null">
+        cid,
+      </if>
+      <if test="pid != null">
+        pid,
+      </if>
+      <if test="sid != null">
+        sid,
+      </if>
+      <if test="deadline != null">
+        deadline,
+      </if>
+      <if test="product_name != null">
+        product_name,
+      </if>
+      <if test="highest_price != null">
+        highest_price,
+      </if>
+      <if test="specified != null">
+        specified,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="cid != null">
+        #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null">
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="sid != null">
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="deadline != null">
+        #{deadline,jdbcType=VARCHAR},
+      </if>
+      <if test="product_name != null">
+        #{product_name,jdbcType=VARCHAR},
+      </if>
+      <if test="highest_price != null">
+        #{highest_price,jdbcType=INTEGER},
+      </if>
+      <if test="specified != null">
+        #{specified,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="pojo.Purchasing_items">
+    update purchasing_items
+    <set>
+      <if test="cid != null">
+        cid = #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null">
+        pid = #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="sid != null">
+        sid = #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="deadline != null">
+        deadline = #{deadline,jdbcType=VARCHAR},
+      </if>
+      <if test="product_name != null">
+        product_name = #{product_name,jdbcType=VARCHAR},
+      </if>
+      <if test="highest_price != null">
+        highest_price = #{highest_price,jdbcType=INTEGER},
+      </if>
+      <if test="specified != null">
+        specified = #{specified,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="pojo.Purchasing_items">
+    update purchasing_items
+    set cid = #{cid,jdbcType=INTEGER},
+      pid = #{pid,jdbcType=INTEGER},
+      sid = #{sid,jdbcType=INTEGER},
+      deadline = #{deadline,jdbcType=VARCHAR},
+      product_name = #{product_name,jdbcType=VARCHAR},
+      highest_price = #{highest_price,jdbcType=INTEGER},
+      specified = #{specified,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
