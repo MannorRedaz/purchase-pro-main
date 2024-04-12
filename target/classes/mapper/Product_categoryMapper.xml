@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.mono.purchase.mapper.Product_categoryMapper">
+  <resultMap id="BaseResultMap" type="cn.mono.purchase.pojo.ProductCategory">
+    <id column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="product_name" jdbcType="VARCHAR" property="product_name" />
+    <result column="types" jdbcType="VARCHAR" property="types" />
+    <result column="sid" jdbcType="INTEGER" property="sid" />
+    <result column="tag" jdbcType="VARCHAR" property="tag" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    pid, product_name, types, sid, tag
+  </sql>
+  <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from product_category
+where  product_name=#{name}
+
+  </select>
+  <select id="selectAll" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from product_category
+
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from product_category
+    where pid = #{pid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from product_category
+    where pid = #{pid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.mono.purchase.pojo.ProductCategory">
+    insert into product_category (pid, product_name, types, 
+      sid, tag)
+    values (#{pid,jdbcType=INTEGER}, #{product_name,jdbcType=VARCHAR}, #{types,jdbcType=VARCHAR}, 
+      #{sid,jdbcType=INTEGER}, #{tag,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.mono.purchase.pojo.ProductCategory">
+    insert into product_category
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pid != null">
+        pid,
+      </if>
+      <if test="product_name != null">
+        product_name,
+      </if>
+      <if test="types != null">
+        types,
+      </if>
+      <if test="sid != null">
+        sid,
+      </if>
+      <if test="tag != null">
+        tag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pid != null">
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="product_name != null">
+        #{product_name,jdbcType=VARCHAR},
+      </if>
+      <if test="types != null">
+        #{types,jdbcType=VARCHAR},
+      </if>
+      <if test="sid != null">
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="tag != null">
+        #{tag,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.mono.purchase.pojo.ProductCategory">
+    update product_category
+    <set>
+      <if test="product_name != null">
+        product_name = #{product_name,jdbcType=VARCHAR},
+      </if>
+      <if test="types != null">
+        types = #{types,jdbcType=VARCHAR},
+      </if>
+      <if test="sid != null">
+        sid = #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="tag != null">
+        tag = #{tag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where pid = #{pid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.mono.purchase.pojo.ProductCategory">
+    update product_category
+    set product_name = #{product_name,jdbcType=VARCHAR},
+      types = #{types,jdbcType=VARCHAR},
+      sid = #{sid,jdbcType=INTEGER},
+      tag = #{tag,jdbcType=VARCHAR}
+    where pid = #{pid,jdbcType=INTEGER}
+  </update>
+</mapper>

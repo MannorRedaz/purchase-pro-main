@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.mono.purchase.mapper.Apply_boardMapper">
+  <resultMap id="BaseResultMap" type="cn.mono.purchase.pojo.ApplyBoard">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="startTime" jdbcType="DATE" property="startTime" />
+    <result column="endTime" jdbcType="DATE" property="endTime" />
+    <result column="boardname" jdbcType="VARCHAR" property="boardname" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, startTime, endTime, boardname
+  </sql>
+
+  <select id="selectAll"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from apply_board
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from apply_board
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from apply_board
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.mono.purchase.pojo.ApplyBoard">
+    insert into apply_board (id, startTime, endTime, 
+      boardname)
+    values (#{id,jdbcType=INTEGER}, #{startTime,jdbcType=DATE}, #{endTime,jdbcType=DATE}, 
+      #{boardname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.mono.purchase.pojo.ApplyBoard">
+    insert into apply_board
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="startTime != null">
+        startTime,
+      </if>
+      <if test="endTime != null">
+        endTime,
+      </if>
+      <if test="boardname != null">
+        boardname,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=DATE},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=DATE},
+      </if>
+      <if test="boardname != null">
+        #{boardname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.mono.purchase.pojo.ApplyBoard">
+    update apply_board
+    <set>
+      <if test="startTime != null">
+        startTime = #{startTime,jdbcType=DATE},
+      </if>
+      <if test="endTime != null">
+        endTime = #{endTime,jdbcType=DATE},
+      </if>
+      <if test="boardname != null">
+        boardname = #{boardname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.mono.purchase.pojo.ApplyBoard">
+    update apply_board
+    set startTime = #{startTime,jdbcType=DATE},
+      endTime = #{endTime,jdbcType=DATE},
+      boardname = #{boardname,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

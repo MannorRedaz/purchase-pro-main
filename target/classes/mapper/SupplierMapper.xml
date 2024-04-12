@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.mono.purchase.mapper.SupplierMapper">
+  <resultMap id="BaseResultMap" type="cn.mono.purchase.pojo.Supplier">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="sid" jdbcType="INTEGER" property="sid" />
+    <result column="cid" jdbcType="INTEGER" property="cid" />
+    <result column="contract_name" jdbcType="VARCHAR" property="contract_name" />
+    <result column="tel" jdbcType="VARCHAR" property="tel" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="pwd" jdbcType="VARCHAR" property="pwd" />
+    <result column="account" jdbcType="VARCHAR" property="account" />
+    <result column="company_name" jdbcType="VARCHAR" property="company_name" />
+    <result column="company_place" jdbcType="VARCHAR" property="company_place" />
+    <result column="access" jdbcType="INTEGER" property="access" />
+    <result column="corporation" jdbcType="VARCHAR" property="corporation" />
+    <result column="corporation_tel" jdbcType="VARCHAR" property="corporation_tel" />
+    <result column="brief_introduction" jdbcType="VARCHAR" property="brief_introduction" />
+    <result column="tag" jdbcType="VARCHAR" property="tag" />
+    <result column="last_time" jdbcType="DATE" property="last_time" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, sid, cid, contract_name, tel, name, pwd, account, company_name, company_place, 
+    access, corporation, corporation_tel, brief_introduction, tag, last_time
+  </sql>
+
+  <select id="selectAll" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select * from purchase.supplier
+  </select>
+
+  <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select * from purchase.supplier where name=#{name}
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from supplier
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from supplier
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.mono.purchase.pojo.Supplier">
+    insert into supplier (id, sid, cid, 
+      contract_name, tel, name, 
+      pwd, account, company_name, 
+      company_place, access, corporation, 
+      corporation_tel, brief_introduction, tag, 
+      last_time)
+    values (#{id,jdbcType=INTEGER}, #{sid,jdbcType=INTEGER}, #{cid,jdbcType=INTEGER}, 
+      #{contract_name,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{pwd,jdbcType=VARCHAR}, #{account,jdbcType=VARCHAR}, #{company_name,jdbcType=VARCHAR}, 
+      #{company_place,jdbcType=VARCHAR}, #{access,jdbcType=INTEGER}, #{corporation,jdbcType=VARCHAR}, 
+      #{corporation_tel,jdbcType=VARCHAR}, #{brief_introduction,jdbcType=VARCHAR}, #{tag,jdbcType=VARCHAR}, 
+      #{last_time,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.mono.purchase.pojo.Supplier">
+    insert into supplier
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="sid != null">
+        sid,
+      </if>
+      <if test="cid != null">
+        cid,
+      </if>
+      <if test="contract_name != null">
+        contract_name,
+      </if>
+      <if test="tel != null">
+        tel,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="pwd != null">
+        pwd,
+      </if>
+      <if test="account != null">
+        account,
+      </if>
+      <if test="company_name != null">
+        company_name,
+      </if>
+      <if test="company_place != null">
+        company_place,
+      </if>
+      <if test="access != null">
+        access,
+      </if>
+      <if test="corporation != null">
+        corporation,
+      </if>
+      <if test="corporation_tel != null">
+        corporation_tel,
+      </if>
+      <if test="brief_introduction != null">
+        brief_introduction,
+      </if>
+      <if test="tag != null">
+        tag,
+      </if>
+      <if test="last_time != null">
+        last_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="sid != null">
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="cid != null">
+        #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="contract_name != null">
+        #{contract_name,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null">
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null">
+        #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null">
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="company_name != null">
+        #{company_name,jdbcType=VARCHAR},
+      </if>
+      <if test="company_place != null">
+        #{company_place,jdbcType=VARCHAR},
+      </if>
+      <if test="access != null">
+        #{access,jdbcType=INTEGER},
+      </if>
+      <if test="corporation != null">
+        #{corporation,jdbcType=VARCHAR},
+      </if>
+      <if test="corporation_tel != null">
+        #{corporation_tel,jdbcType=VARCHAR},
+      </if>
+      <if test="brief_introduction != null">
+        #{brief_introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="tag != null">
+        #{tag,jdbcType=VARCHAR},
+      </if>
+      <if test="last_time != null">
+        #{last_time,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.mono.purchase.pojo.Supplier">
+    update supplier
+    <set>
+      <if test="sid != null">
+        sid = #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="cid != null">
+        cid = #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="contract_name != null">
+        contract_name = #{contract_name,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null">
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null">
+        pwd = #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null">
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="company_name != null">
+        company_name = #{company_name,jdbcType=VARCHAR},
+      </if>
+      <if test="company_place != null">
+        company_place = #{company_place,jdbcType=VARCHAR},
+      </if>
+      <if test="access != null">
+        access = #{access,jdbcType=INTEGER},
+      </if>
+      <if test="corporation != null">
+        corporation = #{corporation,jdbcType=VARCHAR},
+      </if>
+      <if test="corporation_tel != null">
+        corporation_tel = #{corporation_tel,jdbcType=VARCHAR},
+      </if>
+      <if test="brief_introduction != null">
+        brief_introduction = #{brief_introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="tag != null">
+        tag = #{tag,jdbcType=VARCHAR},
+      </if>
+      <if test="last_time != null">
+        last_time = #{last_time,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.mono.purchase.pojo.Supplier">
+    update supplier
+    set sid = #{sid,jdbcType=INTEGER},
+      cid = #{cid,jdbcType=INTEGER},
+      contract_name = #{contract_name,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      pwd = #{pwd,jdbcType=VARCHAR},
+      account = #{account,jdbcType=VARCHAR},
+      company_name = #{company_name,jdbcType=VARCHAR},
+      company_place = #{company_place,jdbcType=VARCHAR},
+      access = #{access,jdbcType=INTEGER},
+      corporation = #{corporation,jdbcType=VARCHAR},
+      corporation_tel = #{corporation_tel,jdbcType=VARCHAR},
+      brief_introduction = #{brief_introduction,jdbcType=VARCHAR},
+      tag = #{tag,jdbcType=VARCHAR},
+      last_time = #{last_time,jdbcType=DATE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

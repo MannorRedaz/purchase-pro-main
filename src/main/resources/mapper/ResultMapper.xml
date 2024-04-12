@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.mono.purchase.mapper.ResultMapper">
+  <resultMap id="BaseResultMap" type="cn.mono.purchase.pojo.Result">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="sid" jdbcType="INTEGER" property="sid" />
+    <result column="scis" jdbcType="INTEGER" property="scis" />
+    <result column="Purchase_id" jdbcType="INTEGER" property="purchase_id" />
+    <result column="actual_product_name" jdbcType="VARCHAR" property="actual_product_name" />
+    <result column="reality_price" jdbcType="INTEGER" property="reality_price" />
+    <result column="date" jdbcType="DATE" property="date" />
+    <result column="tag" jdbcType="VARCHAR" property="tag" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, pid, sid, scis, Purchase_id, actual_product_name, reality_price, date, tag
+  </sql>
+
+
+  <select id="selectByPIId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from result
+    where pid=#{pid}
+  </select>
+
+  <select id="selectBySupplierId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from result
+    where sid=#{sid}
+  </select>
+  <select id="selectByPurchaseId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from result
+    where Purchase_id=#{Purchase_id}
+  </select>
+
+
+  <select id="getSupResultList" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from result
+    where sid=#{sid,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectAll"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from result
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from result
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from result
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.mono.purchase.pojo.Result">
+    insert into result (id, pid, sid, 
+      scis, Purchase_id, actual_product_name, 
+      reality_price, date, tag
+      )
+    values (#{id,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, #{sid,jdbcType=INTEGER}, 
+      #{scis,jdbcType=INTEGER}, #{purchase_id,jdbcType=INTEGER}, #{actual_product_name,jdbcType=VARCHAR}, 
+      #{reality_price,jdbcType=INTEGER}, #{date,jdbcType=DATE}, #{tag,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.mono.purchase.pojo.Result">
+    insert into result
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="pid != null">
+        pid,
+      </if>
+      <if test="sid != null">
+        sid,
+      </if>
+      <if test="scis != null">
+        scis,
+      </if>
+      <if test="purchase_id != null">
+        Purchase_id,
+      </if>
+      <if test="actual_product_name != null">
+        actual_product_name,
+      </if>
+      <if test="reality_price != null">
+        reality_price,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+      <if test="tag != null">
+        tag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null">
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="sid != null">
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="scis != null">
+        #{scis,jdbcType=INTEGER},
+      </if>
+      <if test="purchase_id != null">
+        #{purchase_id,jdbcType=INTEGER},
+      </if>
+      <if test="actual_product_name != null">
+        #{actual_product_name,jdbcType=VARCHAR},
+      </if>
+      <if test="reality_price != null">
+        #{reality_price,jdbcType=INTEGER},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=DATE},
+      </if>
+      <if test="tag != null">
+        #{tag,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.mono.purchase.pojo.Result">
+    update result
+    <set>
+      <if test="pid != null">
+        pid = #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="sid != null">
+        sid = #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="scis != null">
+        scis = #{scis,jdbcType=INTEGER},
+      </if>
+      <if test="purchase_id != null">
+        Purchase_id = #{purchase_id,jdbcType=INTEGER},
+      </if>
+      <if test="actual_product_name != null">
+        actual_product_name = #{actual_product_name,jdbcType=VARCHAR},
+      </if>
+      <if test="reality_price != null">
+        reality_price = #{reality_price,jdbcType=INTEGER},
+      </if>
+      <if test="date != null">
+        date = #{date,jdbcType=DATE},
+      </if>
+      <if test="tag != null">
+        tag = #{tag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.mono.purchase.pojo.Result">
+    update result
+    set pid = #{pid,jdbcType=INTEGER},
+      sid = #{sid,jdbcType=INTEGER},
+      scis = #{scis,jdbcType=INTEGER},
+      Purchase_id = #{purchase_id,jdbcType=INTEGER},
+      actual_product_name = #{actual_product_name,jdbcType=VARCHAR},
+      reality_price = #{reality_price,jdbcType=INTEGER},
+      date = #{date,jdbcType=DATE},
+      tag = #{tag,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

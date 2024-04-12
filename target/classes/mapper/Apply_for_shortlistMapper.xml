@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.mono.purchase.mapper.Apply_for_shortlistMapper">
+    <resultMap id="BaseResultMap" type="cn.mono.purchase.pojo.ApplyForShortlist">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="sid" jdbcType="INTEGER" property="sid"/>
+        <result column="scid" jdbcType="INTEGER" property="scid"/>
+        <result column="date" jdbcType="DATE" property="date"/>
+        <result column="recommends" jdbcType="VARCHAR" property="recommends"/>
+        <result column="academy_access" jdbcType="VARCHAR" property="academy_access"/>
+        <result column="school_administrator_access" jdbcType="INTEGER" property="school_administrator_access"/>
+        <result column="causes" jdbcType="VARCHAR" property="causes"/>
+        <result column="tag" jdbcType="VARCHAR" property="tag"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id
+        , sid, scid, date, recommends, academy_access, school_administrator_access, causes,
+    tag
+    </sql>
+    <select id="selectBySupplierId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from applyForShortlist
+        where sid =#{sid}
+    </select>
+
+    <select id="getApplyForList" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from applyForShortlist
+        where sid =#{sid}
+    </select>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from applyForShortlist
+    </select>
+
+
+    <select id="selectByPurchaingItemId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from applyForShortlist
+        where = #{sid,jdbcType=INTEGER}
+    </select>
+    <select id="getApplyShortList" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from applyForShortlist
+        where sid = #{sid,jdbcType=INTEGER}
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from applyForShortlist
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from applyForShortlist
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <delete id="deleteBySid" parameterType="java.lang.Integer">
+        delete
+        from applyForShortlist
+        where sid = #{sid,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="cn.mono.purchase.pojo.ApplyForShortlist">
+        insert into applyForShortlist (id, sid, scid,
+                                       date, recommends, academy_access,
+                                       school_administrator_access, causes, tag)
+        values (#{id,jdbcType=INTEGER}, #{sid,jdbcType=INTEGER}, #{scid,jdbcType=INTEGER},
+                #{date,jdbcType=DATE}, #{recommends,jdbcType=VARCHAR}, #{academy_access,jdbcType=VARCHAR},
+                #{school_administrator_access,jdbcType=INTEGER}, #{causes,jdbcType=VARCHAR}, #{tag,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="cn.mono.purchase.pojo.ApplyForShortlist">
+        insert into applyForShortlist
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="sid != null">
+                sid,
+            </if>
+            <if test="scid != null">
+                scid,
+            </if>
+            <if test="date != null">
+                date,
+            </if>
+            <if test="recommends != null">
+                recommends,
+            </if>
+            <if test="academy_access != null">
+                academy_access,
+            </if>
+            <if test="school_administrator_access != null">
+                school_administrator_access,
+            </if>
+            <if test="causes != null">
+                causes,
+            </if>
+            <if test="tag != null">
+                tag,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="sid != null">
+                #{sid,jdbcType=INTEGER},
+            </if>
+            <if test="scid != null">
+                #{scid,jdbcType=INTEGER},
+            </if>
+            <if test="date != null">
+                #{date,jdbcType=DATE},
+            </if>
+            <if test="recommends != null">
+                #{recommends,jdbcType=VARCHAR},
+            </if>
+            <if test="academy_access != null">
+                #{academy_access,jdbcType=VARCHAR},
+            </if>
+            <if test="school_administrator_access != null">
+                #{school_administrator_access,jdbcType=INTEGER},
+            </if>
+            <if test="causes != null">
+                #{causes,jdbcType=VARCHAR},
+            </if>
+            <if test="tag != null">
+                #{tag,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="cn.mono.purchase.pojo.ApplyForShortlist">
+        update applyForShortlist
+        <set>
+            <if test="sid != null">
+                sid = #{sid,jdbcType=INTEGER},
+            </if>
+            <if test="scid != null">
+                scid = #{scid,jdbcType=INTEGER},
+            </if>
+            <if test="date != null">
+                date = #{date,jdbcType=DATE},
+            </if>
+            <if test="recommends != null">
+                recommends = #{recommends,jdbcType=VARCHAR},
+            </if>
+            <if test="academy_access != null">
+                academy_access = #{academy_access,jdbcType=VARCHAR},
+            </if>
+            <if test="school_administrator_access != null">
+                school_administrator_access = #{school_administrator_access,jdbcType=INTEGER},
+            </if>
+            <if test="causes != null">
+                causes = #{causes,jdbcType=VARCHAR},
+            </if>
+            <if test="tag != null">
+                tag = #{tag,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="cn.mono.purchase.pojo.ApplyForShortlist">
+        update applyForShortlist
+        set sid                         = #{sid,jdbcType=INTEGER},
+            scid                        = #{scid,jdbcType=INTEGER},
+            date                        = #{date,jdbcType=DATE},
+            recommends                  = #{recommends,jdbcType=VARCHAR},
+            academy_access              = #{academy_access,jdbcType=VARCHAR},
+            school_administrator_access = #{school_administrator_access,jdbcType=INTEGER},
+            causes                      = #{causes,jdbcType=VARCHAR},
+            tag                         = #{tag,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

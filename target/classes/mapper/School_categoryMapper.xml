@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.mono.purchase.mapper.School_categoryMapper">
+  <resultMap id="BaseResultMap" type="cn.mono.purchase.pojo.SchoolCategory">
+    <id column="sid" jdbcType="INTEGER" property="sid" />
+    <result column="school_name" jdbcType="VARCHAR" property="school_name" />
+    <result column="tag" jdbcType="VARCHAR" property="tag" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    sid, school_name, tag
+  </sql>
+
+
+  <select id="selectSchoolByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from school_category
+    <if test="_parameter!= null">
+      where  school_name LIKE concat('%',#{schoolName},'%')
+    </if>
+  </select>
+
+  <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+  select
+  <include refid="Base_Column_List" />
+  from school_category
+where school_name=#{schoolName}
+
+</select>
+  <select id="selectAll" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  select
+  <include refid="Base_Column_List" />
+  from school_category
+
+</select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from school_category
+    where sid = #{sid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from school_category
+    where sid = #{sid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.mono.purchase.pojo.SchoolCategory">
+    insert into school_category (sid, school_name, tag
+      )
+    values (#{sid,jdbcType=INTEGER}, #{school_name,jdbcType=VARCHAR}, #{tag,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.mono.purchase.pojo.SchoolCategory">
+    insert into school_category
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sid != null">
+        sid,
+      </if>
+      <if test="school_name != null">
+        school_name,
+      </if>
+      <if test="tag != null">
+        tag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sid != null">
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="school_name != null">
+        #{school_name,jdbcType=VARCHAR},
+      </if>
+      <if test="tag != null">
+        #{tag,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.mono.purchase.pojo.SchoolCategory">
+    update school_category
+    <set>
+      <if test="school_name != null">
+        school_name = #{school_name,jdbcType=VARCHAR},
+      </if>
+      <if test="tag != null">
+        tag = #{tag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.mono.purchase.pojo.SchoolCategory">
+    update school_category
+    set school_name = #{school_name,jdbcType=VARCHAR},
+      tag = #{tag,jdbcType=VARCHAR}
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+</mapper>

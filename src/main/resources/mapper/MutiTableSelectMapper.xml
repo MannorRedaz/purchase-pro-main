@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.mono.purchase.mapper.MutiTableSelectMapper">
+
+<select id="selectCheckByName" parameterType="java.lang.String" resultType="java.lang.String">
+    select pwd from purchase.purchaser where name=#{name} union all select pwd from purchase.president where name=#{name}
+    union all select pwd from purchase.school_administrator where name=#{name} union all select pwd from purchase.supper where name=#{name}
+# 嵌套查询 实现使用被人的条件
+</select>
+</mapper>
