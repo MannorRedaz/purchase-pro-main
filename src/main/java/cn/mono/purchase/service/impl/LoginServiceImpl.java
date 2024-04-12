@@ -1,21 +1,26 @@
 package cn.mono.purchase.service.impl;
 
+import cn.hutool.core.lang.UUID;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.mono.purchase.dto.Login;
+import cn.mono.purchase.dto.LoginRes;
 import cn.mono.purchase.dto.Message;
 import cn.mono.purchase.mapper.*;
 import cn.mono.purchase.pojo.*;
 
 import cn.mono.purchase.service.LoginService;
+import com.alibaba.fastjson2.JSON;
+import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
-import static cn.mono.purchase.constants.Constants.ACCOUNT_NOT_EXIST;
-import static cn.mono.purchase.constants.Constants.PASSWORD_OR_USERNAME_NOTEMPTY;
+import static cn.mono.purchase.constants.Constants.*;
 
 /**
  * @author nihao
@@ -33,6 +38,8 @@ public class LoginServiceImpl implements LoginService {
     SupperMapper supperMapper;
     @Autowired
     PurchaserMapper purchaserMapper;
+    @Resource
+    private RedisTemplate<String,String> redisTemplate;
 
 
     Message message= new Message();
@@ -53,9 +60,19 @@ public class LoginServiceImpl implements LoginService {
             return message;
         }
         if (supplier1.getPwd().equals(supplier.getPwd())){
-            List<Supplier> list = new ArrayList<>();
-            list.add(supplier1);
-            message.setDate(list);
+
+            List<Supplier> suppliers = new ArrayList<>();
+            suppliers.add(supplier1);
+
+            String token = createToken();
+            LoginRes<List<Supplier>> loginRes = new LoginRes<>(token);
+
+            redisTemplate.opsForValue().set(ADMIN_TOKEN_PREFIX+token, JSON.toJSONString(supplier1), TOKEN_EXPIRE_TIME, TimeUnit.MINUTES);
+            loginRes.setData(suppliers);
+
+            List<LoginRes<List<Supplier>>> data = new ArrayList<>();
+            data.add(loginRes);
+            message.setDate(data);
             message.setSuccess(true);
             message.setMsg("恭喜你，登陆成功");
             message.setP(1);
@@ -75,7 +92,7 @@ public class LoginServiceImpl implements LoginService {
         List<President> list = new ArrayList<>();
 
 
-        if (supplier1==null){
+        if (ObjectUtil.isEmpty(supplier1)){
             message.setSuccess(false);
             message.setMsg("该账号不存在");
             return message;
@@ -94,6 +111,9 @@ public class LoginServiceImpl implements LoginService {
         return message;
     }
 
+    /**
+     * 学校管理员
+     */
     @Override
     public Message schoolAdministratorLogin(Login school_administrator) {
         message.clear();
@@ -118,6 +138,10 @@ public class LoginServiceImpl implements LoginService {
         return message;
     }
 
+
+    /**
+     * 学院管理员登录
+     */
     @Override
     public Message purchaserLogin(Login purchaser) {
 
@@ -142,6 +166,9 @@ public class LoginServiceImpl implements LoginService {
         return message;
     }
 
+    /**
+     * 超级管理员登录
+     */
     @Override
     public Message supperLogin(Login supper) {
         message.clear();
@@ -170,7 +197,7 @@ public class LoginServiceImpl implements LoginService {
     public Message administerLogin(Login login) {
         message.clear();
         
-        if(login.getPwd()==null||login.getName()==null){
+        if(StrUtil.isEmpty(login.getName())||StrUtil.isEmpty(login.getPwd())){
             message.setSuccess(false);
             message.setMsg("账号或密码不能为空");
             return message;
@@ -200,5 +227,8 @@ public class LoginServiceImpl implements LoginService {
             return message;
         }
         return message;
+    }
+    String createToken() {
+        return UUID.randomUUID().toString().replace("-", "");
     }
 }

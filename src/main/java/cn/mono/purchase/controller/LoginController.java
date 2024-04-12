@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.*;
 public class LoginController {
     @Autowired
     LoginService loginService;
-    Message message;
 
     @PostMapping(value = "supplierLogin")
     public Message supplierLogin(@RequestBody Login login){

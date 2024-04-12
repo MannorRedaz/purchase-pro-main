@@ -11,4 +11,6 @@ public class Constants {
 
     public static final String PASSWORD_OR_USERNAME_ERROR = "密码或账号错误";
     public static final String ACCOUNT_NOT_EXIST = "该账号不存在";
+    public static final String ADMIN_TOKEN_PREFIX = "admin:token:";
+    public static final Integer TOKEN_EXPIRE_TIME = 60 * 60 * 24 * 7;
 }

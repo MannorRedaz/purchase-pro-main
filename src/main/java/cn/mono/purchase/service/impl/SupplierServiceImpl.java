@@ -17,6 +17,8 @@ import java.util.List;
  * @author nihao
  * @time 2021/4/16
  */
+
+@SuppressWarnings({"all"})
 @Service
 public class SupplierServiceImpl implements SupplierService {
     @Autowired
@@ -78,10 +80,10 @@ public class SupplierServiceImpl implements SupplierService {
         //查询某个采购的所有记录
         List<BiddingApplication> bidding_applications = bidding_applicationMapper.selectByPurchaingItemId(ba.getPurid());
         //判断申请人员是否为同一人员，且商品名相同
-        
+
         ba.setId(null);
         List<BiddingApplication> bs = bidding_applicationMapper.selectBySid(ba.getId());
-        
+
         if (bs.size() > 0) {
             msg = new Message();
             msg.setSuccess(false);
@@ -269,8 +271,7 @@ public class SupplierServiceImpl implements SupplierService {
 
         File file = new File("D:\\R_normal_soft\\idea\\study\\ssm\\supplyFile\\supSupplyFile\\" + afs.getSid() + ".pdf");
         File file1 = new File("D:\\R_normal_soft\\idea\\study\\ssm\\supplyFile\\supSupplyFile\\" + afs.getSid() + ".doc");
-        
-        
+
 
         if (!file.exists() && !file1.exists()) {
             msg = new Message();
@@ -411,11 +412,10 @@ public class SupplierServiceImpl implements SupplierService {
     @Override
     public Message getResultListBySupplierId(int sid) {
 
-        
-        
+
         List<Result> list = resultMapper.selectBySupplierId(sid);
-        
-        
+
+
         if (list != null) {
             msg = new Message();
             msg.setSuccess(true);
@@ -447,7 +447,7 @@ public class SupplierServiceImpl implements SupplierService {
 
     @Override
     public Message applyListScreen(Selecte selecte) {
-        
+
         //selecte.getAcademy()
         //查询该供应商的申请
         List<BiddingApplication> bidding_applications = bidding_applicationMapper.selectBySupplierId(Integer.valueOf(selecte.getType()));
@@ -587,16 +587,16 @@ public class SupplierServiceImpl implements SupplierService {
         //查询结果订单
         List<Result> results = resultMapper.selectBySupplierId(sid);
         List<SupplierDetail> supplierDetails = new ArrayList<>();
-        
+
         for (BiddingApplication bd : bidding_applications) {
-            
+
             SupplierDetail supplierDetail = new SupplierDetail();
             for (int len = 0; len < purchasing_items.size(); len++) {
-                
-                
+
+
                 if (bd.getPurid().toString().equals(purchasing_items.get(len).getId().toString())) {//这个订单
 
-                    
+
                     supplierDetail.setBoardName(purchasing_items.get(len).getPurchase_name());
                     supplierDetail.setReallyPrice(bd.getRealy_price());
                     supplierDetail.setProductName(purchasing_items.get(len).getProduct_name());
@@ -657,7 +657,7 @@ public class SupplierServiceImpl implements SupplierService {
         List<Result> results = resultMapper.selectBySupplierId(Integer.valueOf(selecte.getType()));
         List<SupplierDetail> supplierDetails = new ArrayList<>();
         List<SupplierDetail> supplierDetails1 = new ArrayList<>();
-        
+
         int acid = -1;
         if (selecte.getAcademy() != null) {
             for (AcademyCategory ac : academy_categories) {

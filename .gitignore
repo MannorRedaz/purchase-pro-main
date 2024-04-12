@@ -1,5 +1,4 @@
 # 项目排除路径
 /web/node_modules/
-/spring-boot/target/
-/spring-boot/.idea/
+/target/
 

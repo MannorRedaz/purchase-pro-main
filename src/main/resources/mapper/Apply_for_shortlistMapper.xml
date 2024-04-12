@@ -20,54 +20,54 @@
     <select id="selectBySupplierId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from applyForShortlist
+        from apply_for_shortlist
         where sid =#{sid}
     </select>
 
     <select id="getApplyForList" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from applyForShortlist
+        from purchase.apply_for_shortlist
         where sid =#{sid}
     </select>
 
     <select id="selectAll" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from applyForShortlist
+        from apply_for_shortlist
     </select>
 
 
     <select id="selectByPurchaingItemId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from applyForShortlist
+        from apply_for_shortlist
         where = #{sid,jdbcType=INTEGER}
     </select>
     <select id="getApplyShortList" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from applyForShortlist
+        from apply_for_shortlist
         where sid = #{sid,jdbcType=INTEGER}
     </select>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from applyForShortlist
+        from apply_for_shortlist
         where id = #{id,jdbcType=INTEGER}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
         delete
-        from applyForShortlist
+        from apply_for_shortlist
         where id = #{id,jdbcType=INTEGER}
     </delete>
     <delete id="deleteBySid" parameterType="java.lang.Integer">
         delete
-        from applyForShortlist
+        from apply_for_shortlist
         where sid = #{sid,jdbcType=INTEGER}
     </delete>
     <insert id="insert" parameterType="cn.mono.purchase.pojo.ApplyForShortlist">
-        insert into applyForShortlist (id, sid, scid,
+        insert into apply_for_shortlist (id, sid, scid,
                                        date, recommends, academy_access,
                                        school_administrator_access, causes, tag)
         values (#{id,jdbcType=INTEGER}, #{sid,jdbcType=INTEGER}, #{scid,jdbcType=INTEGER},
@@ -75,7 +75,7 @@
                 #{school_administrator_access,jdbcType=INTEGER}, #{causes,jdbcType=VARCHAR}, #{tag,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="cn.mono.purchase.pojo.ApplyForShortlist">
-        insert into applyForShortlist
+        insert into apply_for_shortlist
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 id,
@@ -136,7 +136,7 @@
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="cn.mono.purchase.pojo.ApplyForShortlist">
-        update applyForShortlist
+        update apply_for_shortlist
         <set>
             <if test="sid != null">
                 sid = #{sid,jdbcType=INTEGER},
@@ -166,7 +166,7 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKey" parameterType="cn.mono.purchase.pojo.ApplyForShortlist">
-        update applyForShortlist
+        update apply_for_shortlist
         set sid                         = #{sid,jdbcType=INTEGER},
             scid                        = #{scid,jdbcType=INTEGER},
             date                        = #{date,jdbcType=DATE},
