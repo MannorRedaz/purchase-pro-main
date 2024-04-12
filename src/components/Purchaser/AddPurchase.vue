@@ -139,7 +139,7 @@
           <div>
             <el-form :model="form">
               <el-form-item>
-                <el-upload ref="upload" action="http://localhost:8080/uploadPurchaseFile" :limit="limitNum"
+                <el-upload ref="upload" action="http://localhost:8088/uploadPurchaseFile" :limit="limitNum"
                   :auto-upload="false" accept=".pdf,.doc" :before-upload="beforeUploadFile" :on-change="fileChange"
                   :on-exceed="exceedFile" :on-success="handleSuccess" :on-error="handleError" :file-list="fileList"
                   :data="{ id: this.purchaserId }">
