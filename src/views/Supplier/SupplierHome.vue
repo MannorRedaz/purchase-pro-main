@@ -6,14 +6,14 @@
       </div>
       <div class="tools">
         <el-menu class="user" background-color="#2D9DFF" active-text-color="#2D9DFF" style="margin-top: 15px;" router>
-          <el-dropdown>
+          <el-dropdown @command="handleCommand">
             <span class="el-dropdown-link" style=" color: #fff;margin-left: 9px;">
               <img src="@/assets/img/user.svg" style="margin-right: 9px; color: #fff;" width="20px">
               {{ userName }}<i class="el-icon-arrow-down el-icon--right"></i>
             </span>
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item @click="setting">设置</el-dropdown-item>
-              <el-dropdown-item index="/">退出</el-dropdown-item>
+              <el-dropdown-item command="setting">设置</el-dropdown-item>
+              <el-dropdown-item command="logout">退出</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
         </el-menu>
@@ -24,6 +24,7 @@
 </template>
 <script>
 import baseDiv from '../../components/Utils/Home'
+import router from "@/router/index.js"
 export default {
   data() {
     return {
@@ -101,8 +102,7 @@ export default {
   },
   mounted() {
     const data = JSON.parse(window.sessionStorage.getItem('data'));
-    //console.log(data);
-    this.userName = data.contract_name;
+    this.userName = data.data[0].contract_name;
   },
   components: {
     baseDiv
@@ -113,6 +113,14 @@ export default {
       // console.log(this.activePath)
       window.sessionStorage.setItem('activePath', activePath)
       this.activePath = activePath
+    },
+    handleCommand(command) {
+      if (command === 'setting') {
+        this.$router.push("/supplier/basicInfo")
+      } else if (command === 'logout') {
+        window.sessionStorage.clear();
+        this.$router.push("/")
+      }
     }
   }
 }

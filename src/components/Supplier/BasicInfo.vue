@@ -8,9 +8,7 @@
               <span>个人中心</span>
             </div>
             <div class="name-role">
-              <span class="sender"
-                >供应商 - {{ dataForm.contract_name }}</span
-              >
+              <span class="sender">供应商 - {{ dataForm.contract_name }}</span>
             </div>
 
             <el-divider></el-divider>
@@ -20,14 +18,14 @@
                 <div style="float: right; padding-right: 20px">
                   {{ dataForm.tel }}
                 </div>
-                
+
               </div>
-               <div class="relation-item">
+              <div class="relation-item">
                 公司名称:
                 <div style="float: right; padding-right: 20px">
                   {{ dataForm.company_name }}
                 </div>
-                
+
               </div>
             </div>
           </el-card>
@@ -40,47 +38,24 @@
               <span>基本资料</span>
             </div>
             <div>
-              <el-form
-                label-width="80px"
-                v-model="dataForm"
-                size="small"
-                label-position="right"
-              >
+              <el-form label-width="80px" v-model="dataForm" size="small" label-position="right">
                 <el-form-item label="用户昵称" prop="name">
-                  <el-input
-                    auto-complete="off"
-                    v-model="dataForm.name"
-                  ></el-input>
+                  <el-input auto-complete="off" v-model="dataForm.name"></el-input>
                 </el-form-item>
                 <el-form-item label="联系人" prop="contract_name">
-                  <el-input
-                    auto-complete="off"
-                    v-model="dataForm.contract_name"
-                  ></el-input>
+                  <el-input auto-complete="off" v-model="dataForm.contract_name"></el-input>
                 </el-form-item>
                 <el-form-item label="公司位置" prop="contract_name">
-                  <el-input
-                    auto-complete="off"
-                    v-model="dataForm.company_place"
-                  ></el-input>
+                  <el-input auto-complete="off" v-model="dataForm.company_place"></el-input>
                 </el-form-item>
                 <el-form-item label="公司简介" prop="contract_name">
-                  <el-input
-                    auto-complete="off"
-                    v-model="dataForm.brief_introduction"
-                  ></el-input>
+                  <el-input auto-complete="off" v-model="dataForm.brief_introduction"></el-input>
                 </el-form-item>
                 <el-form-item label="手机号" prop="tel">
-                  <el-input
-                    auto-complete="off"
-                    v-model="dataForm.tel"
-                  ></el-input>
+                  <el-input auto-complete="off" v-model="dataForm.tel"></el-input>
                 </el-form-item>
-                  <el-form-item label="账户" prop="tel">
-                  <el-input
-                    auto-complete="off"
-                    v-model="dataForm.account"
-                  ></el-input>
+                <el-form-item label="账户" prop="tel">
+                  <el-input auto-complete="off" v-model="dataForm.account"></el-input>
                 </el-form-item>
                 <el-form-item label="旧密码">
                   <el-input maxlength="18" v-model="loginForm.pwd"></el-input>
@@ -91,9 +66,7 @@
                 </el-form-item>
               </el-form>
               <div slot="footer" class="dialog-footer">
-                <el-button size="mini" type="primary" @click="setBasicInfo()"
-                  >提交修改</el-button
-                >
+                <el-button size="mini" type="primary" @click="setBasicInfo()">提交修改</el-button>
                 <el-button size="mini" type="warning">取消</el-button>
               </div>
             </div>
@@ -113,36 +86,12 @@ export default {
         name: "",
       },
       newPwd: "",
-      dataForm: {
-        // id: "",
-        // contract_name: "超级管理员",
-        // tel: "173567777777",
-        // company_name: "http://www.baidu.com",
-        // sid: "",
-        // cid: "",
-        // name: "",f
-        // pwd: "",
-        // account: "",
-        // company_place: "",
-        // access: "",
-      },
+      dataForm: {},
     };
   },
   mounted() {
     const data = JSON.parse(window.sessionStorage.getItem("data"));
-    this.dataForm = data;
-    // this.dataForm.id = data.id;
-    // this.dataForm.contract_name = data.contract_name;
-    // this.dataForm.tel = data.tel;
-    // console.log(this.dataForm);
-    // this.dataForm.company_name = data.company_name;
-    //  this.dataForm.sid=data.sid,
-    //     this.dataForm.cid=,
-    //     this.dataForm.name: "",
-    //     this.dataForm.pwd: "",
-    //     this.dataForm.account: "",
-    //     this.dataForm.company_place: "",
-    //     this.dataForm.access: "",
+    this.dataForm = data.data[0];
   },
   methods: {
     async setBasicInfo() {
@@ -153,7 +102,6 @@ export default {
           "supplierLogin",
           this.loginForm
         );
-        // console.log(userinfo)
         if (res1.success) {
           this.dataForm.pwd = this.newPwd;
           const { data: res } = await this.$http.post(
@@ -194,6 +142,7 @@ export default {
   display: table;
   content: "";
 }
+
 .clearfix:after {
   clear: both;
 }
@@ -201,19 +150,23 @@ export default {
 .box-card {
   width: 100%;
 }
+
 //文本样式区
 .name-role {
   font-size: 16px;
   padding: 5px;
   text-align: center;
 }
+
 .sender {
   text-align: center;
 }
+
 .registe-info {
   text-align: center;
   padding-top: 10px;
 }
+
 .personal-relation {
   font-size: 16px;
   padding: 0px 5px 15px;
@@ -224,33 +177,42 @@ export default {
 .relation-item {
   padding: 12px;
 }
+
 .dialog-footer {
   padding-top: 10px;
   padding-left: 10%;
 }
+
 //布局样式区
 .el-row {
   margin-bottom: 20px;
+
   &:last-child {
     margin-bottom: 0;
   }
 }
+
 .el-col {
   border-radius: 4px;
 }
+
 .bg-purple-dark {
   background: #99a9bf;
 }
+
 .bg-purple {
   background: #d3dce6;
 }
+
 .bg-purple-light {
   background: #e5e9f2;
 }
+
 .grid-content {
   border-radius: 4px;
   min-height: 36px;
 }
+
 .row-bg {
   padding: 10px 0;
   background-color: #f9fafc;

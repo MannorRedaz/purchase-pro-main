@@ -74,7 +74,7 @@ import Static from '../components/Supplier/staticMian.vue'
 
 Vue.use(VueRouter)
 
-const routes = [
+export const routes = [
   { path: '/', redirect: '/login' },
   { path: '/login', component: Login },
   { path: '/register', component: Register },

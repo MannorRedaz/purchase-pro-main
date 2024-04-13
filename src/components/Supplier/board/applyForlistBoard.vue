@@ -93,8 +93,9 @@ export default {
   },
   methods: {
     async inital() {
+      // 获取申请列表
       await this.getApplyBoard();
-
+      // 获取产品类别
       await this.getAcademyList();
       await this.getApplyForList();
     },
@@ -155,7 +156,7 @@ export default {
     },
     async getApplyForList() {
       const data = JSON.parse(window.sessionStorage.getItem("data"));
-      this.supplierId = data.id;
+      this.supplierId = data.data[0].id;
       const res = await this.$http.get(
         "supplier/getApplyForList?sid=" + this.supplierId
       );
