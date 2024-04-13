@@ -28,7 +28,6 @@ import java.io.IOException;
 //@Api(value = "公共Controller", tags = { "公共访问接口" })
 @RestController
 @RequestMapping("/")
-@CrossOrigin(origins = "*")
 public class CommonController {
     @Resource
     private BaseAcademyService baseAcademyService;

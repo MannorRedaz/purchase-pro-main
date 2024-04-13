@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("notify")
-@CrossOrigin(origins = "*")
 public class NotifyController {
     @Autowired
     NotifyService notifyService;

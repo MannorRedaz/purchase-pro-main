@@ -88,18 +88,26 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public Message presidentLogin(Login president) {
         message.clear();
-        President supplier1 = presidentMapper.selectByName(president.getName());
+        President president1 = presidentMapper.selectByName(president.getName());
         List<President> list = new ArrayList<>();
 
 
-        if (ObjectUtil.isEmpty(supplier1)){
+        if (ObjectUtil.isEmpty(president1)){
             message.setSuccess(false);
             message.setMsg("该账号不存在");
             return message;
         }
-        if (supplier1.getPwd().equals(president.getPwd())){
-            list.add(supplier1);
-            message.setDate(list);
+        if (president1.getPwd().equals(president.getPwd())){
+            list.add(president1);
+
+            String token = createToken();
+            LoginRes<List<President>> loginRes = new LoginRes<>(token);
+            loginRes.setData(list);
+            redisTemplate.opsForValue().set(ADMIN_TOKEN_PREFIX+token, JSON.toJSONString(president1), TOKEN_EXPIRE_TIME, TimeUnit.MINUTES);
+            List<LoginRes<List<President>>> result = new ArrayList<>();
+            result.add(loginRes);
+
+            message.setDate(result);
             message.setSuccess(true);
             message.setMsg("恭喜你，登陆成功");
             message.setP(3);
@@ -126,7 +134,13 @@ public class LoginServiceImpl implements LoginService {
         }
         if (school_administrator1.getPwd().equals(school_administrator.getPwd())){
             list.add(school_administrator1);
-            message.setDate(list);
+            String token = createToken();
+            LoginRes<List<SchoolAdministrator>> loginRes = new LoginRes<>(token);
+            loginRes.setData(list);
+            redisTemplate.opsForValue().set(ADMIN_TOKEN_PREFIX+token, JSON.toJSONString(school_administrator1), TOKEN_EXPIRE_TIME, TimeUnit.MINUTES);
+            List<LoginRes<List<SchoolAdministrator>>> result = new ArrayList<>();
+            result.add(loginRes);
+            message.setDate(result);
             message.setSuccess(true);
             message.setMsg("恭喜你，登陆成功");
             message.setP(4);
@@ -155,7 +169,13 @@ public class LoginServiceImpl implements LoginService {
         }
         if (purchaser.getPwd().equals(purchaser1.getPwd())){
             list.add(purchaser1);
-            message.setDate(list);
+            String token = createToken();
+            LoginRes<List<Purchaser>> loginRes = new LoginRes<>(token);
+            loginRes.setData(list);
+            redisTemplate.opsForValue().set(ADMIN_TOKEN_PREFIX+token, JSON.toJSONString(purchaser1), TOKEN_EXPIRE_TIME, TimeUnit.MINUTES);
+            List<LoginRes<List<Purchaser>>> result = new ArrayList<>();
+            result.add(loginRes);
+            message.setDate(result);
             message.setSuccess(true);
             message.setMsg("恭喜你，登陆成功");
             message.setP(2);
@@ -181,7 +201,13 @@ public class LoginServiceImpl implements LoginService {
         }
         if (supper.getPwd().equals(supper1.getPwd())){
             list.add(supper1);
-            message.setDate(list);
+            String token = createToken();
+            LoginRes<List<Supper>> loginRes = new LoginRes<>(token);
+            loginRes.setData(list);
+            redisTemplate.opsForValue().set(ADMIN_TOKEN_PREFIX+token, JSON.toJSONString(supper1), TOKEN_EXPIRE_TIME, TimeUnit.MINUTES);
+            List<LoginRes<List<Supper>>> result = new ArrayList<>();
+            result.add(loginRes);
+            message.setDate(result);
             message.setSuccess(true);
             message.setMsg("恭喜你，登陆成功");
             message.setP(5);

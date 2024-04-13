@@ -1,6 +1,7 @@
 package cn.mono.purchase.interceptors;
 
 import cn.hutool.core.util.StrUtil;
+import cn.mono.purchase.dto.Message;
 import com.alibaba.fastjson2.JSON;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
@@ -55,9 +56,11 @@ public class LoginAuthInterceptor implements HandlerInterceptor {
         PrintWriter writer = null;
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=utf-8");
+        Message message = new Message();
+        message.setMsg("你的账号未登录，请先登录");
         try {
             writer = response.getWriter();
-            writer.print("未登录");
+            writer.print(JSON.toJSONString(message));
         } catch (IOException e) {
             log.error("出错啦，未登录:IOException{}  ", e.getMessage());
         } finally {

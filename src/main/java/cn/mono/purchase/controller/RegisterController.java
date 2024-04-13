@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
  * @time 2021/3/20
  */
 
-@CrossOrigin(origins = "*")
+
 @RestController
 public class RegisterController {
     @Autowired

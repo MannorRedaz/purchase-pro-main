@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("president")
-@CrossOrigin(origins = "*")
+
 public class PresidentController {
     @Autowired
     PresidentService presidentService;
