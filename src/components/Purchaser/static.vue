@@ -45,10 +45,6 @@ export default {
       this.date = new Date();
       this.getChartList();
     },
-    test() {
-      //  console.log('niaho');
-      //console.log(this.message);
-    },
     drawLineChart() {
       // 基于准备好的dom，初始化echarts实例
       this.chartLine = echarts.init(this.$el, "shine");

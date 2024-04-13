@@ -161,56 +161,38 @@ export default {
       for (let i = 0; i < res.date.length; i++) {
         this.cities[i] = res.date[i].academy_name;
       }
-      // console.log(arry);
       if (res.success) {
         for (let i = 0; i < res.date.length; i++) {
           this.academyList[res.date[i].cid] = res.date[i];
-          // console.log(i);
         }
       } else {
         // console.log("categories请求失败！");
       }
     },
-
     async applyShortList() {
-      // console.log(2);
       const { data: res } = await this.$http.post("supplier/applyShortList?id=", this.dataForm);
-
       if (res.success) {
         for (let i = 0; i < res.date.length; i++) {
           this.tableData = res.date[i];
           this.tableData[i].process = res.date[i].school_administrator_access;
-          // console.log(i);
         }
       } else {
-        // console.log("categories请求失败！");
       }
     },
     async getApplyForList() {
-      // console.log(2);
       const data = JSON.parse(window.sessionStorage.getItem("data"));
       this.supplierId = data.id;
       const { data: res } = await this.$http.get("supplier/getApplyForList?sid=" + this.supplierId);
-      // console.log("shwo");
-      // console.log(res.date);
+
       if (res.success) {
         for (let i = 0; i < res.date.length; i++) {
-
           this.tableData[i] = res.date[i];
           this.tableData[i].date1 = this.$moment(res.date[i].date).format("YYYY-MM-DD");
-
           this.tableData[i].process = res.date[i].school_administrator_access;
-          // console.log(i);
         }
       } else {
-        // console.log("categories请求失败！");
+
       }
-      // console.log("shwo");
-      // console.log(this.tableData);
-
-      this.tableData.push(null);
-      this.tableData.pop();
-
     },
 
     async delApplyForList(val) {

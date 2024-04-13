@@ -109,7 +109,8 @@ export default {
           return this.$message.error("登陆失败!");
         }
         // 将登录成功之后的token,保存到客户端的sessionStorage中
-        window.sessionStorage.setItem("token", "1111111");
+        const token = res.date[0].token;
+        window.sessionStorage.setItem("token", token);
         window.sessionStorage.setItem("data", JSON.stringify(res.date[0]));
         // 通过编程式导航跳转到后台主页，路由地址是/home
         switch (res.p) {
@@ -138,8 +139,8 @@ export default {
           return this.$message.error("登陆失败!");
         }
         // 将登录成功之后的token,保存到客户端的sessionStorage中
-
-        window.sessionStorage.setItem("token", "1111111");
+        const token = res1.date[0].token;
+        window.sessionStorage.setItem("token", token);
         window.sessionStorage.setItem("data", JSON.stringify(res1.date[0]));
         // 通过编程式导航跳转到后台主页，路由地址是/home
         this.$message.error("来了!");
