@@ -6,6 +6,7 @@ import cn.hutool.core.util.StrUtil;
 import cn.mono.purchase.dto.Login;
 import cn.mono.purchase.dto.LoginRes;
 import cn.mono.purchase.dto.Message;
+import cn.mono.purchase.exception.ServiceException;
 import cn.mono.purchase.mapper.*;
 import cn.mono.purchase.pojo.*;
 
@@ -19,8 +20,11 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
 
 import static cn.mono.purchase.constants.Constants.*;
+import static cn.mono.purchase.exception.ErrorCodeEnum.AUTH_LOGIN_BAD_CREDENTIALS;
+import static cn.mono.purchase.exception.ErrorCodeEnum.AUTH_LOGIN_USERNAME_OR_PASSWORD_EMPTY;
 
 /**
  * @author nihao
@@ -39,50 +43,41 @@ public class LoginServiceImpl implements LoginService {
     @Autowired
     PurchaserMapper purchaserMapper;
     @Resource
-    private RedisTemplate<String,String> redisTemplate;
+    private RedisTemplate<String, String> redisTemplate;
 
 
-    Message message= new Message();
+    Message message = new Message();
 
     @Override
     public Message supplierLogin(Login supplier) {
         message.clear();
-        if (StrUtil.isEmpty(supplier.getName())||StrUtil.isEmpty(supplier.getPwd())){
-            message.setSuccess(false);
-            message.setMsg(PASSWORD_OR_USERNAME_NOTEMPTY);
-            return message;
-        }
         Supplier supplier1 = supplierMapper.selectByName(supplier.getName());
 
-        if (ObjectUtil.isEmpty(supplier1)){
-            message.setSuccess(false);
-            message.setMsg(ACCOUNT_NOT_EXIST);
-            return message;
+        if (ObjectUtil.isEmpty(supplier1)) {
+            throw new ServiceException(AUTH_LOGIN_BAD_CREDENTIALS);
         }
-        if (supplier1.getPwd().equals(supplier.getPwd())){
-
-            List<Supplier> suppliers = new ArrayList<>();
-            suppliers.add(supplier1);
-
-            String token = createToken();
-            LoginRes<List<Supplier>> loginRes = new LoginRes<>(token);
-
-            redisTemplate.opsForValue().set(ADMIN_TOKEN_PREFIX+token, JSON.toJSONString(supplier1), TOKEN_EXPIRE_TIME, TimeUnit.MINUTES);
-            loginRes.setData(suppliers);
-
-            List<LoginRes<List<Supplier>>> data = new ArrayList<>();
-            data.add(loginRes);
-            message.setDate(data);
-            message.setSuccess(true);
-            message.setMsg("恭喜你，登陆成功");
-            message.setP(1);
-        }else {
-            message.setSuccess(false);
-            message.setMsg("密码或验证码不正确");
+        if (!supplier1.getPwd().equals(supplier.getPwd())) {
+            throw new ServiceException(AUTH_LOGIN_BAD_CREDENTIALS);
         }
+
+        List<Supplier> suppliers = new ArrayList<>();
+        suppliers.add(supplier1);
+
+        String token = createToken();
+        LoginRes<List<Supplier>> loginRes = new LoginRes<>(token);
+
+        redisTemplate.opsForValue().set(ADMIN_TOKEN_PREFIX + token, JSON.toJSONString(supplier1), TOKEN_EXPIRE_TIME, TimeUnit.MINUTES);
+        loginRes.setData(suppliers);
+
+        List<LoginRes<List<Supplier>>> data = new ArrayList<>();
+        data.add(loginRes);
+        message.setDate(data);
+        message.setSuccess(true);
+        message.setMsg(SUCCESS_LOGIN);
+        message.setP(1);
+
         return message;
     }
-
 
 
     @Override
@@ -92,30 +87,25 @@ public class LoginServiceImpl implements LoginService {
         List<President> list = new ArrayList<>();
 
 
-        if (ObjectUtil.isEmpty(president1)){
-            message.setSuccess(false);
-            message.setMsg("该账号不存在");
-            return message;
+        if (ObjectUtil.isEmpty(president1)) {
+            throw new ServiceException(AUTH_LOGIN_BAD_CREDENTIALS);
         }
-        if (president1.getPwd().equals(president.getPwd())){
-            list.add(president1);
+        if (!president1.getPwd().equals(president.getPwd())) {
+            throw new ServiceException(AUTH_LOGIN_BAD_CREDENTIALS);
+        }
+        list.add(president1);
 
-            String token = createToken();
-            LoginRes<List<President>> loginRes = new LoginRes<>(token);
-            loginRes.setData(list);
-            redisTemplate.opsForValue().set(ADMIN_TOKEN_PREFIX+token, JSON.toJSONString(president1), TOKEN_EXPIRE_TIME, TimeUnit.MINUTES);
-            List<LoginRes<List<President>>> result = new ArrayList<>();
-            result.add(loginRes);
+        String token = createToken();
+        LoginRes<List<President>> loginRes = new LoginRes<>(token);
+        loginRes.setData(list);
+        redisTemplate.opsForValue().set(ADMIN_TOKEN_PREFIX + token, JSON.toJSONString(president1), TOKEN_EXPIRE_TIME, TimeUnit.MINUTES);
+        List<LoginRes<List<President>>> result = new ArrayList<>();
+        result.add(loginRes);
 
-            message.setDate(result);
-            message.setSuccess(true);
-            message.setMsg("恭喜你，登陆成功");
-            message.setP(3);
-        }
-        else {
-            message.setSuccess(false);
-            message.setMsg("密码或验证码不正确");
-        }
+        message.setDate(result);
+        message.setSuccess(true);
+        message.setMsg(SUCCESS_LOGIN);
+        message.setP(3);
         return message;
     }
 
@@ -123,32 +113,27 @@ public class LoginServiceImpl implements LoginService {
      * 学校管理员
      */
     @Override
-    public Message schoolAdministratorLogin(Login school_administrator) {
+    public Message schoolAdministratorLogin(Login schoolAdministrator) {
         message.clear();
-        SchoolAdministrator school_administrator1 = schoolAdministratorMapper.selectByName(school_administrator.getName());
+        SchoolAdministrator schoolAdministrator1 = schoolAdministratorMapper.selectByName(schoolAdministrator.getName());
         List<SchoolAdministrator> list = new ArrayList<>();
-        if (school_administrator1==null){
-            message.setSuccess(false);
-            message.setMsg("该账号不存在");
-            return message;
+        if (ObjectUtil.isEmpty(schoolAdministrator1)) {
+            throw new ServiceException(AUTH_LOGIN_BAD_CREDENTIALS);
         }
-        if (school_administrator1.getPwd().equals(school_administrator.getPwd())){
-            list.add(school_administrator1);
-            String token = createToken();
-            LoginRes<List<SchoolAdministrator>> loginRes = new LoginRes<>(token);
-            loginRes.setData(list);
-            redisTemplate.opsForValue().set(ADMIN_TOKEN_PREFIX+token, JSON.toJSONString(school_administrator1), TOKEN_EXPIRE_TIME, TimeUnit.MINUTES);
-            List<LoginRes<List<SchoolAdministrator>>> result = new ArrayList<>();
-            result.add(loginRes);
-            message.setDate(result);
-            message.setSuccess(true);
-            message.setMsg("恭喜你，登陆成功");
-            message.setP(4);
-        }else {
-            message.setSuccess(false);
-
-                message.setMsg("密码或验证码不正确");
+        if (!schoolAdministrator1.getPwd().equals(schoolAdministrator.getPwd())) {
+            throw new ServiceException(AUTH_LOGIN_BAD_CREDENTIALS);
         }
+        list.add(schoolAdministrator1);
+        String token = createToken();
+        LoginRes<List<SchoolAdministrator>> loginRes = new LoginRes<>(token);
+        loginRes.setData(list);
+        redisTemplate.opsForValue().set(ADMIN_TOKEN_PREFIX + token, JSON.toJSONString(schoolAdministrator1), TOKEN_EXPIRE_TIME, TimeUnit.MINUTES);
+        List<LoginRes<List<SchoolAdministrator>>> result = new ArrayList<>();
+        result.add(loginRes);
+        message.setDate(result);
+        message.setSuccess(true);
+        message.setMsg(SUCCESS_LOGIN);
+        message.setP(4);
         return message;
     }
 
@@ -162,27 +147,23 @@ public class LoginServiceImpl implements LoginService {
         message.clear();
         Purchaser purchaser1 = purchaserMapper.selectByName(purchaser.getName());
         List<Purchaser> list = new ArrayList<>();
-        if (purchaser1==null){
-            message.setSuccess(false);
-            message.setMsg("该账号不存在");
-            return message;
+        if (ObjectUtil.isEmpty(purchaser1)) {
+            throw new ServiceException(AUTH_LOGIN_BAD_CREDENTIALS);
         }
-        if (purchaser.getPwd().equals(purchaser1.getPwd())){
-            list.add(purchaser1);
-            String token = createToken();
-            LoginRes<List<Purchaser>> loginRes = new LoginRes<>(token);
-            loginRes.setData(list);
-            redisTemplate.opsForValue().set(ADMIN_TOKEN_PREFIX+token, JSON.toJSONString(purchaser1), TOKEN_EXPIRE_TIME, TimeUnit.MINUTES);
-            List<LoginRes<List<Purchaser>>> result = new ArrayList<>();
-            result.add(loginRes);
-            message.setDate(result);
-            message.setSuccess(true);
-            message.setMsg("恭喜你，登陆成功");
-            message.setP(2);
-        }else {
-            message.setSuccess(false);
-            message.setMsg("密码或验证码不正确");
+        if (!purchaser.getPwd().equals(purchaser1.getPwd())) {
+            throw new ServiceException(AUTH_LOGIN_BAD_CREDENTIALS);
         }
+        list.add(purchaser1);
+        String token = createToken();
+        LoginRes<List<Purchaser>> loginRes = new LoginRes<>(token);
+        loginRes.setData(list);
+        redisTemplate.opsForValue().set(ADMIN_TOKEN_PREFIX + token, JSON.toJSONString(purchaser1), TOKEN_EXPIRE_TIME, TimeUnit.MINUTES);
+        List<LoginRes<List<Purchaser>>> result = new ArrayList<>();
+        result.add(loginRes);
+        message.setDate(result);
+        message.setSuccess(true);
+        message.setMsg(SUCCESS_LOGIN);
+        message.setP(2);
         return message;
     }
 
@@ -194,66 +175,45 @@ public class LoginServiceImpl implements LoginService {
         message.clear();
         Supper supper1 = supperMapper.selectByName(supper.getName());
         List<Supper> list = new ArrayList<>();
-        if (supper1==null){
-            message.setSuccess(false);
-            message.setMsg("该账号不存在");
-            return message;
+        if (ObjectUtil.isEmpty(supper1)) {
+            throw new ServiceException(AUTH_LOGIN_BAD_CREDENTIALS);
         }
-        if (supper.getPwd().equals(supper1.getPwd())){
-            list.add(supper1);
-            String token = createToken();
-            LoginRes<List<Supper>> loginRes = new LoginRes<>(token);
-            loginRes.setData(list);
-            redisTemplate.opsForValue().set(ADMIN_TOKEN_PREFIX+token, JSON.toJSONString(supper1), TOKEN_EXPIRE_TIME, TimeUnit.MINUTES);
-            List<LoginRes<List<Supper>>> result = new ArrayList<>();
-            result.add(loginRes);
-            message.setDate(result);
-            message.setSuccess(true);
-            message.setMsg("恭喜你，登陆成功");
-            message.setP(5);
-        }else {
-            message.setSuccess(false);
-            message.setMsg("密码或验证码不正确");
+        if (!supper.getPwd().equals(supper1.getPwd())) {
+            throw new ServiceException(AUTH_LOGIN_BAD_CREDENTIALS);
         }
+        list.add(supper1);
+        String token = createToken();
+        LoginRes<List<Supper>> loginRes = new LoginRes<>(token);
+        loginRes.setData(list);
+        redisTemplate.opsForValue().set(ADMIN_TOKEN_PREFIX + token, JSON.toJSONString(supper1), TOKEN_EXPIRE_TIME, TimeUnit.MINUTES);
+        List<LoginRes<List<Supper>>> result = new ArrayList<>();
+        result.add(loginRes);
+        message.setDate(result);
+        message.setSuccess(true);
+        message.setMsg(SUCCESS_LOGIN);
+        message.setP(5);
         return message;
     }
+
+    List<Function<Login, Message>> loginMethods = List.of(
+            this::purchaserLogin,
+            this::presidentLogin,
+            this::supperLogin,
+            this::schoolAdministratorLogin
+    );
 
 
     @Override
     public Message administerLogin(Login login) {
-        message.clear();
-        
-        if(StrUtil.isEmpty(login.getName())||StrUtil.isEmpty(login.getPwd())){
-            message.setSuccess(false);
-            message.setMsg("账号或密码不能为空");
-            return message;
+        for (Function<Login, Message> loginMethod : loginMethods) {
+            Message message = loginMethod.apply(login);
+            if (message.isSuccess()) {
+                return message;
+            }
         }
-        message= purchaserLogin(login);
-        if (message.isSuccess()){
-            return message;
-        }else if (message.getMsg().equals("密码或验证码不正确")){
-            return message;
-        }
-        message= presidentLogin(login);
-        if (message.isSuccess()){
-            return message;
-        }else if (message.getMsg().equals("密码或验证码不正确")){
-            return message;
-        }
-        message= supperLogin(login);
-        if (message.isSuccess()){
-            return message;
-        }else if (message.getMsg().equals("密码或验证码不正确")){
-            return message;
-        }
-        message= schoolAdministratorLogin(login);
-        if (message.isSuccess()){
-            return message;
-        }else if (message.getMsg().equals("密码或验证码不正确")){
-            return message;
-        }
-        return message;
+        return Message.error(AUTH_LOGIN_BAD_CREDENTIALS);
     }
+
     String createToken() {
         return UUID.randomUUID().toString().replace("-", "");
     }

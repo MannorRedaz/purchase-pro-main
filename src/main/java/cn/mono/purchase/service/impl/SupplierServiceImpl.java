@@ -1,5 +1,6 @@
 package cn.mono.purchase.service.impl;
 
+import cn.hutool.core.util.ObjectUtil;
 import cn.mono.purchase.dto.Message;
 import cn.mono.purchase.dto.Selecte;
 import cn.mono.purchase.mapper.*;
@@ -432,6 +433,12 @@ public class SupplierServiceImpl implements SupplierService {
 
     @Override
     public Message getApplyForList(int sid) {
+        if (ObjectUtil.isEmpty(sid)){
+            msg = new Message();
+            msg.setSuccess(false);
+            msg.setMsg("获取申请列表失败");
+            return msg;
+        }
         ApplyForShortlist applyForShortlist = apply_for_shortlistMapper.getApplyForList(sid);
         List<ApplyForShortlist> list = new ArrayList<>();
 

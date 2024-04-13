@@ -105,12 +105,30 @@
             <artifactId>mybatis-spring-boot-starter</artifactId>
             <version>3.0.3</version>
         </dependency>
-<!--        一：引入Swagger依赖库-->
+        <!--        一：引入Swagger依赖库-->
         <!--引入swagger-->
-<!--        <dependency>-->
-<!--            <groupId>io.springfox</groupId>-->
-<!--            <artifactId>springfox-boot-starter</artifactId>-->
-<!--            <version>3.0.0</version>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>io.springfox</groupId>-->
+        <!--            <artifactId>springfox-boot-starter</artifactId>-->
+        <!--            <version>3.0.0</version>-->
+        <!--        </dependency>-->
+
+        <!-- validation -->
+
+
+        <!-- https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator -->
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>8.0.1.Final</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/jakarta.validation/jakarta.validation-api -->
+        <dependency>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
+            <version>3.0.2</version>
+        </dependency>
+
     </dependencies>
 </project>

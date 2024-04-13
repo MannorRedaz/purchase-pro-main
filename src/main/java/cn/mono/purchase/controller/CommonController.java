@@ -226,7 +226,6 @@ public class CommonController {
     //private HttpServletResponse response;
     private HttpServletRequest request;
 
-    @CrossOrigin("*")
     @RequestMapping("uploadResultFile")
     public String uploadResultFile(@RequestParam("file") MultipartFile file) {
         //判断所上传文件是否存在
@@ -267,7 +266,6 @@ public class CommonController {
      * @param response
      * @throws Exception
      */
-    @CrossOrigin("*")
     @RequestMapping("downloadResultFile")
     public void downloadResultFile(int id, HttpServletResponse response) throws Exception {
         
@@ -448,7 +446,6 @@ public class CommonController {
         return message;
     }
 
-    @CrossOrigin("*")
     @RequestMapping(value = "uploadPurchaseFile", method = RequestMethod.POST)
     @ResponseBody
     public Message uploadPurchaseFile(@RequestParam(value = "file", required = false) MultipartFile file, HttpServletRequest request) {
@@ -512,7 +509,6 @@ public class CommonController {
     }
 
 
-    @CrossOrigin("*")
     @RequestMapping(value = "upLoadResultFile1", method = RequestMethod.POST)
     @ResponseBody
     public Message upLoadResultFile1(@RequestParam(value = "file", required = false) MultipartFile file, HttpServletRequest request) {

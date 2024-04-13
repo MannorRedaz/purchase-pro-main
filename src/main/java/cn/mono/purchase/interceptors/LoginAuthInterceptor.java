@@ -35,7 +35,7 @@ public class LoginAuthInterceptor implements HandlerInterceptor {
         if ("OPTIONS".equals(method)) {
             return true;
         }
-        String token = request.getHeader("token");
+        String token = request.getHeader("Authorization");
         if (StrUtil.isEmpty(token)) {
             responseNoLoginInfo(response);
             return false;
