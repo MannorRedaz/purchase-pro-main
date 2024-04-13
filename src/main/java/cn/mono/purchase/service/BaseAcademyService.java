@@ -13,41 +13,50 @@ import cn.mono.purchase.pojo.PurchasingItems;
 public interface BaseAcademyService {
     /**
      * 获取产品种类
+     *
      * @return
      */
     Message GetProductCategory();
 
     /**
      * 获取学院种类
+     *
      * @return
      */
-    Message  GetAcademyCategory();
+    Message GetAcademyCategory();
+
     /**
      * 获取结果集合
+     *
      * @return
      * @return
      */
-    Message  GetResultCategory();
+    Message GetResultCategory();
+
     /**
      * 获取采购列表
+     *
      * @return
      */
-    Message  GetPurchasingCategory();
+    Message GetPurchasingCategory();
 
     /**
      * 获取采购列表 新
+     *
      * @return
      */
-    Message  GetPurchasingCategory1();
+    Message GetPurchasingCategory1();
 
     /**
      * 获取公告列表 新
+     *
      * @return
      */
     Message GetBoardList();
 
     /**
      * 获取某条公告具体内容 新
+     *
      * @return
      */
     Message GetBoard(int id);
@@ -70,8 +79,10 @@ public interface BaseAcademyService {
 
     Message deletePurBoard(PurchasingItems purchasing_items);
 
-   String getSupplyFileName(int id);
+    String getSupplyFileName(int id);
+
     String getPurchaseFileName(int id);
+
     Message getApplyCount(int id);
 
     Message getMinimumPrice(int id);

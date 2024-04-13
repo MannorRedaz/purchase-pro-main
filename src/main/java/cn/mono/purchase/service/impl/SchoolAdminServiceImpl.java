@@ -325,16 +325,15 @@ public class SchoolAdminServiceImpl implements SchoolAdminService {
 
         AcademyCategory academy_category = new AcademyCategory();
         academy_category.setAcademy_name(preAdmin.getAcademy_name());
-        
 
-        
+
         academy_category.setSid(preAdmin.getSid());
 
         academy_category.setBudget(preAdmin.getBudget());
         academy_category.setMaximum_order(preAdmin.getMaximum_order());
         try {
             p = academy_categoryMapper.insertSelective(academy_category);
-        }catch (Exception e){
+        } catch (Exception e) {
             msg = new Message();
             msg.setSuccess(false);
             msg.setMsg("添加失败");
@@ -343,7 +342,7 @@ public class SchoolAdminServiceImpl implements SchoolAdminService {
         }
         try {
             academy_category = academy_categoryMapper.selectByName(preAdmin.getAcademy_name());
-        }catch (Exception e){
+        } catch (Exception e) {
             msg = new Message();
             msg.setSuccess(false);
             msg.setMsg("学院已经存在");
@@ -361,10 +360,10 @@ public class SchoolAdminServiceImpl implements SchoolAdminService {
         president.setTel(preAdmin.getTel());
 
         president.setLast_time(new Date());
-        int i=0;
+        int i = 0;
         try {
-             i = presidentMapper.insertSelective(president);
-        }catch (Exception e){
+            i = presidentMapper.insertSelective(president);
+        } catch (Exception e) {
             msg = new Message();
             msg.setSuccess(false);
             msg.setMsg("添加失败");
@@ -372,13 +371,10 @@ public class SchoolAdminServiceImpl implements SchoolAdminService {
             return msg;
         }
 
-        
-        
+
         try {
             presidentMapper.selectByName(president.getName());
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             msg = new Message();
             msg.setSuccess(false);
             msg.setMsg("用户名重复");
@@ -428,9 +424,9 @@ public class SchoolAdminServiceImpl implements SchoolAdminService {
     public Message deletePresident(int id) {
         int i = 0;
         try {
-            
+
             i = presidentMapper.deleteByPrimaryKey(id);
-        }catch (Exception e){
+        } catch (Exception e) {
             msg = new Message();
             msg.setSuccess(false);
             msg.setMsg("删除失败");
@@ -459,8 +455,9 @@ public class SchoolAdminServiceImpl implements SchoolAdminService {
         Purchaser purchaser;
         for (AcademyCategory a : listAca) {
             purchaser = purchaserMapper.selectByCid(a.getCid());
-            if (purchaser != null)
+            if (purchaser != null) {
                 listRes.add(purchaser);
+            }
         }
         msg = new Message();
         msg.setSuccess(true);
@@ -474,7 +471,7 @@ public class SchoolAdminServiceImpl implements SchoolAdminService {
     public Message addPurchaserAdmin(PreAdmin preAdmin) {
         AcademyCategory academy_category = academy_categoryMapper.selectByName(preAdmin.getAcademy_name());
 
-        if (purchaserMapper.selectByCid(academy_category.getCid())!=null) {
+        if (purchaserMapper.selectByCid(academy_category.getCid()) != null) {
             msg = new Message();
             msg.setSuccess(false);
             msg.setMsg("该学院已经有实验室管理员了");
@@ -489,7 +486,7 @@ public class SchoolAdminServiceImpl implements SchoolAdminService {
         purchaser.setCount(preAdmin.getCount());
         purchaser.setName(preAdmin.getName());
         purchaser.setSid(1);
-        
+
         President president = presidentMapper.selectByCid(academy_category.getCid()).get(0);
         purchaser.setPrid(president.getId());
         purchaser.setPwd("123456");
@@ -579,7 +576,7 @@ public class SchoolAdminServiceImpl implements SchoolAdminService {
 
     @Override
     public Message supplyApprove(int id) {
-        
+
         ApplyForShortlist i = apply_for_shortlistMapper.selectByPrimaryKey(id);
         i.setSchool_administrator_access(1);
         i.setAcademy_access("1");
@@ -587,7 +584,7 @@ public class SchoolAdminServiceImpl implements SchoolAdminService {
         supplier.setAccess(1);
         int m = supplierMapper.updateByPrimaryKey(supplier);
         int p = apply_for_shortlistMapper.updateByPrimaryKey(i);
-        if (p == 1&&m==1) {
+        if (p == 1 && m == 1) {
             msg = new Message();
             msg.setSuccess(true);
             msg.setMsg("已同意该申请");
@@ -610,7 +607,7 @@ public class SchoolAdminServiceImpl implements SchoolAdminService {
         for (PurchasingItems p :
                 purchasing_items) {
             AcademyCategory academy_category = academy_categoryMapper.selectByPrimaryKey(
-                p.getCid()
+                    p.getCid()
             );
 
             if (p.getAcceess() == 1 || p.getAcceess() == 11) {
@@ -641,7 +638,7 @@ public class SchoolAdminServiceImpl implements SchoolAdminService {
 //            purchasing_items.setAcceess(1);
 //        }else
 //        {
-            purchasing_items.setAcceess(11);
+        purchasing_items.setAcceess(11);
 
 //        }
         int p = purchasing_itemsMapper.updateByPrimaryKey(purchasing_items);
@@ -662,23 +659,19 @@ public class SchoolAdminServiceImpl implements SchoolAdminService {
     @Override
     public Message selectDetail(Selecte selecte) {
         //查询历史订单
-        
 
-        
 
         List<PurchasingItems> purchasing_items = purchasing_itemsMapper.selectAll();
         List<PurchasingItems> purchasing_items1 = new ArrayList<>();
-        
+
 //只要有结果的
-        for (PurchasingItems item : purchasing_items
-        ) {
-            try{
+        for (PurchasingItems item : purchasing_items) {
+            try {
                 if (item.getIs_result() == 1) {
-                    
+
                     purchasing_items1.add(item);
                 }
-            }
-            catch (Exception e){
+            } catch (Exception e) {
 
             }
         }
@@ -689,7 +682,7 @@ public class SchoolAdminServiceImpl implements SchoolAdminService {
         }
         purchasing_items1.clear();
         int i = 0;
-        
+
         //判断是否需要学院的筛选
         if (selecte.getAcademy() != null) {
             AcademyCategory academy_category = academy_categoryMapper.selectByName(selecte.getAcademy());
@@ -712,17 +705,20 @@ public class SchoolAdminServiceImpl implements SchoolAdminService {
         }
 
         //list list1 null 数组越界get(0)
-        
+
 //这里有问题
-        if (selecte.getValue1().size()>0) {
-            
+        if (selecte.getValue1().size() > 0) {
+
 
             for (PurchasingItems item : purchasing_items
-            ) { if(item==null)break;
-                int res2=0;
+            ) {
+                if (item == null) {
+                    break;
+                }
+                int res2 = 0;
                 try {
                     res2 = item.getPublish_time().compareTo(selecte.getValue1().get(0));
-                }catch (Exception e){
+                } catch (Exception e) {
                     msg = new Message();
                     msg.setSuccess(true);
                     msg.setMsg("没有订单");
@@ -743,8 +739,6 @@ public class SchoolAdminServiceImpl implements SchoolAdminService {
             purchasing_items1.clear();
 
         }
-        
-
 
 
         Result result = null;
@@ -752,19 +746,18 @@ public class SchoolAdminServiceImpl implements SchoolAdminService {
         for (PurchasingItems item : purchasing_items
         ) {
             result = resultMapper.selectByPIId(item.getId());
-            if (result != null)
+            if (result != null) {
                 count = count + result.getReality_price();//17900
+            }
         }
-        
+
         msg = new Message();
         msg.setSuccess(true);
         msg.setMsg("查询到" + purchasing_items.size() + "条记录");
         msg.setStatus((int) count);
         msg.setDate(purchasing_items);
 
-        
-        
-        
+
         return msg;
     }
 
@@ -775,7 +768,7 @@ public class SchoolAdminServiceImpl implements SchoolAdminService {
 
         for (PurchasingItems p :
                 purchasing_items) {
-            if (p.getIs_result()!=null) {
+            if (p.getIs_result() != null) {
                 list.add(p);
             }
         }
@@ -797,7 +790,7 @@ public class SchoolAdminServiceImpl implements SchoolAdminService {
     public Message deleteApplyBoard(int id) {
         try {
             apply_boardMapper.deleteByPrimaryKey(id);
-        }catch (Exception e){
+        } catch (Exception e) {
             msg = new Message();
             msg.setSuccess(false);
             msg.setMsg("删除失败");
@@ -814,7 +807,7 @@ public class SchoolAdminServiceImpl implements SchoolAdminService {
     public Message addApplyBoard(ApplyBoard ab) {
         try {
             apply_boardMapper.insert(ab);
-        }catch (Exception e){
+        } catch (Exception e) {
             msg = new Message();
             msg.setSuccess(false);
             msg.setMsg("添加失败");

@@ -5,7 +5,6 @@ import cn.mono.purchase.dto.Message;
 import cn.mono.purchase.dto.Selecte;
 import cn.mono.purchase.mapper.*;
 import cn.mono.purchase.pojo.*;
-
 import cn.mono.purchase.service.SupplierService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -433,7 +432,7 @@ public class SupplierServiceImpl implements SupplierService {
 
     @Override
     public Message getApplyForList(int sid) {
-        if (ObjectUtil.isEmpty(sid)){
+        if (ObjectUtil.isEmpty(sid)) {
             msg = new Message();
             msg.setSuccess(false);
             msg.setMsg("获取申请列表失败");

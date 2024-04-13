@@ -14,9 +14,6 @@ import cn.mono.purchase.pojo.PurchasingItems;
 public interface PurchaserService {
 
 
-
-
-
     Message purchaseApply(PurchasingItems pi);
 
     Message purchaseApplyUpdate(PurchasingItems pi);

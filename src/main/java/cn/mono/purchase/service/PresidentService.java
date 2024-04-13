@@ -14,34 +14,36 @@ import cn.mono.purchase.pojo.President;
 public interface PresidentService {
     //查询预算
     Message getBudget(int cid);
+
     // 查询已经使用的钱
     Message getUsedMoney(int cid);
 
-    public Message supplierApply(BiddingApplication ba);
+    Message supplierApply(BiddingApplication ba);
 
 
-    public Message supApplys(int id) ;
+    Message supApplys(int id);
 
-    public Message applyUpdate(BiddingApplication ba) ;
-
-
-    public Message applySelect(String t1,String t2,int sid);
-
-    public Message applyDelete (int id);
+    Message applyUpdate(BiddingApplication ba);
 
 
-    public Message supResult(int sid) ;
+    Message applySelect(String t1, String t2, int sid);
+
+    Message applyDelete(int id);
 
 
-    public Message infoUpdate(President president);
+    Message supResult(int sid);
 
 
-    public Message applyShortList(ApplyForShortlist afs);
-    public Message applyShortListUpdate(ApplyForShortlist afs);
+    Message infoUpdate(President president);
 
-    public Message applyShortListSelect(String t1,String t2,int sid);
 
-    public Message applyShortListDelete (int id);
+    Message applyShortList(ApplyForShortlist afs);
+
+    Message applyShortListUpdate(ApplyForShortlist afs);
+
+    Message applyShortListSelect(String t1, String t2, int sid);
+
+    Message applyShortListDelete(int id);
 
     Message getPurchaseList(int cid);
 

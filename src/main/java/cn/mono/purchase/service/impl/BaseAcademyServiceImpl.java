@@ -90,19 +90,7 @@ public class BaseAcademyServiceImpl implements BaseAcademyService {
     @Override
     public Message GetPurchasingCategory() {
         List<PurchasingItems> purchasing_items = purchasingItemsMapper.selectAll();
-        StringBuffer sb = new StringBuffer();
-//        for (Purchasing_items i:
-//             purchasing_items) {
-//            sb.delete(0,sb.length());
-//            sb.append(i.getDate()).insert(4,"/");
-//            sb.insert(7,"/");
-//            i.setDate(sb.toString());
-//            sb.delete(0,sb.length());
-//            sb.append(i.getDeadline()).insert(4,"/");
-//            sb.insert(7,"/");
-//            i.setDeadline(sb.toString());
-//        }
-        if (purchasing_items.size() != 0) {
+        if (!purchasing_items.isEmpty()) {
             message = new Message();
             message.setSuccess(true);
             message.setMsg("获取采购列表成功");
@@ -120,15 +108,7 @@ public class BaseAcademyServiceImpl implements BaseAcademyService {
     public Message GetPurchasingCategory1() {
         List<PurchasingItems> purchasing_items = purchasingItemsMapper.selectAll();
 
-        StringBuffer sb = new StringBuffer();
-//        for (Purchasing_items i:
-//                purchasing_items) {
-//            sb.delete(0,sb.length());
-//            sb.append(i.getDate()).insert(4,"/");
-//            sb.insert(7,"/");
-//            i.setDate(sb.toString());
-//        }
-        if (purchasing_items.size() != 0) {
+        if (!purchasing_items.isEmpty()) {
             message = new Message();
             message.setSuccess(true);
             message.setMsg("获取采购列表成功");
@@ -154,7 +134,7 @@ public class BaseAcademyServiceImpl implements BaseAcademyService {
             }
         }
 
-        if (purchasing_items.size() != 0) {
+        if (!purchasing_items.isEmpty()) {
             message = new Message();
             message.setSuccess(true);
             message.setMsg("获取到" + list.size() + "条数据");
@@ -364,31 +344,6 @@ public class BaseAcademyServiceImpl implements BaseAcademyService {
                 }
             }
         }
-
-//        if (selecte.getType() != null) {
-//            // item.getErrol_type()==2
-//            if (selecte.getType() == "结果公告") {
-//                for (Purchasing_items item : purchasing_items
-//                ) {
-//                    if (item.getErrol_type() == 2) {
-//                        purchasing_items1.add(item);
-//                    }
-//                }
-//            } else {
-//                for (Purchasing_items item : purchasing_items
-//                ) {
-//                    if (item.getErrol_type() == 1) {
-//                        purchasing_items1.add(item);
-//                    }
-//                }
-//            }
-//            purchasing_items.clear();
-//            for (Purchasing_items item : purchasing_items1
-//            ) {
-//                purchasing_items.add(item);
-//            }
-//            purchasing_items1.clear();
-//        }
         for (PurchasingItems p : purchasing_items) {
             if (p.getAcceess() == 11 && p.getPurchase_name() != null && p.getPurchase_name().length() > 0) {
                 purchasing_items1.add(p);
@@ -894,18 +849,6 @@ public class BaseAcademyServiceImpl implements BaseAcademyService {
 
         purchasing_items.setIs_result(1);
         int i = purchasingItemsMapper.updateByPrimaryKey(purchasing_items);
-//
-//        List<Bidding_application> list =bidding_applicationMapper.selectByPurchaingItemId(id);
-//        int minimun=1000000;
-//        if(list.size()!=0)
-//            minimun=list.get(0).getRealy_price();
-//        int thisId =0;
-//        for (Bidding_application b:list) {
-//            if(b.getRealy_price()<minimun){
-//                minimun = b.getRealy_price();
-//                thisId= b.getId();
-//            }
-//        }
 
         File file = new File("D:\\R_normal_soft\\idea\\study\\ssm\\boardFile\\resultFile\\" + ba.getPurid() + ".pdf");
         
@@ -918,12 +861,6 @@ public class BaseAcademyServiceImpl implements BaseAcademyService {
 
 
         Result result1 = new Result();
-//        result1.setPid(purchasing_items.getId());
-//        for(Bidding_application bd:list){
-//            if(bd.getId()==thisId)
-//                result1.setSid(bd.getSid());//设置供应商id
-//        }
-        //result1.setSid(list.get(thisId).getSid());//设置供应商id
         result1.setPid(ba.getPurid());
         result1.setSid(ba.getSid());//设置供应商id
         result1.setScis(1);

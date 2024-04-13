@@ -13,31 +13,32 @@ import cn.mono.purchase.pojo.Supplier;
  */
 public interface SupplierService {
 
-    public Message supplierApply(BiddingApplication ba);
+    Message supplierApply(BiddingApplication ba);
 
 
-    public Message supApplys(int id) ;
+    Message supApplys(int id);
 
-    public Message applyUpdate(BiddingApplication ba) ;
-
-
-    public Message applySelect(String t1,String t2,int sid);
-
-    public Message applyDelete (int id);
+    Message applyUpdate(BiddingApplication ba);
 
 
-    public Message supResult(int sid) ;
+    Message applySelect(String t1, String t2, int sid);
+
+    Message applyDelete(int id);
 
 
-    public Message infoUpdate(Supplier sup);
+    Message supResult(int sid);
 
 
-    public Message applyShortList(ApplyForShortlist afs);
-    public Message applyShortListUpdate(ApplyForShortlist afs);
+    Message infoUpdate(Supplier sup);
 
-    public Message applyShortListSelect(String t1,String t2,int sid);
 
-    public Message applyShortListDelete (int id);
+    Message applyShortList(ApplyForShortlist afs);
+
+    Message applyShortListUpdate(ApplyForShortlist afs);
+
+    Message applyShortListSelect(String t1, String t2, int sid);
+
+    Message applyShortListDelete(int id);
 
     Message getApplyList(int id);
 
@@ -56,6 +57,7 @@ public interface SupplierService {
     Message getSearchBidingList(Selecte selecte);
 
     Message getApplyBoard();
+
     Message getPurchaseMaxID();
 
 }

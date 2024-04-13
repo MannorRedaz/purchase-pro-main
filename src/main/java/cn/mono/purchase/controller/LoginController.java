@@ -5,7 +5,6 @@ import cn.mono.purchase.dto.Login;
 import cn.mono.purchase.dto.Message;
 import cn.mono.purchase.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -27,6 +26,11 @@ public class LoginController {
     @PostMapping(value = "administerLogin")
     public Message administerLogin(@RequestBody Login login){
         return loginService.administerLogin(login);
+    }
+
+    @GetMapping("/logout")
+    public Message logout(@RequestHeader("Authorization") String token) {
+        return loginService.logout(token);
     }
 
 }

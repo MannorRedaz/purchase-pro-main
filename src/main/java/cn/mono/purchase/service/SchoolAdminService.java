@@ -15,33 +15,34 @@ import cn.mono.purchase.pojo.SchoolAdministrator;
  */
 public interface SchoolAdminService {
 
-    public Message selectSchoolAdminByName(String name);
+    Message selectSchoolAdminByName(String name);
 
-    public Message supplierApply(BiddingApplication ba);
-
-
-    public Message supApplys(int id) ;
-
-    public Message applyUpdate(BiddingApplication ba) ;
+    Message supplierApply(BiddingApplication ba);
 
 
-    public Message applySelect(String t1,String t2,int sid);
+    Message supApplys(int id);
 
-    public Message applyDelete (int id);
-
-
-    public Message supResult(int sid) ;
+    Message applyUpdate(BiddingApplication ba);
 
 
-    public Message infoUpdate(SchoolAdministrator sa);
+    Message applySelect(String t1, String t2, int sid);
+
+    Message applyDelete(int id);
 
 
-    public Message applyShortList(ApplyForShortlist afs);
-    public Message applyShortListUpdate(ApplyForShortlist afs);
+    Message supResult(int sid);
 
-    public Message applyShortListSelect(String t1,String t2,int sid);
 
-    public Message applyShortListDelete (int id);
+    Message infoUpdate(SchoolAdministrator sa);
+
+
+    Message applyShortList(ApplyForShortlist afs);
+
+    Message applyShortListUpdate(ApplyForShortlist afs);
+
+    Message applyShortListSelect(String t1, String t2, int sid);
+
+    Message applyShortListDelete(int id);
 
     Message selectSearchByAcademyName(String name);
 

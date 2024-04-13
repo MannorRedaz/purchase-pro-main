@@ -11,7 +11,7 @@ import cn.mono.purchase.pojo.Supper;
  */
 public interface SupperService {
 
-     Message selectSchoolAdminByName(String name);
+    Message selectSchoolAdminByName(String name);
 
     Message selectSchool();
 

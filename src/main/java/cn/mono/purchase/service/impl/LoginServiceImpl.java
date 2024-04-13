@@ -214,6 +214,12 @@ public class LoginServiceImpl implements LoginService {
         return Message.error(AUTH_LOGIN_BAD_CREDENTIALS);
     }
 
+    @Override
+    public Message logout(String token) {
+        redisTemplate.delete(ADMIN_TOKEN_PREFIX + token);
+        return new Message(Boolean.TRUE, "退出成功");
+    }
+
     String createToken() {
         return UUID.randomUUID().toString().replace("-", "");
     }
