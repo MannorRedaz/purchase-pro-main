@@ -9,14 +9,13 @@ export class applyManage1JS {
   static getbiddingList() {
     const data = JSON.parse(window.sessionStorage.getItem("data"));
     let res = axios.get(
-      "supplier/getApplyResultList?sid=" + data.id
+      "supplier/getApplyResultList?sid=" + data.data[0].id
     );
     return res;
   }
 
   static handleList2() {
     this.$message.success("188");
-
     const data = JSON.parse(window.sessionStorage.getItem("data"));
     this.$message.success("191");
 

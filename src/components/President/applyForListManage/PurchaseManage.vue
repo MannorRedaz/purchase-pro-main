@@ -7,11 +7,7 @@
         <div class="headers">
           <template>
             <el-select placeholder="请选择" v-model="access_value">
-              <el-option
-                v-for="item in access"
-                :key="item.id"
-                :value="item.value"
-              >
+              <el-option v-for="item in access" :key="item.id" :value="item.value">
               </el-option>
             </el-select>
           </template>
@@ -21,27 +17,16 @@
           <template>
              
             <div>
-                            <el-date-picker
-                v-model="time_value"
-                type="datetimerange"
-                range-separator="至"
-                start-placeholder="开始日期"
-                end-placeholder="结束日期"
-              >
-                              </el-date-picker
-              >
+                            <el-date-picker v-model="time_value" type="datetimerange" range-separator="至"
+                start-placeholder="开始日期" end-placeholder="结束日期">
+                              </el-date-picker>
                         
             </div>
           </template>
         </div>
       </div>
     </div>
-    <el-table
-      :data="tableData"
-      :key="tableData.id"
-      style="width: 100%; font-size: 15px"
-      stripe
-    >
+    <el-table :data="tableData" :key="tableData.id" style="width: 100%; font-size: 15px" stripe>
       <el-table-column type="index" label="序号"> </el-table-column>
       <el-table-column prop="academy" label="采购院系"> </el-table-column>
       <el-table-column prop="product_name" label="采购产品"> </el-table-column>
@@ -52,13 +37,8 @@
       <el-table-column align="right" label="详情">
         <template slot-scope="scope">
           <el-button size="mini" @click="handleEdit(scope.row)">详情</el-button>
-          <el-button
-            size="mini"
-            type="danger"
-            :disabled="scope.row.acceess == 11"
-            @click="handleApprove(scope.row)"
-            >{{ fun1(scope.row) }}</el-button
-          >
+          <el-button size="mini" type="danger" :disabled="scope.row.acceess == 11" @click="handleApprove(scope.row)">{{
+            fun1(scope.row) }}</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -68,34 +48,22 @@
           <el-input v-model="clickTarget.reason" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="产品名称" :label-width="formLabelWidth">
-          <el-input
-            v-model="clickTarget.product_name"
-            autocomplete="off"
-          ></el-input>
+          <el-input v-model="clickTarget.product_name" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="产品类别" :label-width="formLabelWidth">
-          <el-input
-            v-model="clickTarget.category"
-            autocomplete="off"
-          ></el-input>
+          <el-input v-model="clickTarget.category" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="发布学院" :label-width="formLabelWidth">
           <el-input v-model="clickTarget.academy" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="预估价格" :label-width="formLabelWidth">
-          <el-input
-            v-model="clickTarget.highest_price"
-            autocomplete="off"
-          ></el-input>
+          <el-input v-model="clickTarget.highest_price" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="需求数量" :label-width="formLabelWidth">
           <el-input v-model="clickTarget.tag" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="申请时间" :label-width="formLabelWidth">
-          <el-input
-            v-model="clickTarget.publish_time1"
-            autocomplete="off"
-          ></el-input>
+          <el-input v-model="clickTarget.publish_time1" autocomplete="off"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -190,17 +158,17 @@ export default {
   },
   methods: {
     async getAcademyList() {
-      console.log(2);
+      // console.log(2);
       const { data: res } = await this.$http.post("academys");
       const arry = res.date;
-      console.log(arry);
+      // console.log(arry);
       if (res.success) {
         for (let i = 0; i < res.date.length; i++) {
           this.academyList[res.date[i].cid] = res.date[i];
-          console.log(i);
+          // console.log(i);
         }
       } else {
-        console.log("categories请求失败！");
+        // console.log("categories请求失败！");
       }
     },
 
@@ -211,12 +179,12 @@ export default {
       const { data: res } = await this.$http.get(
         "president/getPurchaseList1?cid=" + data.cid
       );
-      console.log("getGoogsList");
+      // console.log("getGoogsList");
       if (res.success) {
         this.purchaseList = res.date;
         this.handleList();
       } else {
-        console.log("purchasingList请求失败！");
+        // console.log("purchasingList请求失败！");
       }
     },
     fun1(val) {
@@ -225,17 +193,17 @@ export default {
     },
     //获得商品类别列表
     async getCategoryList() {
-      console.log(2);
+      // console.log(2);
       const { data: res } = await this.$http.post("categories");
       const arry = res.date;
       if (res.success) {
         for (let i = 0; i < res.date.length; i++) {
           this.categorieList[res.date[i].pid] = res.date[i];
-          console.log(i);
+          // console.log(i);
         }
-        console.log(this.categorieList);
+        // console.log(this.categorieList);
       } else {
-        console.log("categories请求失败！");
+        // console.log("categories请求失败！");
       }
     },
     //获取供应商列表
@@ -246,14 +214,14 @@ export default {
         for (let i = 0; i < res.date.length; i++) {
           this.supplierList[res.date[i].id] = res.date[i];
         }
-        console.log(this.supplierList);
+        // console.log(this.supplierList);
       } else {
-        console.log("getSupplierList请求失败！");
+        // console.log("getSupplierList请求失败！");
       }
     },
     async dialog(val) {
       if (val) {
-        console.log("dialog");
+        // console.log("dialog");
         this.dialogFormVisible = false;
         const { data: res } = await this.$http.post(
           "schoolAdmin/addPurchaserAdmin",
@@ -261,7 +229,7 @@ export default {
           this.form
         );
         if (res.success) {
-          console.log("dialog2");
+          // console.log("dialog2");
           this.$message.success(res.msg);
           this.iniSearch();
         } else {
@@ -269,7 +237,7 @@ export default {
         }
       } else {
         this.dialogFormVisible = false;
-        console.log("fasle");
+        // console.log("fasle");
       }
     },
     async initial() {
@@ -291,11 +259,11 @@ export default {
       this.tableData.pop(null);
       this.tmp = this.tableData;
 
-      console.log("yes");
-      console.log("yes");
-      console.log("yes");
-      console.log("yes");
-      console.log(this.tableData);
+      // console.log("yes");
+      // console.log("yes");
+      // console.log("yes");
+      // console.log("yes");
+      // console.log(this.tableData);
     },
 
     handleEdit(row) {
@@ -317,7 +285,7 @@ export default {
     async downLoad() {
       window.open(
         "http://localhost:8080/ssm_war_exploded/downLoadSupplierFile/?id=" +
-          this.clickTarget.sid
+        this.clickTarget.sid
       );
     },
   },
@@ -329,10 +297,12 @@ export default {
   width: 150px;
   font-size: 20px;
 }
+
 .headers {
   display: flex;
   align-items: center;
 }
+
 #tagn {
   margin-right: 480px;
 }

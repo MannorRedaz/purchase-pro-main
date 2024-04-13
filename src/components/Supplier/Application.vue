@@ -7,8 +7,6 @@
       <div>
         <el-table :data="tableData" :key="tableData.id" style="width: 70%" stripe>
           <el-table-column prop="date1" label="申请时间" style="width: 100%;font-size: 15px;"> </el-table-column>
-
-
           <el-table-column align="right" label="是否通过">
             <template slot-scope="scope">
               <el-button v-if="scope.row.process == 1" type="primary" icon="el-icon-edit">通过</el-button>
@@ -177,11 +175,9 @@ export default {
     },
     async getApplyForList() {
       const data = JSON.parse(window.sessionStorage.getItem("data"));
-      this.supplierId = data.id;
+      this.supplierId = data.data[0].id;
       // const { data: res } = await this.$http.get("supplier/getApplyForList?sid=" + this.supplierId);
       const { data: res } = await this.$http.get("supplier/getApplyForList?sid=" + this.supplierId);
-
-
       if (res.success) {
         for (let i = 0; i < res.date.length; i++) {
           this.tableData[i] = res.date[i];

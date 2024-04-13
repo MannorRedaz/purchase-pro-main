@@ -74,50 +74,24 @@ export default {
         name: "",
       },
       newPwd: "",
-      dataForm: {
-        // id: "",
-        // contract_name: "超级管理员",
-        // tel: "173567777777",
-        // company_name: "http://www.baidu.com",
-        // sid: "",
-        // cid: "",
-        // name: "",f
-        // pwd: "",
-        // account: "",
-        // company_place: "",
-        // access: "",
-      },
+      dataForm: {},
       academyList: '',
       academy1: '',
     };
   },
   mounted() {
     const data = JSON.parse(window.sessionStorage.getItem("data"));
-    this.dataForm = data;
+    this.dataForm = data.data[0];
+    console.log("date");
+    console.log(data);
     this.inital();
-    // this.dataForm.id = data.id;
-    // this.dataForm.contract_name = data.contract_name;
-    // this.dataForm.tel = data.tel;
-    // console.log(this.dataForm);
-    // this.dataForm.company_name = data.company_name;
-    //  this.dataForm.sid=data.sid,
-    //     this.dataForm.cid=,
-    //     this.dataForm.name: "",
-    //     this.dataForm.pwd: "",
-    //     this.dataForm.account: "",
-    //     this.dataForm.company_place: "",
-    //     this.dataForm.access: "",
   },
   methods: {
     async getAcademyList() {
-      // console.log(1);
       const { data: res } = await this.$http.post("academys");
       const arry = res.date;
-      // console.log(res);
       if (res.success) {
         this.academyList = arry;
-      } else {
-        // console.log("academys请求失败！");
       }
     },
     async inital() {
@@ -137,7 +111,6 @@ export default {
           "administerLogin",
           this.loginForm
         );
-        // console.log(userinfo)
 
         if (res1.success) {
           this.dataForm.pwd = this.newPwd;

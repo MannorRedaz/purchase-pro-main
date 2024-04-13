@@ -211,7 +211,7 @@ export default {
       await this.getSupplierList();
       const data = JSON.parse(window.sessionStorage.getItem("data"));
       const { data: res } = await this.$http.get(
-        "president/getPurchaseList?cid=" + data.cid
+        "president/getPurchaseList?cid=" + data.data[0].cid
       );
       // console.log("getGoogsList");
       // console.log(this.purchaseList.length);

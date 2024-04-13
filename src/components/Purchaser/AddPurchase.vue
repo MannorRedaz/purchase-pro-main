@@ -73,7 +73,7 @@
       </el-pagination>
     </div>
 
-    <el-dialog title="采购详情" :visible.sync="showDetailPurchase" width="50%" fullscreen class="dialog"
+    <el-dialog title="采购详情" :visible.sync="showDetailPurchase" :width="'500px'" :height="'300px'"
       :append-to-body="true">
       <el-form label-width="120px" :model="seeTarget" size="small" label-position="right">
         <el-form-item label="产品名称" prop="">
@@ -313,7 +313,6 @@ export default {
         value1: [new Date(), new Date()],
         type: "",
       },
-
       //设置默认时间
     };
   },
@@ -358,7 +357,6 @@ export default {
   mounted() {
     const data = JSON.parse(window.sessionStorage.getItem("data"));
     //获取当前id最大值+1，并存储于errol_type
-
     this.purchaserId = data.id;
   },
   methods: {
@@ -373,16 +371,10 @@ export default {
     },
     // 文件状态改变时的钩子
     fileChange(file, fileList) {
-      // console.log("change");
-      // console.log(file);
       this.form.file = file.raw;
-      // console.log(this.form.file);
-      // console.log(fileList);
     },
     // 上传文件之前的钩子, 参数为上传的文件,若返回 false 或者返回 Promise 且被 reject，则停止上传
     beforeUploadFile(file) {
-      // console.log("before upload");
-      // console.log(file);
       let extension = file.name.substring(file.name.lastIndexOf(".") + 1);
       let size = file.size / 1024 / 1024;
       if (extension != "doc") {
@@ -410,7 +402,6 @@ export default {
     },
     // 文件上传失败时的钩子 err错误信息
     handleError(err, file, fileList) {
-      // console.log(err);
       let myError = err.toString(); //转字符串
       myError = myError.replace("Error: ", ""); // 去掉前面的" Error: "
       this.$notify.error({
@@ -428,15 +419,12 @@ export default {
           this.selects.academy = this.academyListLi[i].academy_name;
         }
       }
-      // console.log("yes" + this.selects);
       const { data: res } = await this.$http.post(
         "purchaser/purchaseScreen1",
         this.selects
       );
       if (res.success) {
         this.purchaseList = res.date;
-        // console.log("purchseList+" + this.purchaseList);
-        // console.log("purchseList+" + res.date);
         this.handleList();
         this.$message.success(res.msg);
       } else {
@@ -445,34 +433,24 @@ export default {
     },
     //获得商品类别列表
     async getCategoryList() {
-      // console.log(2);
       const { data: res } = await this.$http.post("categories");
       const arry = res.date;
       if (res.success) {
         this.categoryListLi = res.date;
         for (let i = 0; i < res.date.length; i++) {
           this.categoryList[res.date[i].pid] = res.date[i];
-          // console.log(i);
         }
-        // console.log(this.categorieList);
-      } else {
-        // console.log("categories请求失败！");
       }
     },
     //获得学院列表
     async getAcademyList() {
-      // console.log(2);
       const { data: res } = await this.$http.post("academys");
       const arry = res.date;
-      // console.log(arry);
       if (res.success) {
         this.academyListLi = res.date;
         for (let i = 0; i < res.date.length; i++) {
           this.academyList[res.date[i].cid] = res.date[i];
-          // console.log(i);
         }
-      } else {
-        // console.log("categories请求失败！");
       }
     },
     //使用学院号获得该学院的采购信息
@@ -481,7 +459,7 @@ export default {
       await this.getCategoryList();
       const data = JSON.parse(window.sessionStorage.getItem("data"));
       const { data: res } = await this.$http.get(
-        "president/getPurchaseList1?cid=" + data.cid
+        "president/getPurchaseList1?cid=" + data.data[0].cid
       );
       // console.log("getGoogsList");
       if (res.success) {
@@ -519,7 +497,6 @@ export default {
         this.tableData[i].category =
           this.categoryList[this.purchaseList[i].pid].product_name;
       }
-      // console.log("this.tabelData" + this.tableData);
       //触发更新问题
       this.tableData.push(null);
       this.tableData.pop(null);
@@ -529,7 +506,6 @@ export default {
       this.tmp = this.tableData;
     },
     async addPurchaseShow() {
-      // console.log("我执行了addPurchaseShow");
       this.showAddPurchase = true;
     },
     async addPurchase() {
@@ -549,8 +525,8 @@ export default {
       const data = JSON.parse(window.sessionStorage.getItem("data"));
       let tmp = {};
       tmp.id = null;
-      tmp.cid = data.cid;
-      tmp.sid = data.sid;
+      tmp.cid = data.data[0].cid;
+      tmp.sid = data.data[0].sid;
       tmp.tag = this.addTarget.tag;
       tmp.highest_price = this.addTarget.highest_price;
       tmp.product_name = this.addTarget.product_name;
@@ -559,18 +535,14 @@ export default {
 
       tmp.apply_time = new Date();
       tmp.pid = this.addTarget.pid;
-      // console.log("pid==" + this.addTarget.pid);
-      // console.log("addTarget==" + this.addTarget);
 
       const { data: res } = await this.$http.post("purchaser/addPurchase", tmp);
       if (res.success) {
         this.$message.success(res.msg);
         this.getPurchaseList();
-        // console.log(this.supplierList);
       } else {
         this.$message.error(res.msg);
       }
-      //this.getPurchaseList();
       this.showAddPurchase = false;
     },
     closeAddPurchase() {
@@ -680,6 +652,7 @@ export default {
   align-items: center;
 }
 
+
 .product-name,
 .product-type,
 .transaction-type,
@@ -689,8 +662,15 @@ export default {
 }
 
 .dialog>.el-dialog {
-  overflow-y: auto !important;
-  height: 500px !important;
+  overflow-y: auto;
+  height: 50%;
+}
+
+.el-dialog .is-fullscreen {
+  width: 500px !important;
+  /* 设置对话框宽度为500像素 */
+  height: 300px !important;
+  /* 设置对话框高度为300像素 */
 }
 
 .tit {

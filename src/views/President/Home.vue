@@ -150,8 +150,10 @@ export default {
     },
     async getUsedMoney() {
       const data = JSON.parse(window.sessionStorage.getItem("data"));
+      console.log('data.data[0].cid');
+      console.log(data.data[0].cid);
       const { data: res } = await this.$http.get(
-        "president/getUsedMoney?cid=" + data.cid
+        "president/getUsedMoney?cid=" + data.data[0].cid
       );
       this.count = res.status;
     },

@@ -1,7 +1,6 @@
 <template>
   <div class="register_container">
-    <!-- 这是首部 -->
-    <el-header></el-header>
+    <el-header>这是首部</el-header>
     <el-card class="register_box">
       <el-row>
         <el-col :span="12" class="form">
@@ -113,20 +112,35 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-.register_container {
+@image-path: url("@/assets/img/Desert1.jpg");
+@box-padding: 20px;
+@container-width: 1000px;
+@container-margin: 20px auto 0;
+
+html {
   height: 100%;
-  background-color: rgb(255, 255, 255);
+  width: 100%;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  background: @image-path no-repeat 0px 0px;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  -moz-background-size: 100% 100%;
+}
 
-  .register_box {
-    padding-top: 20px;
-    width: 1000px;
-    margin: 20px auto 0;
-  }
+.register_container {
+  width: @container-width;
+  margin: @container-margin;
+}
 
-  .form {
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-  }
+.register_box {
+  padding-top: @box-padding;
+}
+
+.form {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
 }
 </style>

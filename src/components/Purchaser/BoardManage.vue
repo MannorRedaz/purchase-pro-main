@@ -9,11 +9,7 @@
         <div>
           <template>
             <el-select v-model="selects.categories" placeholder="请选择">
-              <el-option
-                v-for="item in CategoriesMap"
-                :key="item.pid"
-                :value="item.product_name"
-              >
+              <el-option v-for="item in CategoriesMap" :key="item.pid" :value="item.product_name">
               </el-option>
             </el-select>
           </template>
@@ -42,13 +38,8 @@
         <div>
           <template>
             <div class="block">
-              <el-date-picker
-                v-model="selects.value1"
-                type="datetimerange"
-                range-separator="至"
-                start-placeholder="开始日期"
-                end-placeholder="结束日期"
-              >
+              <el-date-picker v-model="selects.value1" type="datetimerange" range-separator="至" start-placeholder="开始日期"
+                end-placeholder="结束日期">
               </el-date-picker>
             </div>
           </template>
@@ -57,12 +48,12 @@
 
       <!--搜索-->
       <div id="searchStyle">
-        <template >
-        <el-button type="primary" @click="search">搜索</el-button>
+        <template>
+          <el-button type="primary" @click="search">搜索</el-button>
         </template>
       </div>
-      
-<!--       
+
+      <!--       
  <div class="grade-box">
         <div class="grade"></div>
         <template>
@@ -81,37 +72,22 @@
         <el-table-column label="截至时间" prop="end_time"></el-table-column>
         <el-table-column label="查看">
           <template slot-scope="scope">
-            <el-button
-              type="primary"
-              icon="el-icon-edit"
-              size="mini"
-              @click="showDialog(scope.row)"
-            ></el-button>
+            <el-button type="primary" icon="el-icon-edit" size="mini" @click="showDialog(scope.row)"></el-button>
           </template>
         </el-table-column>
         <el-table-column label="编辑">
           <template slot-scope="scope">
-            <el-button
-              type="primary"
-              icon="el-icon-edit"
-              size="mini"
-              @click="editDialog(scope.row)"
-            ></el-button>
+            <el-button type="primary" icon="el-icon-edit" size="mini" @click="editDialog(scope.row)"></el-button>
           </template>
         </el-table-column>
-         <el-table-column label="删除">
+        <el-table-column label="删除">
           <template slot-scope="scope">
-            <el-button
-              type="primary"
-              icon="el-icon-edit"
-              size="mini"
-              @click="delete1(scope.row)"
-            ></el-button>
+            <el-button type="primary" icon="el-icon-edit" size="mini" @click="delete1(scope.row)"></el-button>
           </template>
         </el-table-column>
       </el-table>
     </div>
-<!-- 
+    <!-- 
     <div class="page-part">
       <el-pagination
         @size-change="handleSizeChange"
@@ -124,19 +100,11 @@
       </el-pagination>
     </div> -->
 
-    <el-dialog
-      title="结果公告"
-      :visible.sync="showDialogVisible2"
-      width="50%"
-      fullscreen
-      @close="showDialogClosed"
-      class="dialog"
-    >
+    <el-dialog title="结果公告" :visible.sync="showDialogVisible2" width="50%" fullscreen @close="showDialogClosed"
+      class="dialog">
       <div class="Section0" style="layout-grid: 15.6pt">
         <p class="MsoNormal" align="center" style="text-align: center">
-          <b
-            ><span
-              style="
+          <b><span style="
                 mso-spacerun: 'yes';
                 font-family: 宋体;
                 mso-ascii-font-family: Calibri;
@@ -145,12 +113,9 @@
                 font-weight: bold;
                 font-size: 15pt;
                 mso-font-kerning: 1pt;
-              "
-              ><font face="宋体">{{ clickTarget.purchase_name }}</font></span
-            ></b
-          ><b
-            ><span
-              style="
+              ">
+              <font face="宋体">{{ clickTarget.purchase_name }}</font>
+            </span></b><b><span style="
                 mso-spacerun: 'yes';
                 font-family: Calibri;
                 mso-fareast-font-family: 宋体;
@@ -158,13 +123,12 @@
                 font-weight: bold;
                 font-size: 15pt;
                 mso-font-kerning: 1pt;
-              "
-              ><o:p></o:p></span
-          ></b>
+              ">
+              <o:p></o:p>
+            </span></b>
         </p>
         <p class="MsoNormal" align="center" style="text-align: center">
-          <span
-            style="
+          <span style="
               mso-spacerun: 'yes';
               font-family: 宋体;
               mso-ascii-font-family: Calibri;
@@ -172,17 +136,16 @@
               mso-bidi-font-family: 'Times New Roman';
               font-size: 10.5pt;
               mso-font-kerning: 1pt;
-            "
-            ><font face="Calibri">{{ clickTarget.publish_time }}</font
-            ><font face="Calibri">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font
-            ><font face="宋体">资管处</font
-            ><font face="Calibri">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font
-            ><font face="宋体">资管处装备科</font
-            ><font face="Calibri">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font
-            ><font face="宋体">点击数：</font
-            ><font face="Calibri">{{ clickTarget.click_count }}</font></span
-          ><span
-            style="
+            ">
+            <font face="Calibri">{{ clickTarget.publish_time }}</font>
+            <font face="Calibri">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>
+            <font face="宋体">资管处</font>
+            <font face="Calibri">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>
+            <font face="宋体">资管处装备科</font>
+            <font face="Calibri">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>
+            <font face="宋体">点击数：</font>
+            <font face="Calibri">{{ clickTarget.click_count }}</font>
+          </span><span style="
               mso-spacerun: 'yes';
               font-family: 宋体;
               mso-ascii-font-family: Calibri;
@@ -190,16 +153,12 @@
               mso-bidi-font-family: 'Times New Roman';
               font-size: 10.5pt;
               mso-font-kerning: 1pt;
-            "
-            ><o:p></o:p
-          ></span>
+            ">
+            <o:p></o:p>
+          </span>
         </p>
-        <p
-          class="MsoNormal"
-          style="text-indent: 21pt; mso-char-indent-count: 2"
-        >
-          <span
-            style="
+        <p class="MsoNormal" style="text-indent: 21pt; mso-char-indent-count: 2">
+          <span style="
               mso-spacerun: 'yes';
               font-family: 宋体;
               mso-ascii-font-family: Calibri;
@@ -207,18 +166,15 @@
               mso-bidi-font-family: 'Times New Roman';
               font-size: 10.5pt;
               mso-font-kerning: 1pt;
-            "
-            ><font face="宋体"
-              >{{ clickTarget.academy }}，{{
-                clickTarget.reason
-              }}，采购预算价,不超过</font
-            ><font face="Calibri">{{ clickTarget.highest_price }}</font
-            ><font face="宋体"
-              >元，拟采购供应商{{ clickTarget.company_name }}，中标价：</font
-            ><font face="Calibri">{{ clickTarget.realy_price }}</font
-            ><font face="宋体">元，现予以公示，采购审批表等见附件</font></span
-          ><span
-            style="
+            ">
+            <font face="宋体">{{ clickTarget.academy }}，{{
+              clickTarget.reason
+            }}，采购预算价,不超过</font>
+            <font face="Calibri">{{ clickTarget.highest_price }}</font>
+            <font face="宋体">元，拟采购供应商{{ clickTarget.company_name }}，中标价：</font>
+            <font face="Calibri">{{ clickTarget.realy_price }}</font>
+            <font face="宋体">元，现予以公示，采购审批表等见附件</font>
+          </span><span style="
               mso-spacerun: 'yes';
               font-family: 宋体;
               mso-ascii-font-family: Calibri;
@@ -226,13 +182,12 @@
               mso-bidi-font-family: 'Times New Roman';
               font-size: 10.5pt;
               mso-font-kerning: 1pt;
-            "
-            ><o:p></o:p
-          ></span>
+            ">
+            <o:p></o:p>
+          </span>
         </p>
         <p class="MsoNormal">
-          <span
-            style="
+          <span style="
               mso-spacerun: 'yes';
               font-family: 宋体;
               mso-ascii-font-family: Calibri;
@@ -240,12 +195,9 @@
               mso-bidi-font-family: 'Times New Roman';
               font-size: 10.5pt;
               mso-font-kerning: 1pt;
-            "
-            ><font face="宋体">附件【</font></span
-          ><span
-            ><a @click="downLoad"
-              ><span
-                style="
+            ">
+            <font face="宋体">附件【</font>
+          </span><span><a @click="downLoad"><span style="
                   mso-spacerun: 'yes';
                   font-family: 宋体;
                   mso-ascii-font-family: Calibri;
@@ -253,14 +205,10 @@
                   mso-bidi-font-family: 'Times New Roman';
                   font-size: 10.5pt;
                   mso-font-kerning: 1pt;
-                "
-                ><font face="宋体"
-                  >{{ clickTarget.product_name }}采购审批表</font
-                ><font face="Calibri">.pdf</font></span
-              ></a
-            ></span
-          ><span
-            style="
+                ">
+                <font face="宋体">{{ clickTarget.product_name }}采购审批表</font>
+                <font face="Calibri">.pdf</font>
+              </span></a></span><span style="
               mso-spacerun: 'yes';
               font-family: 宋体;
               mso-ascii-font-family: Calibri;
@@ -268,22 +216,16 @@
               mso-bidi-font-family: 'Times New Roman';
               font-size: 10.5pt;
               mso-font-kerning: 1pt;
-            "
-            ><font face="宋体">】</font></span
-          >
+            ">
+            <font face="宋体">】</font>
+          </span>
         </p>
       </div>
     </el-dialog>
-   <el-dialog
-      title="采购公告"
-      :visible.sync="showDialogVisible"
-      width="50%"
-      fullscreen
-      @close="showDialogClosed"
-      class="dialog"
-    >
-    <div>
-        <div class="tit">{{ clickTarget.purchase_name}}</div>
+    <el-dialog title="采购公告" :visible.sync="showDialogVisible" width="50%" fullscreen @close="showDialogClosed"
+      class="dialog">
+      <div>
+        <div class="tit">{{ clickTarget.purchase_name }}</div>
         <div class="tit" style="font-size: 20px; margin-top: 20px"></div>
         <!-- {{ List[0].publish_time }} -->
         <div class="tit">
@@ -298,543 +240,340 @@
 
           <!-- </span></p> -->
           <p><span style="font-size: 16px"></span></p>
-          <p
-            class="MsoNormal"
-            style="
+          <p class="MsoNormal" style="
               margin: 0cm 0cm 0px;
               text-align: left;
               line-height: 35px;
               mso-line-height-rule: exactly;
-            "
-          >
-            <span
-              lang="EN-US"
-              style="color: rgb(51, 51, 51); font-family: 黑体; font-size: 24px"
-            >
+            ">
+            <span lang="EN-US" style="color: rgb(51, 51, 51); font-family: 黑体; font-size: 24px">
             </span>
           </p>
           <p><span style="font-size: 16px"></span></p>
-          <p
-            class="MsoNormal"
-            style="
+          <p class="MsoNormal" style="
               margin: 0cm 0cm 0px;
               text-align: left;
               line-height: 35px;
               text-indent: 40px;
               mso-line-height-rule: exactly;
-            "
-          >
-            <span
-              style="color: rgb(51, 51, 51); font-family: 宋体; font-size: 20px"
-              >{{ clickTarget.title }} </span
-            ><span
-              lang="EN-US"
-              style="
+            ">
+            <span style="color: rgb(51, 51, 51); font-family: 宋体; font-size: 20px">{{ clickTarget.title }} </span><span
+              lang="EN-US" style="
                 color: rgb(51, 51, 51);
                 font-family: 'ˎ̥', 'serif';
                 font-size: 20px;
-              "
-            >
+              ">
               <br /><span style="font-family: 宋体">
                 <strong style="mso-bidi-font-weight: normal">
-                  <span style="mso-spacerun: yes"> &nbsp; </span></strong
-                ></span
-              > </span
-            ><strong style="mso-bidi-font-weight: normal">
-              <span
-                style="
+                  <span style="mso-spacerun: yes"> &nbsp; </span></strong></span> </span><strong
+              style="mso-bidi-font-weight: normal">
+              <span style="
                   color: rgb(51, 51, 51);
                   font-family: 宋体;
                   font-size: 20px;
                   mso-ascii-font-family: ˎ̥;
-                "
-              >
-                一、采购目的</span
-              ></strong
-            >
+                ">
+                一、采购目的</span></strong>
             <strong style="mso-bidi-font-weight: normal">
-              <span
-                lang="EN-US"
-                style="
+              <span lang="EN-US" style="
                   color: rgb(51, 51, 51);
                   font-family: 'ˎ̥', 'serif';
                   font-size: 20px;
-                "
-              >
-              </span
-            ></strong>
+                ">
+              </span></strong>
           </p>
           <p><span style="font-size: 16px"></span></p>
-          <p
-            class="MsoNormal"
-            style="
+          <p class="MsoNormal" style="
               margin: 0cm 0cm 0px;
               text-align: left;
               line-height: 35px;
               text-indent: 40px;
               mso-line-height-rule: exactly;
-            "
-          >
-            <span
-              style="
+            ">
+            <span style="
                 color: rgb(51, 51, 51);
                 font-family: 宋体;
                 font-size: 21px;
                 mso-ascii-theme-font: minor-fareast;
                 mso-fareast-theme-font: minor-fareast;
                 mso-hansi-theme-font: minor-fareast;
-              "
-              >{{ clickTarget.reason
-              }}<strong style="mso-bidi-font-weight: normal"
-                ><span lang="EN-US"> </span></strong
-            ></span>
+              ">{{ clickTarget.reason
+              }}<strong style="mso-bidi-font-weight: normal"><span lang="EN-US"> </span></strong></span>
           </p>
           <p><span style="font-size: 16px"></span></p>
-          <p
-            class="MsoNormal"
-            style="
+          <p class="MsoNormal" style="
               margin: 0cm 0cm 0px;
               text-align: left;
               line-height: 35px;
               text-indent: 40px;
               mso-line-height-rule: exactly;
-            "
-          >
-             
-            <strong style="mso-bidi-font-weight: normal"
-              ><span
-                style="
+            ">
+
+            <strong style="mso-bidi-font-weight: normal"><span style="
                   color: rgb(51, 51, 51);
                   font-family: 宋体;
                   font-size: 20px;
                   mso-ascii-font-family: ˎ̥;
-                "
-                >二、采购详情</span
-              ></strong
-            ><br>
-            <span
-              style="
+                ">二、采购详情</span></strong><br>
+            <span style="
                 color: rgb(51, 51, 51);
                 font-family: 宋体;
                 font-size: 20px;
                 mso-ascii-font-family: ˎ̥;
-              "
-              >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1、发布学院:</span
-            >
-            <span
-                lang="EN-US"
-                style="
+              ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1、发布学院:</span>
+            <span lang="EN-US" style="
                   color: rgb(51, 51, 51);
                   font-family: 'ˎ̥', 'serif';
                   font-size: 20px;
-                "
-                >{{
-                 clickTarget.academy
+                ">{{
+                  clickTarget.academy
                 }}</span>
-            <br><span
-              style="
+            <br><span style="
                 color: rgb(51, 51, 51);
                 font-family: 宋体;
                 font-size: 20px;
                 mso-ascii-font-family: ˎ̥;
-              "
-              >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2、采购需求:</span
-            ><span style="font-family: 宋体"
-              ><span
-                lang="EN-US"
-                style="
+              ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2、采购需求:</span><span style="font-family: 宋体"><span lang="EN-US" style="
                   color: rgb(51, 51, 51);
                   font-family: 'ˎ̥', 'serif';
                   font-size: 20px;
-                "
-                >{{
+                ">{{
                   clickTarget.product_name
-                }}</span
-              ><span
-                lang="EN-US"
-                style="
+                }}</span><span lang="EN-US" style="
                   color: rgb(51, 51, 51);
                   font-family: 'ˎ̥', 'serif';
                   font-size: 20px;
-                "
-                >（{{
+                ">（{{
                   clickTarget.purpose
-                }}）</span
-              ><span
-                lang="EN-US"
-                style="
+                }}）</span><span lang="EN-US" style="
                   color: rgb(51, 51, 51);
                   font-family: 'ˎ̥', 'serif';
                   font-size: 20px;
-                "
-              >
-              </span
-            ></span>
+                ">
+              </span></span>
           </p>
           <p><span style="font-size: 16px"></span></p>
-          <p
-            class="MsoNormal"
-            style="
+          <p class="MsoNormal" style="
               margin: 0cm 0cm 0px;
               line-height: 35px;
               text-indent: 40px;
               mso-line-height-rule: exactly;
               mso-char-indent-count: 2;
-            "
-          >
-            <strong style="mso-bidi-font-weight: normal"
-              ><span
-                style="
+            ">
+            <strong style="mso-bidi-font-weight: normal"><span style="
                   color: rgb(51, 51, 51);
                   font-family: 宋体;
                   font-size: 20px;
                   mso-ascii-font-family: ˎ̥;
-                "
-                >三、竞拍要求</span
-              ></strong
-            ><strong style="mso-bidi-font-weight: normal"
-              ><span
-                lang="EN-US"
-                style="
+                ">三、竞拍要求</span></strong><strong style="mso-bidi-font-weight: normal"><span lang="EN-US" style="
                   color: rgb(51, 51, 51);
                   font-family: 'ˎ̥', 'serif';
                   font-size: 20px;
-                "
-                ><br /><span style="font-family: 宋体"></span></span></strong
-            ><span style="font-family: 宋体"
-              ><span
-                lang="EN-US"
-                style="
+                "><br /><span style="font-family: 宋体"></span></span></strong><span style="font-family: 宋体"><span
+                lang="EN-US" style="
                   color: rgb(51, 51, 51);
                   font-family: 'ˎ̥', 'serif';
                   font-size: 20px;
-                "
-                ><span style="mso-spacerun: yes"> &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; </span
-                ><strong style="mso-bidi-font-weight: normal">1</strong></span
-              ><strong style="mso-bidi-font-weight: normal"
-                ><span
-                  style="
+                "><span style="mso-spacerun: yes"> &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+                </span><strong style="mso-bidi-font-weight: normal">1</strong></span><strong
+                style="mso-bidi-font-weight: normal"><span style="
                     color: rgb(51, 51, 51);
                     font-family: 宋体;
                     font-size: 20px;
                     mso-ascii-font-family: ˎ̥;
-                  "
-                  >、竞拍资格：</span
-                ></strong
-              ><span
-                style="
+                  ">、竞拍资格：</span></strong><span style="
                   color: rgb(51, 51, 51);
                   font-family: 宋体;
                   font-size: 20px;
                   mso-ascii-font-family: ˎ̥;
-                "
-                >{{ clickTarget.qualifications }}</span
-              ><span
-                lang="EN-US"
-                style="
+                ">{{ clickTarget.qualifications }}</span><span lang="EN-US" style="
                   color: rgb(51, 51, 51);
                   font-family: 'ˎ̥', 'serif';
                   font-size: 20px;
-                "
-              >
-              </span
-            ></span>
+                ">
+              </span></span>
           </p>
           <p><span style="font-size: 16px"></span></p>
-          <p
-            class="MsoNormal"
-            style="
+          <p class="MsoNormal" style="
               margin: 0cm 0cm 0px;
               line-height: 35px;
               text-indent: 40px;
               mso-line-height-rule: exactly;
               mso-char-indent-count: 2;
-            "
-          >
-            <span style="font-family: 宋体"
-              ><strong style="mso-bidi-font-weight: normal"
-                ><span
-                  lang="EN-US"
-                  style="
+            ">
+            <span style="font-family: 宋体"><strong style="mso-bidi-font-weight: normal"><span lang="EN-US" style="
                     color: rgb(51, 51, 51);
                     font-family: 'ˎ̥', 'serif';
                     font-size: 20px;
-                  "
-                  >&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; 2</span
-                ></strong
-              ><strong style="mso-bidi-font-weight: normal"
-                ><span
-                  style="
+                  ">&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; 2</span></strong><strong
+                style="mso-bidi-font-weight: normal"><span style="
                     color: rgb(51, 51, 51);
                     font-family: 宋体;
                     font-size: 20px;
                     mso-ascii-font-family: ˎ̥;
-                  "
-                  >、竞拍报名</span
-                ></strong
-              ></span
-            ><span
-              lang="EN-US"
-              style="
+                  ">、竞拍报名</span></strong></span><span lang="EN-US" style="
                 color: rgb(51, 51, 51);
                 font-family: 'ˎ̥', 'serif';
                 font-size: 20px;
-              "
-              ><br /><span style="font-family: 宋体"
-                ><span style="mso-spacerun: yes">&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; </span></span
-              ></span
-            ><span
-              style="
+              "><br /><span style="font-family: 宋体"><span style="mso-spacerun: yes">&nbsp; &nbsp; &nbsp;&nbsp;
+                  &nbsp;&nbsp; </span></span></span><span style="
                 color: rgb(51, 51, 51);
                 font-family: 宋体;
                 font-size: 20px;
                 mso-ascii-font-family: ˎ̥;
-              "
-              >1）、截止时间：</span
-            ><span style="
+              ">1）、截止时间：</span><span style="
                 color: rgb(51, 51, 51);
                 font-family: 宋体;
                 font-size: 20px;
                 mso-ascii-font-family: ˎ̥;
               "><strong>{{
-              this.$moment(clickTarget.end_time).format("YYYY-MM-DD")
-            }}</strong></span>
+                this.$moment(clickTarget.end_time).format("YYYY-MM-DD")
+              }}</strong></span>
             <a name="_GoBack"></a><br />
-            <span style="font-family: 宋体"
-              ><span style="mso-spacerun: yes"> &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;  &nbsp;&nbsp; </span></span
-            >
-            <span
-              style="
+            <span style="font-family: 宋体"><span style="mso-spacerun: yes"> &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+                &nbsp;&nbsp; </span></span>
+            <span style="
                 color: rgb(51, 51, 51);
                 font-family: 宋体;
                 font-size: 20px;
                 mso-ascii-font-family: ˎ̥;
-              "
-              >2）、报名方式：使用网站申请或者直接到学校进行申请</span
-            ><span style="font-family: 宋体"
-              >{{ clickTarget.auction_site }} </span
-            ><span
-              lang="EN-US"
-              style="
+              ">2）、报名方式：使用网站申请或者直接到学校进行申请</span><span style="font-family: 宋体">{{ clickTarget.auction_site }}
+            </span><span lang="EN-US" style="
                 color: rgb(51, 51, 51);
                 font-family: 'ˎ̥', 'serif';
                 font-size: 20px;
-              "
-              ><br /><span style="font-family: 宋体"
-                ><span style="mso-spacerun: yes"> &nbsp;  &nbsp;&nbsp; &nbsp;</span
-                ><strong style="mso-bidi-font-weight: normal"
-                  ><span style="mso-spacerun: yes"> </span>3</strong
-                ></span
-              ></span
-            ><strong style="mso-bidi-font-weight: normal"
-              ><span
-                style="
+              "><br /><span style="font-family: 宋体"><span style="mso-spacerun: yes"> &nbsp; &nbsp;&nbsp;
+                  &nbsp;</span><strong style="mso-bidi-font-weight: normal"><span style="mso-spacerun: yes">
+                  </span>3</strong></span></span><strong style="mso-bidi-font-weight: normal"><span style="
                   color: rgb(51, 51, 51);
                   font-family: 宋体;
                   font-size: 20px;
                   mso-ascii-font-family: ˎ̥;
-                "
-                >、保证金：</span
-              ></strong
-            ><span
-              style="
+                ">、保证金：</span></strong><span style="
                 color: rgb(51, 51, 51);
                 font-family: 宋体;
                 font-size: 20px;
                 mso-ascii-font-family: ˎ̥;
-              "
-              >参与投标商在开拍前需缴纳现金保证金</span
-            ><span style="font-family: 宋体"
-              ><span
-                lang="EN-US"
-                style="
+              ">参与投标商在开拍前需缴纳现金保证金</span><span style="font-family: 宋体"><span lang="EN-US" style="
                   color: rgb(51, 51, 51);
                   font-family: 'ˎ̥', 'serif';
                   font-size: 20px;
-                "
-                >2000</span
-              ><span
-                style="
+                ">2000</span><span style="
                   color: rgb(51, 51, 51);
                   font-family: 宋体;
                   font-size: 20px;
                   mso-ascii-font-family: ˎ̥;
-                "
-                >元。未中标者当场退还保证金，若中标者弃标保证金不予退还。所有物资（含待拆除的学生课桌椅）</span
-              ></span
-            ><span
-              style="
+                ">元。未中标者当场退还保证金，若中标者弃标保证金不予退还。所有物资（含待拆除的学生课桌椅）</span></span><span style="
                 color: black;
                 font-family: 宋体;
                 font-size: 20px;
                 mso-ascii-font-family: ˎ̥;
                 mso-themecolor: text1;
-              "
-              >搬运完成、垃圾清运完毕、建筑物破坏恢复后退还保证金。</span
-            ><span
-              lang="EN-US"
-              style="
+              ">搬运完成、垃圾清运完毕、建筑物破坏恢复后退还保证金。</span><span lang="EN-US" style="
                 color: black;
                 font-family: 'ˎ̥', 'serif';
                 font-size: 20px;
                 mso-themecolor: text1;
-              "
-              ><br /><span style="font-family: 宋体"></span></span
-            ><span style="font-family: 宋体"
-              ><span
-                lang="EN-US"
+              "><br /><span style="font-family: 宋体"></span></span><span style="font-family: 宋体"><span lang="EN-US"
                 style="
                   color: rgb(51, 51, 51);
                   font-family: 'ˎ̥', 'serif';
                   font-size: 20px;
-                "
-                ><span style="mso-spacerun: yes"> &nbsp;</span
-                ><span style="mso-spacerun: yes"> </span></span
-              ><span
-                lang="EN-US"
-                style="
+                "><span style="mso-spacerun: yes"> &nbsp;</span><span style="mso-spacerun: yes"> </span></span><span
+                lang="EN-US" style="
                   color: black;
                   font-family: 'ˎ̥', 'serif';
                   font-size: 20px;
                   mso-themecolor: text1;
-                "
-                ><span style="mso-spacerun: yes"> </span
-                ><strong style="mso-bidi-font-weight: normal"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;四</strong></span
-              ><strong style="mso-bidi-font-weight: normal"
-                ><span
+                "><span style="mso-spacerun: yes"> </span><strong style="mso-bidi-font-weight: normal">
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;四</strong></span><strong style="mso-bidi-font-weight: normal"><span
                   style="
                     color: black;
                     font-family: 宋体;
                     font-size: 20px;
                     mso-ascii-font-family: ˎ̥;
                     mso-themecolor: text1;
-                  "
-                  >、成交原则：</span
-                ></strong
-              ><span
-                style="
+                  ">、成交原则：</span></strong><span style="
                   color: black;
                   font-family: 宋体;
                   font-size: 20px;
                   mso-ascii-font-family: ˎ̥;
                   mso-themecolor: text1;
-                "
-                >{{ clickTarget.rules }}</span
-              ><span
-                lang="EN-US"
-                style="
+                ">{{ clickTarget.rules }}</span><span lang="EN-US" style="
                   color: black;
                   font-family: 'ˎ̥', 'serif';
                   font-size: 20px;
                   mso-themecolor: text1;
-                "
-              >
-              </span
-            ></span>
+                ">
+              </span></span>
           </p>
           <p><span style="font-size: 16px"></span></p>
-          <p
-            class="MsoNormal"
-            style="
+          <p class="MsoNormal" style="
               margin: 0cm 0cm 0px;
               line-height: 35px;
               text-indent: 40px;
               mso-line-height-rule: exactly;
               mso-char-indent-count: 2;
-            "
-          >
-            <span style="font-family: 宋体"
-              ><span
-                lang="EN-US"
-                style="
+            ">
+            <span style="font-family: 宋体"><span lang="EN-US" style="
                   color: black;
                   font-family: 'ˎ̥', 'serif';
                   font-size: 20px;
                   mso-themecolor: text1;
-                "
-                > 五</span
-              ><span
-                style="
+                "> 五</span><span style="
                   color: black;
                   font-family: 宋体;
                   font-size: 20px;
                   mso-ascii-font-family: ˎ̥;
                   mso-themecolor: text1;
-                "
-                >、其他事宜：</span
-              ></span
-            ><span
-              style="
+                ">、其他事宜：</span></span><span style="
                 color: rgb(51, 51, 51);
                 font-family: 宋体;
                 font-size: 20px;
                 mso-ascii-font-family: ˎ̥;
-              "
-              >{{ clickTarget.others }}</span
-            >
-          <p
-            class="MsoNormal"
-            style="
+              ">{{ clickTarget.others }}</span>
+          <p class="MsoNormal" style="
               margin: 0cm 0cm 0px;
               line-height: 35px;
               text-indent: 40px;
               mso-line-height-rule: exactly;
               mso-char-indent-count: 1.98;
-            "
-          >
-          
+            ">
+
           </p>
           <p><span style="font-size: 16px"></span></p>
-          <p
-            class="MsoNormal"
-            style="
+          <p class="MsoNormal" style="
               margin: 0cm 0cm 0px;
               line-height: 35px;
               text-indent: 32px;
               mso-line-height-rule: exactly;
               mso-char-indent-count: 1.98;
-            "
-          >
-            <span
-              lang="EN-US"
-              style="
+            ">
+            <span lang="EN-US" style="
                 color: rgb(51, 51, 51);
                 font-family: 'ˎ̥', 'serif';
                 font-size: 16px;
                 mso-bidi-font-size: 13px;
-              "
-              ><br /><span style="font-family: 宋体"></span></span
-            ><span style="font-family: 宋体"
-              ><span
-                lang="EN-US"
+              "><br /><span style="font-family: 宋体"></span></span><span style="font-family: 宋体"><span lang="EN-US"
                 style="
                   color: rgb(51, 51, 51);
                   font-family: 'ˎ̥', 'serif';
                   font-size: 20px;
-                "
-              >
+                ">
                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                &nbsp; &nbsp;</span
-              ><span
-                style="
+                &nbsp; &nbsp;</span><span style="
                   color: rgb(51, 51, 51);
                   font-family: 宋体;
                   font-size: 20px;
                   mso-ascii-font-family: ˎ̥;
-                "
-              ></span
-              ><span
-                lang="EN-US"
-                style="
+                "></span><span lang="EN-US" style="
                   color: rgb(51, 51, 51);
                   font-family: 'ˎ̥', 'serif';
                   font-size: 20px;
-                "
-              >
+                ">
                 <span style="mso-spacerun: yes">
                   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                  &nbsp;</span
-                >
+                  &nbsp;</span>
                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
@@ -842,157 +581,90 @@
                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                &nbsp; &nbsp;&nbsp; &nbsp;</span
-              ><span
-                style="
+                &nbsp; &nbsp;&nbsp; &nbsp;</span><span style="
                   color: rgb(51, 51, 51);
                   font-family: 宋体;
                   font-size: 20px;
-                "
-                > &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;攀枝花学院</span
-              ></span
-            ><span
-              lang="EN-US"
-              style="
+                "> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;攀枝花学院</span></span><span lang="EN-US" style="
                 color: rgb(51, 51, 51);
                 font-family: 'ˎ̥', 'serif';
                 font-size: 20px;
-              "
-              ><br /><span style="font-family: 宋体">
+              "><br /><span style="font-family: 宋体">
                 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                 &nbsp;<span style="mso-spacerun: yes">
                   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                  &nbsp; &nbsp; &nbsp; &nbsp;</span
-                ><span style="mso-spacerun: yes"> </span
-                >2021</span
-              ></span
-            >
-            <span
-              style="
+                  &nbsp; &nbsp; &nbsp; &nbsp;</span><span style="mso-spacerun: yes"> </span>2021</span></span>
+            <span style="
                 color: rgb(51, 51, 51);
                 font-family: 宋体;
                 font-size: 20px;
                 mso-ascii-font-family: ˎ̥;
-              "
-              >年</span
-            ><span style="font-family: 宋体"
-              ><span
-                lang="EN-US"
-                style="
+              ">年</span><span style="font-family: 宋体"><span lang="EN-US" style="
                   color: rgb(51, 51, 51);
                   font-family: 'ˎ̥', 'serif';
                   font-size: 20px;
-                "
-                >4</span
-              ><span
-                style="
+                ">4</span><span style="
                   color: rgb(51, 51, 51);
                   font-family: 宋体;
                   font-size: 20px;
                   mso-ascii-font-family: ˎ̥;
-                "
-                >月</span
-              ><span
-                lang="EN-US"
-                style="
+                ">月</span><span lang="EN-US" style="
                   color: rgb(51, 51, 51);
                   font-family: 'ˎ̥', 'serif';
                   font-size: 20px;
-                "
-                >14</span
-              ><span
-                style="
+                ">14</span><span style="
                   color: rgb(51, 51, 51);
                   font-family: 宋体;
                   font-size: 20px;
                   mso-ascii-font-family: ˎ̥;
-                "
-                >日</span
-              ><strong style="mso-bidi-font-weight: normal"
-                ><span
-                  lang="EN-US"
-                  style="
+                ">日</span><strong style="mso-bidi-font-weight: normal"><span lang="EN-US" style="
                     color: rgb(51, 51, 51);
                     font-family: 'ˎ̥', 'serif';
                     font-size: 20px;
-                  "
-                >
-                </span></strong
-            ></span>
+                  ">
+                </span></strong></span>
           </p>
           <p><span style="font-size: 16px"></span></p>
         </div>
         <div id="div_vote_id"></div>
       </div>
     </el-dialog>
-    <el-dialog
-      title="添加公告"
-      :visible.sync="showAddDialog"
-      width="50%"
-      fullscreen
-      @close="showDialogClosed"
-      class="dialog"
-    >
-      <el-form
-        label-width="120px"
-        :model="addModel"
-        size="small"
-        label-position="right"
-      >
+    <el-dialog title="添加公告" :visible.sync="showAddDialog" width="50%" fullscreen @close="showDialogClosed"
+      class="dialog">
+      <el-form label-width="120px" :model="addModel" size="small" label-position="right">
         <el-form-item label="公告名" prop="">
           <el-col :span="8">
-            <el-input
-              auto-complete="off"
-              v-model="addModel.purchase_name"
-            ></el-input>
+            <el-input auto-complete="off" v-model="addModel.purchase_name"></el-input>
           </el-col>
           <el-col :span="2"> 产品名称 </el-col>
           <el-col :span="8">
-            <el-input
-              auto-complete="off"
-              v-model="addModel.product_name"
-            ></el-input>
+            <el-input auto-complete="off" v-model="addModel.product_name"></el-input>
           </el-col>
-           <el-col :span="2"> 产品数量 </el-col>
-           <el-col :span="8">
-            <el-input
-              auto-complete="off"
-              v-model="addModel.tag"
-            ></el-input>
+          <el-col :span="2"> 产品数量 </el-col>
+          <el-col :span="8">
+            <el-input auto-complete="off" v-model="addModel.tag"></el-input>
           </el-col>
         </el-form-item>
-         <el-form-item label="采购目的" prop="">
+        <el-form-item label="采购目的" prop="">
           <el-input v-model="addModel.reason" auto-complete="off"></el-input>
         </el-form-item>
         <el-form-item label="请选择开始和结束时间" prop="">
           <el-col :span="8">
-            <el-date-picker
-              v-model="times"
-              type="datetimerange"
-              range-separator="至"
-              start-placeholder="开始日期"
-              end-placeholder="结束日期"
-            >
+            <el-date-picker v-model="times" type="datetimerange" range-separator="至" start-placeholder="开始日期"
+              end-placeholder="结束日期">
             </el-date-picker>
           </el-col>
           <el-col :span="2">产品类别</el-col>
           <el-col :span="3">
             <el-select v-model="category" placeholder="请选择">
-              <el-option
-                v-for="item in CategoriesMap"
-                :key="item.pid"
-                :value="item.product_name"
-              >
+              <el-option v-for="item in CategoriesMap" :key="item.pid" :value="item.product_name">
               </el-option>
             </el-select>
           </el-col>
           <el-col :span="2"> 预算价格 </el-col>
           <el-col :span="3">
-            <el-input
-              auto-complete="off"
-              v-model="addModel.highest_price"
-            ></el-input>
+            <el-input auto-complete="off" v-model="addModel.highest_price"></el-input>
           </el-col>
         </el-form-item>
         <!-- <el-form-item label="现场看样时间" prop="">
@@ -1065,41 +737,20 @@
       </el-form>
 
       <div slot="footer" class="dialog-footer">
-        <el-button size="mini" type="primary" @click="addBoard"
-          >添加公告</el-button
-        >
-        <el-button size="mini" type="warning" @click="cancelAdd"
-          >取消</el-button
-        >
+        <el-button size="mini" type="primary" @click="addBoard">添加公告</el-button>
+        <el-button size="mini" type="warning" @click="cancelAdd">取消</el-button>
       </div>
     </el-dialog>
-     <el-dialog
-      title="修改公告"
-      :visible.sync="showEditDialog"
-      width="50%"
-      fullscreen
-      @close="showDialogClosed"
-      class="dialog"
-    >
-      <el-form
-        label-width="120px"
-        :model="editModel"
-        size="small"
-        label-position="right"
-      >
+    <el-dialog title="修改公告" :visible.sync="showEditDialog" width="50%" fullscreen @close="showDialogClosed"
+      class="dialog">
+      <el-form label-width="120px" :model="editModel" size="small" label-position="right">
         <el-form-item label="公告名" prop="">
           <el-col :span="8">
-            <el-input
-              auto-complete="off"
-              v-model="editModel.purchase_name"
-            ></el-input>
+            <el-input auto-complete="off" v-model="editModel.purchase_name"></el-input>
           </el-col>
           <el-col :span="2"> 产品名称 </el-col>
           <el-col :span="8">
-            <el-input
-              auto-complete="off"
-              v-model="editModel.product_name"
-            ></el-input>
+            <el-input auto-complete="off" v-model="editModel.product_name"></el-input>
           </el-col>
         </el-form-item>
         <el-form-item label="拍卖标的" prop="">
@@ -1107,41 +758,25 @@
         </el-form-item>
         <el-form-item label="请选择开始和结束时间" prop="">
           <el-col :span="8">
-            <el-date-picker
-              v-model="time2"
-              type="datetimerange"
-              range-separator="至"
-              start-placeholder="开始日期"
-              end-placeholder="结束日期"
-            >
+            <el-date-picker v-model="time2" type="datetimerange" range-separator="至" start-placeholder="开始日期"
+              end-placeholder="结束日期">
             </el-date-picker>
           </el-col>
           <el-col :span="2">产品类别</el-col>
           <el-col :span="3">
             <el-select v-model="category1" placeholder="请选择">
-              <el-option
-                v-for="item in CategoriesMap"
-                :key="item.pid"
-                :value="item.product_name"
-              >
+              <el-option v-for="item in CategoriesMap" :key="item.pid" :value="item.product_name">
               </el-option>
             </el-select>
           </el-col>
           <el-col :span="2"> 预算价格 </el-col>
           <el-col :span="3">
-            <el-input
-              auto-complete="off"
-              v-model="editModel.highest_price"
-            ></el-input>
+            <el-input auto-complete="off" v-model="editModel.highest_price"></el-input>
           </el-col>
         </el-form-item>
         <el-form-item label="现场看样时间" prop="">
           <el-col :span="8">
-            <el-date-picker
-              v-model="editModel.site_inspection_time"
-              type="date"
-              placeholder="选择日期"
-            >
+            <el-date-picker v-model="editModel.site_inspection_time" type="date" placeholder="选择日期">
             </el-date-picker>
           </el-col>
           <el-col :span="2"> 现场看样地点 </el-col>
@@ -1151,46 +786,29 @@
         </el-form-item>
         <el-form-item label="报名联系人">
           <el-col :span="8">
-            <el-input
-              auto-complete="off"
-              v-model="editModel.errol_contract"
-            ></el-input>
+            <el-input auto-complete="off" v-model="editModel.errol_contract"></el-input>
           </el-col>
           <el-col :span="2"> 报名联系人电话 </el-col>
           <el-col :span="8">
-            <el-input
-              auto-complete="off"
-              v-model="editModel.errol_tel"
-            ></el-input>
+            <el-input auto-complete="off" v-model="editModel.errol_tel"></el-input>
           </el-col>
         </el-form-item>
         <el-form-item label="看样联系人">
           <el-col :span="8">
-            <el-input
-              auto-complete="off"
-              v-model="editModel.inspection_contract"
-            ></el-input>
+            <el-input auto-complete="off" v-model="editModel.inspection_contract"></el-input>
           </el-col>
           <el-col :span="2"> 看样联系人电话 </el-col>
           <el-col :span="8">
-            <el-input auto-complete="off" v-model="editModel.inspection_tel"
-              >></el-input
-            >
+            <el-input auto-complete="off" v-model="editModel.inspection_tel">></el-input>
           </el-col>
         </el-form-item>
         <el-form-item label="拍卖地点">
           <el-col :span="8">
-            <el-input
-              auto-complete="off"
-              v-model="editModel.auction_site"
-            ></el-input>
+            <el-input auto-complete="off" v-model="editModel.auction_site"></el-input>
           </el-col>
           <el-col :span="2"> 拍卖时间 </el-col>
           <el-col :span="8">
-            <el-input
-              auto-complete="off"
-              v-model="editModel.deadline"
-            ></el-input>
+            <el-input auto-complete="off" v-model="editModel.deadline"></el-input>
           </el-col>
         </el-form-item>
         <el-form-item label="成交原则">
@@ -1205,12 +823,8 @@
       </el-form>
 
       <div slot="footer" class="dialog-footer">
-        <el-button size="mini" type="primary" @click="edit"
-          >修改公告</el-button
-        >
-        <el-button size="mini" type="warning" @click="cancelEdit"
-          >取消</el-button
-        >
+        <el-button size="mini" type="primary" @click="edit">修改公告</el-button>
+        <el-button size="mini" type="warning" @click="cancelEdit">取消</el-button>
       </div>
     </el-dialog>
   </div>
@@ -1219,12 +833,12 @@
 export default {
   data() {
     return {
-      editModel:{},
-      showEditDialog:false,
+      editModel: {},
+      showEditDialog: false,
       times: [new Date(), new Date()],
       time2: [new Date(), new Date()],
       category: "",
-      category1:"",
+      category1: "",
 
       addModel: {
         id: "",
@@ -1329,13 +943,13 @@ export default {
     //         }
   },
   created() {
-    
+
   },
   mounted() {
     this.getBoardList();
   },
   methods: {
-async addBoardShow() {
+    async addBoardShow() {
       this.showAddDialog = true;
     },
 
@@ -1348,12 +962,11 @@ async addBoardShow() {
           break;
         }
       }
-      
-        const data=JSON.parse(window.sessionStorage.getItem('data'));
-          this.addModel.cid=data.cid;
-          // console.log(data.cid+"data.cid");
-          this.addModel.apply_time=new Date();
-          this.addModel.acceess=0;
+
+      const data = JSON.parse(window.sessionStorage.getItem('data'));
+      this.addModel.cid = data.data[0].cid;
+      this.addModel.apply_time = new Date();
+      this.addModel.acceess = 0;
       const { data: res } = await this.$http.post("addPurBoard", this.addModel);
       if (res.success) {
         this.$message.success(res.msg);
@@ -1369,33 +982,34 @@ async addBoardShow() {
     async edit() {
       // console.log(this.category1);
 
-      if(this.category1!=null){
-      // console.log(this.category1);
+      if (this.category1 != null) {
+        // console.log(this.category1);
 
-      // console.log(this.category1);
-       for (let i = 0; i < this.CategoriesMap.length; i++) {
-        if (this.category1 == this.CategoriesMap[i].product_name) {
-        this.editModel.pid = this.CategoriesMap.pid
-          break;
+        // console.log(this.category1);
+        for (let i = 0; i < this.CategoriesMap.length; i++) {
+          if (this.category1 == this.CategoriesMap[i].product_name) {
+            this.editModel.pid = this.CategoriesMap.pid
+            break;
+          }
         }
-      }}
-     this.editModel.start_time= this.time2[0];
-       this.editModel.end_time=this.time2[1];
+      }
+      this.editModel.start_time = this.time2[0];
+      this.editModel.end_time = this.time2[1];
       const { data: res } = await this.$http.post("editPurBoard", this.editModel);
       if (res.success) {
         this.$message.success(res.msg);
         boardListDeal(res.date);
-        this.showEditDialog=false;
+        this.showEditDialog = false;
       } else {
         this.$message.error(res.msg);
-        this.showEditDialog=false;
+        this.showEditDialog = false;
       }
-      this.showEditDialog=false;
+      this.showEditDialog = false;
     },
-    cancelEdit(){
-this.showEditDialog=false;
+    cancelEdit() {
+      this.showEditDialog = false;
     },
-     async delete1(val) {
+    async delete1(val) {
       const { data: res } = await this.$http.post("deletePurBoard", val);
       // console.log("我执行了delet1,返回的结果为"+res);
       if (res.success) {
@@ -1405,27 +1019,27 @@ this.showEditDialog=false;
         this.$message.error(res.msg);
       }
     },
-     async editDialog(val) {
-      
-      this.editModel=val;
-       for (let i = 0; i < this.CategoriesMap.length; i++) {
+    async editDialog(val) {
+
+      this.editModel = val;
+      for (let i = 0; i < this.CategoriesMap.length; i++) {
         if (val.pid = this.CategoriesMap.pid) {
-        this.category1 == this.CategoriesMap[i].product_name;
+          this.category1 == this.CategoriesMap[i].product_name;
           break;
         }
       }
-      this.time2[0]=val.start_time;
-      this.time2[1]=val.end_time;
+      this.time2[0] = val.start_time;
+      this.time2[1] = val.end_time;
       this.showEditDialog = true;
     },
-   
+
     cancelAdd() {
       this.showAddDialog = false;
     },
     async downLoad() {
       window.open(
         "http://localhost:8080/ssm_war_exploded/downloadResultFile/?id=" +
-          this.clickTarget.result_id
+        this.clickTarget.result_id
       );
     },
 
@@ -1456,7 +1070,7 @@ this.showEditDialog=false;
       await this.getAcademyList();
       await this.getCategoriesList();
       const data = JSON.parse(window.sessionStorage.getItem("data"));
-      this.addModel.cid=data.cid;
+      this.addModel.cid = data.data[0].cid;
       const { data: res } = await this.$http.get(
         "getAllBoardListByCid?cid=" + this.addModel.cid
       );
@@ -1464,7 +1078,7 @@ this.showEditDialog=false;
       // console.log("getGoogsList");
       if (res.success) {
         this.$message.success(res.msg);
-         this.boardListDeal(res);
+        this.boardListDeal(res);
       } else {
         // console.log("purchasingList请求失败！");
       }
@@ -1509,7 +1123,7 @@ this.showEditDialog=false;
         obj.qualifications = arry[i].qualifications;
         obj.notifiedcation = arry[i].notifiedcation;
         obj.errol_contract = arry[i].errol_contract;
-        obj.purpose= arry[i].purpose;
+        obj.purpose = arry[i].purpose;
         obj.errol_tel = arry[i].errol_tel;
         obj.errol_type = arry[i].errol_type;
         obj.inspection_contract = arry[i].inspection_contract;
@@ -1529,12 +1143,12 @@ this.showEditDialog=false;
         obj.cid = arry[i].cid;
         obj.purpose = arry[i].purpose;
         obj.tag = arry[i].tag;
-obj.acceess = arry[i].acceess;
+        obj.acceess = arry[i].acceess;
         this.List.push(obj);
       }
     },
-    handleSizeChange(res) {},
-    handleCurrentChange() {},
+    handleSizeChange(res) { },
+    handleCurrentChange() { },
     async showDialog(val) {
       if (val.errol_type == 3) {
         const { data: res } = await this.$http.get("getResult?id=" + val.id);
@@ -1565,10 +1179,10 @@ obj.acceess = arry[i].acceess;
       // this.$refs.addFormRef.resetFields()
     },
     async search() {
-       const data=JSON.parse(window.sessionStorage.getItem('data'));
-      for(let i=0;i<this.AcademysMap.length;i++){
-        if(this.AcademysMap[i].cid==data.cid){
-this.selects.academy=this.AcademysMap[i].academy_name;
+      const data = JSON.parse(window.sessionStorage.getItem('data'));
+      for (let i = 0; i < this.AcademysMap.length; i++) {
+        if (this.AcademysMap[i].cid == data.cid) {
+          this.selects.academy = this.AcademysMap[i].academy_name;
         }
       }
       const { data: res } = await this.$http.post("boardScreen", this.selects);
@@ -1599,16 +1213,19 @@ this.selects.academy=this.AcademysMap[i].academy_name;
   font-size: 14px;
   width: 100px;
 }
-.dialog > .el-dialog {
-  overflow-y: auto !important ;
+
+.dialog>.el-dialog {
+  overflow-y: auto !important;
   height: 500px !important;
 }
+
 .tit {
   width: 60%;
   margin: 0 auto;
   text-align: center;
   font-size: 24px;
 }
+
 .myclose {
   top: 18px;
   right: 36.6px;
@@ -1616,9 +1233,11 @@ this.selects.academy=this.AcademysMap[i].academy_name;
   position: fixed;
   cursor: pointer;
 }
+
 .close:hover {
   color: blue;
 }
+
 .info {
   width: 50%;
   height: 40px;
@@ -1629,13 +1248,15 @@ this.selects.academy=this.AcademysMap[i].academy_name;
   color: #666;
   background-color: #f6f5f5;
 }
+
 .content p {
   width: 70%;
   margin: 10px auto;
   text-indent: 2em;
   line-height: 37px;
 }
+
 #searchStyle {
-margin-left: 40px;
+  margin-left: 40px;
 }
 </style>

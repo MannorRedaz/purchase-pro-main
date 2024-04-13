@@ -118,7 +118,7 @@ export default {
   },
   mounted() {
     const data = JSON.parse(window.sessionStorage.getItem("data"));
-    this.userName = data.contract_name;
+    this.userName = data.data[0].contract_name;
   },
   computed: {
     balance: function () {
@@ -137,14 +137,14 @@ export default {
     async getBudget() {
       const data = JSON.parse(window.sessionStorage.getItem("data"));
       const { data: res } = await this.$http.get(
-        "president/getBudget?sid=" + data.cid
+        "president/getBudget?sid=" + data.data[0].cid
       );
       this.budge = res.date[0].budget;
     },
     async getUsedMoney() {
       const data = JSON.parse(window.sessionStorage.getItem("data"));
       const { data: res } = await this.$http.get(
-        "president/getUsedMoney?cid=" + data.cid
+        "president/getUsedMoney?cid=" + data.data[0].cid
       );
       this.count = res.status;
     },
