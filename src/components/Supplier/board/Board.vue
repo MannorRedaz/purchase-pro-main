@@ -1445,8 +1445,7 @@ export default {
       // 获取时间区间
       const { data: res } = await this.$http.post("boardScreen", this.selects);
       this.boardListDeal(res);
-      // console.log(this.selects);
-      // console.log(res);
+
     },
   },
 };

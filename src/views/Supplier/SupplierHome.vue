@@ -5,13 +5,19 @@
         <span>供应商</span>
       </div>
       <div class="tools">
-        <el-menu class="user" background-color="skyblue" active-text-color="#ffd04b" router>
-          <el-submenu index="2">
-            <template slot="title">{{ userName }}</template>
-            <el-menu-item index="/">设置</el-menu-item>
-            <el-menu-item index="/">退出</el-menu-item>
-          </el-submenu>
+        <el-menu class="user" background-color="#2D9DFF" active-text-color="#2D9DFF" style="margin-top: 15px;" router>
+          <el-dropdown>
+            <span class="el-dropdown-link" style=" color: #fff;margin-left: 9px;">
+              <img src="@/assets/img/user.svg" style="margin-right: 9px; color: #fff;" width="20px">
+              {{ userName }}<i class="el-icon-arrow-down el-icon--right"></i>
+            </span>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item @click="setting">设置</el-dropdown-item>
+              <el-dropdown-item index="/">退出</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
         </el-menu>
+
       </div>
     </div>
   </base-div>
@@ -83,7 +89,7 @@ export default {
           height: "100%"
         },
         {
-          backgroundColor: "skyblue"
+          backgroundColor: "#2D9DFF"
         },
         {
           backgroundColor: "#545c64"
@@ -115,6 +121,25 @@ export default {
 .logo {
   line-height: 60px;
   float: left;
+  color: #fff;
+}
+
+input {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  color: #fff;
+}
+
+.date {
+  width: 500px;
+  height: 100px;
+  position: absolute;
+  left: 100px;
+  top: 20px;
+  margin-left: 500px;
+  color: #fff;
+
 }
 
 .tools {

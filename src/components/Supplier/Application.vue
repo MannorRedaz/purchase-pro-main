@@ -147,15 +147,11 @@ export default {
     this.inital();
   },
   methods: {
-
     async inital() {
-
-
       await this.getAcademyList();
       await this.getApplyForList();
     },
     async getAcademyList() {
-      // console.log(2);
       const { data: res } = await this.$http.post("academys");
       const arry = res.date;
       for (let i = 0; i < res.date.length; i++) {
@@ -182,7 +178,9 @@ export default {
     async getApplyForList() {
       const data = JSON.parse(window.sessionStorage.getItem("data"));
       this.supplierId = data.id;
+      // const { data: res } = await this.$http.get("supplier/getApplyForList?sid=" + this.supplierId);
       const { data: res } = await this.$http.get("supplier/getApplyForList?sid=" + this.supplierId);
+
 
       if (res.success) {
         for (let i = 0; i < res.date.length; i++) {
