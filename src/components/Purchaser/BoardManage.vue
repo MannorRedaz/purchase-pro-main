@@ -49,21 +49,13 @@
       <!--搜索-->
       <div id="searchStyle">
         <template>
-          <el-button type="primary" @click="search">搜索</el-button>
+          <el-button type="primary" @click="search" id="myButton">搜索</el-button>
         </template>
       </div>
-
-      <!--       
- <div class="grade-box">
-        <div class="grade"></div>
-        <template>
-          <el-button @click="addBoardShow"> 添加公告 </el-button>
-        </template>g
-      </div> -->
     </div>
     <!--显示相关的审核数据-->
     <div class="main-content">
-      <el-table :data="List" style="width: 100%;font-size: 15px;" border stripe>
+      <el-table :data="paginatedData" style="width: 100%;font-size: 15px;" border stripe>
         <el-table-column type="index"></el-table-column>
         <el-table-column label="公告名" prop="name"></el-table-column>
         <el-table-column label="发布学院" prop="academy"></el-table-column>
@@ -86,6 +78,10 @@
           </template>
         </el-table-column>
       </el-table>
+      <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
+        :current-page.sync="currentPage" :page-size="pageSize" :page-sizes="[5, 10, 20, 50]" @prev-click="prevPage"
+        @next-click="nextPage" layout="total, sizes, prev, pager, next" :total="List.length">
+      </el-pagination>
     </div>
     <!-- 
     <div class="page-part">
@@ -169,7 +165,7 @@
             ">
             <font face="宋体">{{ clickTarget.academy }}，{{
               clickTarget.reason
-            }}，采购预算价,不超过</font>
+              }}，采购预算价,不超过</font>
             <font face="Calibri">{{ clickTarget.highest_price }}</font>
             <font face="宋体">元，拟采购供应商{{ clickTarget.company_name }}，中标价：</font>
             <font face="Calibri">{{ clickTarget.realy_price }}</font>
@@ -326,8 +322,8 @@
                   font-family: 'ˎ̥', 'serif';
                   font-size: 20px;
                 ">{{
-                  clickTarget.academy
-                }}</span>
+              clickTarget.academy
+              }}</span>
             <br><span style="
                 color: rgb(51, 51, 51);
                 font-family: 宋体;
@@ -338,13 +334,13 @@
                   font-family: 'ˎ̥', 'serif';
                   font-size: 20px;
                 ">{{
-                  clickTarget.product_name
+                clickTarget.product_name
                 }}</span><span lang="EN-US" style="
                   color: rgb(51, 51, 51);
                   font-family: 'ˎ̥', 'serif';
                   font-size: 20px;
                 ">（{{
-                  clickTarget.purpose
+                clickTarget.purpose
                 }}）</span><span lang="EN-US" style="
                   color: rgb(51, 51, 51);
                   font-family: 'ˎ̥', 'serif';
@@ -428,7 +424,7 @@
                 mso-ascii-font-family: ˎ̥;
               "><strong>{{
                 this.$moment(clickTarget.end_time).format("YYYY-MM-DD")
-              }}</strong></span>
+                }}</strong></span>
             <a name="_GoBack"></a><br />
             <span style="font-family: 宋体"><span style="mso-spacerun: yes"> &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
                 &nbsp;&nbsp; </span></span>
@@ -759,7 +755,8 @@
         <el-form-item label="请选择开始和结束时间" prop="">
           <el-col :span="8">
             <el-date-picker v-model="time2" type="datetimerange" range-separator="至" start-placeholder="开始日期"
-              end-placeholder="结束日期">
+              end-placeholder="结束日期" :value-format="'yyyy-MM-dd'">
+              <!-- 2022-04-06 16:12:43 -->
             </el-date-picker>
           </el-col>
           <el-col :span="2">产品类别</el-col>
@@ -776,7 +773,8 @@
         </el-form-item>
         <el-form-item label="现场看样时间" prop="">
           <el-col :span="8">
-            <el-date-picker v-model="editModel.site_inspection_time" type="date" placeholder="选择日期">
+            <el-date-picker v-model="editModel.site_inspection_time" type="datetime" placeholder="选择日期"
+              :value-format="'yyyy-MM-dd'">
             </el-date-picker>
           </el-col>
           <el-col :span="2"> 现场看样地点 </el-col>
@@ -884,7 +882,6 @@ export default {
       newPwd: "",
       type_value: "",
       productName: 0,
-      currentPage: 0,
       date: "",
       AcademysMap: [],
       CategoriesMap: [],
@@ -897,7 +894,7 @@ export default {
       selects: {
         academy: "",
         categories: "",
-        value1: [new Date(), new Date()],
+        value1: [],
         type: "",
       },
       //时间选择器的时间
@@ -934,16 +931,19 @@ export default {
         ],
       },
       //设置默认时间
+      pageSize: 10, // 添加页面大小属性
+      currentPage: 1,
     };
   },
   computed: {
-    //   type:function() {
-    // if(type=="招标公告")
-    //             return  this.budge - this.count;
-    //         }
+    paginatedData() {
+      const startIndex = (this.currentPage - 1) * this.pageSize;
+      const endIndex = startIndex + this.pageSize;
+      return this.List.slice(startIndex, endIndex);
+    }
   },
   created() {
-
+    // this.search();
   },
   mounted() {
     this.getBoardList();
@@ -980,31 +980,29 @@ export default {
     },
 
     async edit() {
-      // console.log(this.category1);
-
+      // console.log(this.editModel.site_inspection_time);
       if (this.category1 != null) {
-        // console.log(this.category1);
-
-        // console.log(this.category1);
         for (let i = 0; i < this.CategoriesMap.length; i++) {
           if (this.category1 == this.CategoriesMap[i].product_name) {
-            this.editModel.pid = this.CategoriesMap.pid
+            this.editModel.pid = this.CategoriesMap[i].pid
             break;
           }
         }
       }
       this.editModel.start_time = this.time2[0];
       this.editModel.end_time = this.time2[1];
+      // console.log(this.time2[0]);
       const { data: res } = await this.$http.post("editPurBoard", this.editModel);
       if (res.success) {
         this.$message.success(res.msg);
-        boardListDeal(res.date);
         this.showEditDialog = false;
+        this.boardListDeal(res.date);
       } else {
         this.$message.error(res.msg);
         this.showEditDialog = false;
       }
       this.showEditDialog = false;
+      this.search()
     },
     cancelEdit() {
       this.showEditDialog = false;
@@ -1066,7 +1064,6 @@ export default {
       }
     },
     async getBoardList() {
-      // console.log("getGoogsList");
       await this.getAcademyList();
       await this.getCategoriesList();
       const data = JSON.parse(window.sessionStorage.getItem("data"));
@@ -1074,18 +1071,14 @@ export default {
       const { data: res } = await this.$http.get(
         "getAllBoardListByCid?cid=" + this.addModel.cid
       );
-
-      // console.log("getGoogsList");
       if (res.success) {
-        this.$message.success(res.msg);
         this.boardListDeal(res);
       } else {
         // console.log("purchasingList请求失败！");
       }
+      await this.search()
     },
     boardListDeal(res) {
-      let List2 = [];
-      this.List = List2;
       const arry = res.date;
       this.count1 = res.date.length;
       for (let i = 0; i < res.date.length; i++) {
@@ -1147,8 +1140,6 @@ export default {
         this.List.push(obj);
       }
     },
-    handleSizeChange(res) { },
-    handleCurrentChange() { },
     async showDialog(val) {
       if (val.errol_type == 3) {
         const { data: res } = await this.$http.get("getResult?id=" + val.id);
@@ -1179,6 +1170,7 @@ export default {
       // this.$refs.addFormRef.resetFields()
     },
     async search() {
+      this.List = []
       const data = JSON.parse(window.sessionStorage.getItem('data'));
       for (let i = 0; i < this.AcademysMap.length; i++) {
         if (this.AcademysMap[i].cid == data.cid) {
@@ -1186,8 +1178,35 @@ export default {
         }
       }
       const { data: res } = await this.$http.post("boardScreen", this.selects);
-      this.boardListDeal(res);
+      if (res.success) {
+        this.$message.success(res.msg);
+        this.boardListDeal(res);
+      } else {
+        this.$message.error(res.msg);
+      }
     },
+  },
+  prevPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+    }
+  },
+  nextPage() {
+    const maxPage = Math.ceil(this.List.length / this.pageSize);
+    if (this.currentPage < maxPage) {
+      this.currentPage++;
+    }
+  },
+  handleSizeChange(val) {
+    console.log("handleSizeChange:" + val);
+    this.pageSize = val;
+    // this.getPurchaseList()  //发起分页请求
+  },
+  handleCurrentChange(val) {
+    console.log("handleCurrentChange:" + val);
+    this.currentPage = val;
+    // this.getPurchaseList()  //发起分页请求
+
   },
 };
 </script>

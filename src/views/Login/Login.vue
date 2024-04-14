@@ -129,7 +129,7 @@ export default {
           default:
             return this.$message.error("登陆失败!");
         }
-        this.$message.success("登录成功!");
+        // this.$message.success("登录成功!");
       } else {
         const { data: res1 } = await this.$http.post(
           "supplierLogin",
@@ -143,7 +143,7 @@ export default {
         window.sessionStorage.setItem("token", token);
         window.sessionStorage.setItem("data", JSON.stringify(res1.date[0]));
         // 通过编程式导航跳转到后台主页，路由地址是/home
-        this.$message.error("来了!");
+        // this.$message.error("来了!");
 
         switch (res1.p) {
           case 1:

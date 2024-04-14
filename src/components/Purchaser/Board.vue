@@ -80,7 +80,7 @@
 
     <div class="page-part">
       <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
-        :current-page.sync="currentPage" :page-size="50" layout="total, prev, pager, next" :total="100">
+        :current-page.sync="currentPage" :page-size="10" layout="total, prev, pager, next" :total="20">
       </el-pagination>
     </div>
     <el-dialog title="详细信息" :visible.sync="showDialogVisible" width="50%" fullscreen @close="showDialogClosed"

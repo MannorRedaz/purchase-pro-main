@@ -13,7 +13,6 @@
         <el-table-column label="公告名" prop="boardname"></el-table-column>
         <el-table-column label="开始时间" prop="startTime"></el-table-column>
         <el-table-column label="结束时间" prop="endTime"></el-table-column>
-
         <el-table-column label="操作">
           <template slot-scope="scope">
             <el-button type="primary" size="mini" @click="ShowApplyDialog(scope.row)">入围申请</el-button>
@@ -160,7 +159,6 @@ export default {
       const res = await this.$http.get(
         "supplier/getApplyForList?sid=" + this.supplierId
       );
-      // console.log(res);
       this.tableData = res.date;
       if (res.success) {
         for (let i = 0; i < this.tableData.length; i++) {
@@ -301,19 +299,12 @@ export default {
       }
     },
     ShowApplyDialog(val) {
-      // console.log("date");
-
-      // console.log(val);
       const data = JSON.parse(window.sessionStorage.getItem("data"));
-      if (data.access) {
+      if (data.data[0].access) {
         this.$message.warning("你已经通过申请");
         return;
       }
-      // console.log("date");
       let date = this.$moment(new Date()).format("YYYY-MM-DD");
-      // console.log("date");
-
-
       //要不为null 且长度大于一
       if (this.tableData[0] != null && this.tableData.length > 0) {
         this.$message.warning("你已经申请过，如需重新申请请删除原来申请表");

@@ -43,7 +43,7 @@
     </div>
     <!--显示相关的审核数据-->
     <div class="main-content">
-      <el-table :data="tableData" style="width: 100%; font-size: 15px" border stripe>
+      <el-table :data="paginatedData" style="width: 100%; font-size: 15px" border stripe>
         <el-table-column type="index"></el-table-column>
         <el-table-column label="商品名称" prop="product_name"></el-table-column>
         <el-table-column label="商品类别" prop="category"></el-table-column>
@@ -66,11 +66,11 @@
           </template>
         </el-table-column>
       </el-table>
-
       <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
-        :current-page.sync="currentPage" :page-size="pagesize" :page-sizes="[50]"
-        layout="total,sizes, prev, pager, next" :total="tableData.length">
+        :current-page.sync="currentPage" :page-size="pageSize" :page-sizes="[5, 10, 20, 50]" @prev-click="prevPage"
+        @next-click="nextPage" layout="total, sizes, prev, pager, next" :total="tableData.length">
       </el-pagination>
+
     </div>
 
     <el-dialog title="采购详情" :visible.sync="showDetailPurchase" :width="'500px'" :height="'300px'"
@@ -78,27 +78,27 @@
       <el-form label-width="120px" :model="seeTarget" size="small" label-position="right">
         <el-form-item label="产品名称" prop="">
           <el-col :span="8">
-            <el-input auto-complete="off" v-model="seeTarget.product_name"></el-input>
+            <el-input auto-complete="off" v-model="seeTarget.product_name" readonly></el-input>
           </el-col>
-          <el-col :span="2"> 产品数量 </el-col>
+          <el-col :span="4" style="margin-left: 20px;"> 产品数量 </el-col>
           <el-col :span="8">
-            <el-input auto-complete="off" v-model="seeTarget.tag"></el-input>
+            <el-input auto-complete="off" v-model="seeTarget.tag" readonly></el-input>
           </el-col>
         </el-form-item>
         <el-form-item label="型号或类型" prop="">
           <el-col>
-            <el-input auto-complete="off" v-model="seeTarget.purpose"></el-input>
+            <el-input auto-complete="off" v-model="seeTarget.purpose" readonly></el-input>
           </el-col>
         </el-form-item>
         <el-form-item label="采购目的" prop="">
-          <el-input auto-complete="off" v-model="seeTarget.reason"></el-input></el-form-item>
+          <el-input auto-complete="off" v-model="seeTarget.reason" readonly></el-input></el-form-item>
         <el-form-item label="产品类别" prop="">
-          <el-col :span="3">
-            <el-input v-model="seeTarget.category"></el-input>
+          <el-col :span="8">
+            <el-input v-model="seeTarget.category" readonly></el-input>
           </el-col>
-          <el-col :span="2"> 预算价格 </el-col>
-          <el-col :span="3">
-            <el-input auto-complete="off" v-model="seeTarget.highest_price"></el-input>
+          <el-col :span="4" style="margin-left: 20px;"> 预算价格 </el-col>
+          <el-col :span="8">
+            <el-input auto-complete="off" v-model="seeTarget.highest_price" readonly></el-input>
           </el-col>
         </el-form-item>
       </el-form>
@@ -140,12 +140,12 @@
             <el-form :model="form">
               <el-form-item>
                 <el-upload ref="upload" action="http://localhost:8088/uploadPurchaseFile" :limit="limitNum"
-                  :auto-upload="false" accept=".pdf,.doc" :before-upload="beforeUploadFile" :on-change="fileChange"
+                  :auto-upload="false" accept=".doc" :before-upload="beforeUploadFile" :on-change="fileChange"
                   :on-exceed="exceedFile" :on-success="handleSuccess" :on-error="handleError" :file-list="fileList"
                   :data="{ id: this.purchaserId }">
                   <el-button size="small" plain>选择文件</el-button>
                   <div slot="tip" class="el-upload__tip">
-                    只能上传pdf文件，且不超过5M
+                    只能上传word文件，且不超过10M
                   </div>
                 </el-upload>
               </el-form-item>
@@ -302,8 +302,10 @@ export default {
       newPwd: "",
       type_value: "",
       productName: 0,
-      currentPage: 0,
+      currentPage: 1,
       date: "",
+      pageSize: 5, // 添加页面大小属性
+      totalItems: 10, // 设置总数为适当的值
       tableData: [],
       clickTarget: {},
       count1: 0,
@@ -313,7 +315,8 @@ export default {
         value1: [new Date(), new Date()],
         type: "",
       },
-      //设置默认时间
+      limitNum: 10,
+      fileList: [],
     };
   },
 
@@ -357,10 +360,16 @@ export default {
   mounted() {
     const data = JSON.parse(window.sessionStorage.getItem("data"));
     //获取当前id最大值+1，并存储于errol_type
-    this.purchaserId = data.id;
+    this.purchaserId = data.data[0].id;
+  },
+  computed: {
+    paginatedData() {
+      const startIndex = (this.currentPage - 1) * this.pageSize;
+      const endIndex = startIndex + this.pageSize;
+      return this.tableData.slice(startIndex, endIndex);
+    }
   },
   methods: {
-
     // 文件超出个数限制时的钩子
     exceedFile(files, fileList) {
       this.$notify.warning({
@@ -465,9 +474,8 @@ export default {
       if (res.success) {
         this.purchaseList = res.date;
         this.handleList();
-      } else {
-        // console.log("purchasingList请求失败！");
       }
+      this.search()
     },
     //获取供应商列表
     async getSupplierList() {
@@ -476,9 +484,7 @@ export default {
         for (let i = 0; i < res.date.length; i++) {
           this.supplierList[res.date[i].id] = res.date[i];
         }
-        // console.log(this.supplierList);
       } else {
-        // console.log("getSupplierList请求失败！");
       }
     },
     handleList() {
@@ -634,6 +640,34 @@ export default {
       val.company_name = res.date[0].company_name;
       this.clickTarget = val;
     },
+    prevPage() {
+      if (this.currentPage > 1) {
+        this.currentPage--;
+      }
+    },
+    nextPage() {
+      const maxPage = Math.ceil(this.tableData.length / this.pageSize);
+      if (this.currentPage < maxPage) {
+        this.currentPage++;
+      }
+    },
+    handleSizeChange(val) {
+      // console.log("handleSizeChange:" + val);
+      this.pageSize = val;
+      // this.getPurchaseList()  //发起分页请求
+    },
+    handleCurrentChange(val) {
+      // console.log("handleCurrentChange:" + val);
+      this.currentPage = val;
+      // this.getPurchaseList()  //发起分页请求
+
+    },
+    form(val) {
+      console.log("form:" + val);
+    },
+
+
+
   },
 };
 </script>

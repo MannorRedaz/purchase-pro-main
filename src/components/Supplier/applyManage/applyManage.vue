@@ -133,7 +133,7 @@ export default {
 
   methods: {
     async handleList2() {
-      this.$message.success("188");
+      // this.$message.success("188");
 
       // const data = JSON.parse(window.sessionStorage.getItem("data"));
       //  this.$message.success("191");
@@ -151,7 +151,7 @@ export default {
 
       //this.$message.success("200"+res.msg);
       // this.bidList =res.date;
-      this.$message.success("200");
+      // this.$message.success("200");
 
     },
     async search() {

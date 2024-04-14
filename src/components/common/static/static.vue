@@ -28,20 +28,14 @@ export default {
   //监听photoList的值，当它由空转变时就会触发，这时候就能取到了，拿到值后要传值到data的newPhotoList中
   watch: {
     message: function (newData) {
-      // console.log("q");
-      // console.log(newData);
       this.date = newData;
-      // this.getPhotoList(this.newPhotoList)
       this.getChartList();
     },
     message1: function (newData) {
       this.date2 = newData;
-      // this.getPhotoList(this.newPhotoList)
       this.getChartList1();
     },
     message2: function (newData) {
-      // console.log("q");
-
       this.date3 = newData;
       this.getChartList2();
     },
@@ -60,10 +54,6 @@ export default {
     },
     getData() {
       return this.chartList();
-    },
-    test() {
-      // console.log("niaho");
-      //console.log(this.message);
     },
     drawLineChart() {
       // 基于准备好的dom，初始化echarts实例
@@ -85,7 +75,6 @@ export default {
             axisTick: {
               show: false,
             },
-            // data : ['周一','周二','周三','周四','周五','周六','周日']
             data: this.xlist,
           },
         ],
@@ -119,7 +108,7 @@ export default {
       this.chartLine.setOption(option);
     },
     async getChartList() {
-      console.log("getChartList");
+      // console.log("getChartList");
       const data1 = JSON.parse(window.sessionStorage.getItem("data"));
       const { data: res } = await this.$http.get("getChartAllList");
       let str = this.$moment(this.date).format("YYYY-MM");
@@ -136,8 +125,8 @@ export default {
       if (res.success) {
         //时间，交易金额
         this.chartList = res.date;
-        console.log(this.chartList);
-        console.log(this.date);
+        // console.log(this.chartList);
+        // console.log(this.date);
         for (let i = 0; i < 6; i++) {
           this.ylist1[i] = 0;
           this.ylist2[i] = 0;
@@ -150,7 +139,7 @@ export default {
             this.chartList[i].date - 30 * 24 * 60 * 60 * 1000 < this.date &&
             this.chartList[i].date > this.date
           ) {
-            console.log("有数据");
+            // console.log("有数据");
             //
             if (this.chartList[i].date - 5 * 24 * 60 * 60 * 1000 < this.date) {
               this.ylist1[0]++;
@@ -186,7 +175,7 @@ export default {
           }
         }
       } else {
-        console.log("chartList请求失败");
+        // console.log("chartList请求失败");
       }
       this.drawLineChart();
     },
@@ -221,7 +210,7 @@ export default {
           p = Math.floor((this.date2[0].getMonth() + i) / 12);
         }
         this.xlist[i] = (this.date2[0].getFullYear() + p) + "-" + month + "-" + this.date2[0].getDate();
-        console.log(this.xlist[i] + "this.xlist[i]");
+        // console.log(this.xlist[i] + "this.xlist[i]");
       }
 
       //处理y轴
@@ -237,7 +226,7 @@ export default {
           this.chartList[i].date > this.date2[0] &&
           this.chartList[i].date - 1000 * 30 * 60 * 60 * 24 < this.date2[1]
         ) {
-          console.log("有数据");
+          // console.log("有数据");
           //
           for (let j = 0; j < this.time.length; j++)
             if (this.chartList[i].date < this.time[j]) {
@@ -268,13 +257,13 @@ export default {
         this.ylist1[i] = 0;
         this.ylist2[i] = 0;
       }
-      console.log("this.chartList");
+      // console.log("this.chartList");
       for (let i = 0; i < this.chartList.length; i++) {
         if (
           this.chartList[i].date > this.date3 &&
           this.chartList[i].date - 1000 * 30 * 60 * 60 * 24 * 12 < this.date3
         ) {
-          console.log("有数据");
+          // console.log("有数据");
           this.time = [];
           for (let i = 0; i < 4; i++) {
             this.time[i] = (this.date3.getTime() + i * 4 * 1000 * 24 * 30 * 60 * 60);

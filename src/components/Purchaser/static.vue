@@ -116,21 +116,15 @@ export default {
       if (res.success) {
         //时间，交易金额
         this.chartList = res.date;
-        // console.log(this.chartList);
-        // console.log(this.date);
         for (let i = 0; i < 7; i++) {
           this.ylist1[i] = 0;
           this.ylist2[i] = 0;
         }
         for (let i = 0; i < this.chartList.length; i++) {
           //在这个月的
-          // console.log((this.chartList[i].date-30*24*60*60*1000)<(this.date));
-          // console.log(this.chartList[i].date > (this.date));
           if (((this.chartList[i].date - 30 * 24 * 60 * 60 * 1000) < (this.date)) && (
             this.chartList[i].date > (this.date)
           )) {
-            // console.log("有数据");
-            //
             if ((this.chartList[i].date - 5 * 24 * 60 * 60 * 1000 < this.date)) {
               this.ylist1[0]++;
               this.ylist2[0] += this.chartList[i].reality_price;
