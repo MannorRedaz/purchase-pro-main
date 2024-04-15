@@ -17,6 +17,7 @@ import java.util.List;
 /**
  * @author nihao
  * @time 2021/4/16
+ * school_administrator学校管理员
  */
 @Service
 public class SchoolAdminServiceImpl implements SchoolAdminService {

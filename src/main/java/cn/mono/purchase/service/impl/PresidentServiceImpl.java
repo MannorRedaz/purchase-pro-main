@@ -1,11 +1,13 @@
 package cn.mono.purchase.service.impl;
 
+import cn.hutool.core.util.ObjectUtil;
 import cn.mono.purchase.dto.Message;
 import cn.mono.purchase.dto.Selecte;
 import cn.mono.purchase.mapper.*;
 import cn.mono.purchase.pojo.*;
 
 import cn.mono.purchase.service.PresidentService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +18,9 @@ import java.util.List;
 /**
  * @author nihao
  * @time 2021/4/16
+ * president 学院管理员
  */
+@Slf4j
 @Service
 public class PresidentServiceImpl implements PresidentService {
     @Autowired
@@ -59,23 +63,34 @@ public class PresidentServiceImpl implements PresidentService {
 
     @Override
     public Message getUsedMoney(int cid) {
-        //Purchaser purchaser = purchaserMapper.selectByCid(cid);
+        if (ObjectUtil.isEmpty(cid)){
+            msg = new Message();
+            msg.setSuccess(false);
+            msg.setMsg("获取结果列表失败");
+            return msg;
+        }
         AcademyCategory academy_category = academy_categoryMapper.selectByPrimaryKey(cid);
+        //学院预算
+        int budget = academy_category.getBudget();
         PurchasingItems purchasing_items = null;
-        //List<Result> list = resultMapper.selectByPurchaseId(purchaser.getId());
         List<Result> list = resultMapper.selectAll();
         int j = 0;
-        for (Result i :
-                list) {
+        for (Result i : list) {
             purchasing_items = purchasing_itemsMapper.selectByPrimaryKey(i.getPid());
-            if (purchasing_items.getCid() == cid)
+            if (purchasing_items.getCid() == cid) {
                 j = j + i.getReality_price();
+            }
         }
-        if (list.size() != 0) {
+
+        if (!list.isEmpty()) {
             msg = new Message();
+            List<Integer> list1 = new ArrayList<>();
+            list1.add(budget);
+            list1.add(j);
+            msg.setDate(list1);
             msg.setSuccess(true);
             msg.setMsg("获取结果列表成功");
-            msg.setStatus(j);
+            msg.setStatus(1);
         } else {
             msg = new Message();
             msg.setSuccess(false);
@@ -108,7 +123,7 @@ public class PresidentServiceImpl implements PresidentService {
     @Override
     public Message supApplys(int sid) {
         List<BiddingApplication> bidList = bidding_applicationMapper.getBidList(sid);
-        if (bidList.size() != 0) {
+        if (!bidList.isEmpty()) {
             msg = new Message();
             msg.setSuccess(true);
             msg.setMsg("获取申请列表成功");

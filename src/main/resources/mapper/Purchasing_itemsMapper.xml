@@ -80,6 +80,8 @@
     from purchasing_items
   </select>
 
+
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

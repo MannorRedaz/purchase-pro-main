@@ -13,6 +13,7 @@ import cn.mono.purchase.pojo.*;
 import cn.mono.purchase.service.LoginService;
 import com.alibaba.fastjson2.JSON;
 import jakarta.annotation.Resource;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,7 @@ import static cn.mono.purchase.exception.ErrorCodeEnum.AUTH_LOGIN_USERNAME_OR_PA
  * @author nihao
  * @time 2021/3/13
  */
+@Slf4j
 @Service
 public class LoginServiceImpl implements LoginService {
     @Autowired
@@ -53,10 +55,7 @@ public class LoginServiceImpl implements LoginService {
         message.clear();
         Supplier supplier1 = supplierMapper.selectByName(supplier.getName());
 
-        if (ObjectUtil.isEmpty(supplier1)) {
-            throw new ServiceException(AUTH_LOGIN_BAD_CREDENTIALS);
-        }
-        if (!supplier1.getPwd().equals(supplier.getPwd())) {
+        if (ObjectUtil.isEmpty(supplier1)||!supplier1.getPwd().equals(supplier.getPwd())) {
             throw new ServiceException(AUTH_LOGIN_BAD_CREDENTIALS);
         }
 
@@ -86,12 +85,8 @@ public class LoginServiceImpl implements LoginService {
         President president1 = presidentMapper.selectByName(president.getName());
         List<President> list = new ArrayList<>();
 
-
-        if (ObjectUtil.isEmpty(president1)) {
-            throw new ServiceException(AUTH_LOGIN_BAD_CREDENTIALS);
-        }
-        if (!president1.getPwd().equals(president.getPwd())) {
-            throw new ServiceException(AUTH_LOGIN_BAD_CREDENTIALS);
+        if (ObjectUtil.isEmpty(president1)||!president1.getPwd().equals(president.getPwd())) {
+            return message;
         }
         list.add(president1);
 
@@ -117,11 +112,8 @@ public class LoginServiceImpl implements LoginService {
         message.clear();
         SchoolAdministrator schoolAdministrator1 = schoolAdministratorMapper.selectByName(schoolAdministrator.getName());
         List<SchoolAdministrator> list = new ArrayList<>();
-        if (ObjectUtil.isEmpty(schoolAdministrator1)) {
-            throw new ServiceException(AUTH_LOGIN_BAD_CREDENTIALS);
-        }
-        if (!schoolAdministrator1.getPwd().equals(schoolAdministrator.getPwd())) {
-            throw new ServiceException(AUTH_LOGIN_BAD_CREDENTIALS);
+        if (ObjectUtil.isEmpty(schoolAdministrator1)||!schoolAdministrator1.getPwd().equals(schoolAdministrator.getPwd())) {
+            return message;
         }
         list.add(schoolAdministrator1);
         String token = createToken();
@@ -147,11 +139,8 @@ public class LoginServiceImpl implements LoginService {
         message.clear();
         Purchaser purchaser1 = purchaserMapper.selectByName(purchaser.getName());
         List<Purchaser> list = new ArrayList<>();
-        if (ObjectUtil.isEmpty(purchaser1)) {
-            throw new ServiceException(AUTH_LOGIN_BAD_CREDENTIALS);
-        }
-        if (!purchaser.getPwd().equals(purchaser1.getPwd())) {
-            throw new ServiceException(AUTH_LOGIN_BAD_CREDENTIALS);
+        if (ObjectUtil.isEmpty(purchaser1)||!purchaser.getPwd().equals(purchaser1.getPwd())) {
+            return message;
         }
         list.add(purchaser1);
         String token = createToken();
@@ -175,11 +164,8 @@ public class LoginServiceImpl implements LoginService {
         message.clear();
         Supper supper1 = supperMapper.selectByName(supper.getName());
         List<Supper> list = new ArrayList<>();
-        if (ObjectUtil.isEmpty(supper1)) {
-            throw new ServiceException(AUTH_LOGIN_BAD_CREDENTIALS);
-        }
-        if (!supper.getPwd().equals(supper1.getPwd())) {
-            throw new ServiceException(AUTH_LOGIN_BAD_CREDENTIALS);
+        if (ObjectUtil.isEmpty(supper1)||!supper.getPwd().equals(supper1.getPwd())) {
+            return message;
         }
         list.add(supper1);
         String token = createToken();
@@ -211,6 +197,7 @@ public class LoginServiceImpl implements LoginService {
                 return message;
             }
         }
+        log.info("message{}", message.toString());
         return Message.error(AUTH_LOGIN_BAD_CREDENTIALS);
     }
 

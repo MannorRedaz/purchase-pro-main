@@ -16,7 +16,9 @@ import java.util.List;
 
 /**
  * @author nihao
- * @time 2021/4/16*/
+ * @time 2021/4/16
+ * supper 超级管理员
+ * */
 @Service
 public class SupperServiceImpl implements SupperService {
     @Autowired

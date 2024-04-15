@@ -16,6 +16,7 @@ import java.util.List;
 /**
  * @author nihao
  * @time 2021/4/16
+ * purchaser 采购管理员
  */
 @Service
 public class PurchaserServiceImpl implements PurchaserService {
