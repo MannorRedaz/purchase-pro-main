@@ -154,9 +154,10 @@ export default {
                 }
                 this.$message.success("登录成功!");
             } else {
+                const { name, pwd } = this.loginForm
                 const { data: res1 } = await this.$http.post(
                     "supplierLogin",
-                    this.loginForm
+                    { name, pwd }
                 );
                 if (!res1.success) {
                     return this.$message.error("登陆失败!");
