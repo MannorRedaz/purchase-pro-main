@@ -63,22 +63,12 @@ export default {
         // 验证用户名是否合法
         name: [
           { required: true, message: "请输入登录名称", trigger: "blur" },
-          {
-            min: 3,
-            max: 10,
-            message: "长度应该在3到10个字符之间",
-            trigger: "blur",
-          },
+          { min: 3, max: 10, message: "长度应该在3到10个字符之间", trigger: "blur", },
         ],
         // 验证密码是否合法
         pwd: [
           { required: true, message: "请输入登陆密码", trigger: "blur" },
-          {
-            min: 6,
-            max: 15,
-            message: "长度在6到15个字符之间",
-            trigger: "blur",
-          },
+          { min: 6, max: 15, message: "长度在6到15个字符之间", trigger: "blur", },
         ],
       },
     };

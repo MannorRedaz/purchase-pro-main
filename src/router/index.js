@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 
 
 import Login from '../views/Login/Login.vue'
+import Loginfor from '../components/common/index.vue'
 import Register from '../views/Register/Register.vue'
 
 import StaticMain from '../components/common/static/staticMian.vue'
@@ -76,7 +77,8 @@ Vue.use(VueRouter)
 
 export const routes = [
   { path: '/', redirect: '/login' },
-  { path: '/login', component: Login },
+  // { path: '/login', component: Login },
+  { path: '/login', component: Loginfor },
   { path: '/register', component: Register },
 
   {
