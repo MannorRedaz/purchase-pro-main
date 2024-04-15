@@ -8,6 +8,7 @@ import cn.mono.purchase.pojo.PurchasingItems;
 import cn.mono.purchase.service.BaseAcademyService;
 import cn.mono.purchase.service.SupplierService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,9 +27,8 @@ import java.io.IOException;
  * @author nihao
  * @time 2021/4/16
  */
-//@Api(value = "公共Controller", tags = { "公共访问接口" })
+@Tag(name = "公共Controller")
 @RestController
-@RequestMapping("/")
 public class CommonController {
     @Resource
     private BaseAcademyService baseAcademyService;

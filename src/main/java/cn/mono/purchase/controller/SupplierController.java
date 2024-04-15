@@ -7,6 +7,7 @@ import cn.mono.purchase.pojo.BiddingApplication;
 import cn.mono.purchase.pojo.Supplier;
 import cn.mono.purchase.service.SupplierService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("supplier")
-
+@Tag(name = "供应商接口")
 public class SupplierController {
     @Autowired
     SupplierService supplierService;

@@ -8,6 +8,7 @@ import cn.mono.purchase.pojo.President;
 
 import cn.mono.purchase.service.PresidentService;
 import cn.mono.purchase.service.SupplierService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("president")
+@Tag(name = "实验室管理员")
 
 public class PresidentController {
     @Resource

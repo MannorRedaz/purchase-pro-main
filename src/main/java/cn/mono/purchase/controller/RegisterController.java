@@ -3,6 +3,7 @@ package cn.mono.purchase.controller;
 import cn.mono.purchase.dto.Message;
 import cn.mono.purchase.pojo.*;
 import cn.mono.purchase.service.Register;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
+@Tag(name = "注册Controller")
 public class RegisterController {
     @Autowired
     Register register;

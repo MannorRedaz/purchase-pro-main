@@ -7,6 +7,7 @@ import cn.mono.purchase.pojo.ApplyBoard;
 import cn.mono.purchase.pojo.SchoolAdministrator;
 
 import cn.mono.purchase.service.SchoolAdminService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("schoolAdmin")
+@Tag(name = "学校管理员")
 
 public class SchoolAdminController {
     @Autowired

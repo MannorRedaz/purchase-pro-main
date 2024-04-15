@@ -4,6 +4,7 @@ package cn.mono.purchase.controller;
 import cn.mono.purchase.dto.Login;
 import cn.mono.purchase.dto.Message;
 import cn.mono.purchase.service.LoginService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/")
+@Tag(name = "认证")
 public class LoginController {
     @Autowired
     LoginService loginService;

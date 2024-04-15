@@ -2,6 +2,7 @@ package cn.mono.purchase.controller;
 
 import cn.mono.purchase.dto.Message;
 import cn.mono.purchase.service.FileService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletRequest;
@@ -23,7 +24,7 @@ import java.io.IOException;
  * Description  :
  */
 @RestController
-@RequestMapping("/")
+@Tag(name = "文件")
 public class FileController {
     /**
      * 文件的上传
