@@ -84,9 +84,13 @@
 </template>
 
 <script>
+import VueRouter from 'vue-router';
+
 export default {
   data() {
     return {
+      sid:0,
+      pagesize:5,
       schoolName: "",
       currentPage: 0,
       date: "",
@@ -143,6 +147,7 @@ export default {
   },
   created() { },
   mounted() {
+    // const data = JSON.parse(window.sessionStorage.getItem('data')).data[0];
     this.iniSearch();
     this.selectSchool();
     this.handleList();
@@ -187,7 +192,7 @@ export default {
       }
       for (let i = 0; i < this.schoolList.length; i++) {
         let row;
-        // console.log(row);
+        console.log(row);
         for (let j = 0; j < this.schoolAdminList.length; j++) {
           if (this.schoolList[i].sid == this.schoolAdminList[j].sid) {
             row = this.schoolAdminList[j];
@@ -216,8 +221,11 @@ export default {
     async deleteAdmin(id) {
       // console.log("delete");
       const { data: res } = await this.$http.get(`supper/deleteAdmin?id=` + id);
+      
       if (res.success) {
         this.$message.success(res.msg);
+        //刷新页面
+        this.$router.push("/supper/supperUserMenage");
       } else {
         this.$message.error(res.msg);
       }
@@ -225,7 +233,7 @@ export default {
     async iniSearch() {
       //查询数据
       const { data: res } = await this.$http.get(
-        `supper/selectSchoolAdminByName?name=` + this.schoolName
+        `supper/selectSchoolAdminByName` 
       );
       // console.log(this.schoolName);
       if (res.success) {

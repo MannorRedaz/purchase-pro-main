@@ -105,7 +105,8 @@ export default {
   },
   mounted() {
     const data = JSON.parse(window.sessionStorage.getItem("data"));
-    this.dataForm = data;
+    this.dataForm = data.data[0];
+    
     // this.dataForm.id = data.id;
     // this.dataForm.contract_name = data.contract_name;
     // this.dataForm.tel = data.tel;
