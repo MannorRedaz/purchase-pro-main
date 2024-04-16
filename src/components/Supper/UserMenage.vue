@@ -225,7 +225,7 @@ export default {
       if (res.success) {
         this.$message.success(res.msg);
         //刷新页面
-        this.$router.push("/supper/supperUserMenage");
+        location.reload()
       } else {
         this.$message.error(res.msg);
       }

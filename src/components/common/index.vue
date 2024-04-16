@@ -69,7 +69,7 @@ export default {
         return {
             // 这是数据表单的数据绑定对象
             loginForm: {
-                name: "nihao",
+                name: "school",
                 pwd: "123456",
                 agree: true,
             },

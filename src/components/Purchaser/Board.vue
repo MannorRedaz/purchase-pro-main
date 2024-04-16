@@ -255,7 +255,7 @@ export default {
   },
   methods: {
     async downLoad() {
-      window.open("http://localhost:8080/ssm_war_exploded/downloadResultFile/?id=" + this.clickTarget.id);
+      window.open("http://localhost:8088/downloadResultFile/?id=" + this.clickTarget.id);
     },
     async showResultDialog(val) {
       if (val.is_result = 1) {

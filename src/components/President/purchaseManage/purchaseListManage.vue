@@ -385,7 +385,7 @@ export default {
     },
     async downLoad() {
       window.open(
-        "http://localhost:8080/ssm_war_exploded/downLoadSupplierFile/?id=" +
+        "http://localhost:8088/downLoadSupplierFile/?id=" +
           this.clickTarget.sid
       );
     },

@@ -144,7 +144,7 @@
             </el-form-item>
 
             <el-form-item label="上传推荐表" :label-width="formLabelWidth">
-              <el-upload ref="upload" action="http://localhost:8080/ssm_war_exploded/upLoadResultFile1"
+              <el-upload ref="upload" action="http://localhost:8088/upLoadResultFile1"
                 :limit="limitNum" :auto-upload="false" accept=".pdf" :before-upload="beforeUploadFile"
                 :on-change="fileChange" :on-exceed="exceedFile" :on-success="handleSuccess" :on-error="handleError"
                 :file-list="fileList" :data="{ id: this.supplierId }">
@@ -784,6 +784,7 @@
 export default {
   data() {
     return {
+      pagesize:5,
       obj: "",
       resultList: [],
       showResultDialog: false,
@@ -1103,7 +1104,7 @@ export default {
     },
     async downLoad() {
       window.open(
-        "http://localhost:8080/ssm_war_exploded/downloadResultFile/?id=" +
+        "http://localhost:8088/downloadResultFile/?id=" +
         this.clickTarget.result_id
       );
     },

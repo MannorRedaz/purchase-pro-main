@@ -289,7 +289,7 @@ export default {
     },
      async downLoad1() {
       window.open(
-        "http://localhost:8080/ssm_war_exploded/downLoadPurchaseFile/?id=" +
+        "http://localhost:8088/downLoadPurchaseFile/?id=" +
           this.clickTarget.id
       );
     },
@@ -376,7 +376,7 @@ export default {
     },
     async downLoad() {
       window.open(
-        "http://localhost:8080/ssm_war_exploded/downLoadSupplierFile/?id=" +
+        "http://localhost:8088/downLoadSupplierFile/?id=" +
           this.clickTarget.sid
       );
     },

@@ -636,6 +636,7 @@ export default {
         { name: "结果公告", id: 2 },
         { name: "招标公告", id: 1 },
       ],
+      pagesize:5,
       type_value: '',
       productName: 0,
       currentPage: 0,
@@ -729,7 +730,7 @@ export default {
     },
 
     async downLoad() {
-      window.open("http://localhost:8080/ssm_war_exploded/downloadResultFile/?id=" + this.clickTarget.id);
+      window.open("http://localhost:8088/downloadResultFile/?id=" + this.clickTarget.id);
     },
 
     async getAcademyList() {

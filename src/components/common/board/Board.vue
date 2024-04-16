@@ -799,7 +799,7 @@ export default {
   methods: {
 
     async downLoad() {
-      window.open("http://localhost:8080/ssm_war_exploded/downloadResultFile/?id=" + this.clickTarget.result_id);
+      window.open("http://localhost:8088/downloadResultFile/?id=" + this.clickTarget.result_id);
     },
 
     async getAcademyList() {

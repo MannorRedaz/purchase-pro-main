@@ -297,7 +297,7 @@ export default {
     async downLoad() {
 
       window.open(
-        "http://localhost:8080/ssm_war_exploded/downLoadPurchaseFile/?id=" +
+        "http://localhost:8088/downLoadPurchaseFile/?id=" +
         this.clickTarget.id
       );
     },

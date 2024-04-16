@@ -31,7 +31,7 @@
             <el-form-item label="上传推荐表" :label-width="formLabelWidth">
               <el-upload
                 ref="upload"
-                action="http://localhost:8080/ssm_war_exploded/uploadApplyFile"
+                action="http://localhost:8088/uploadApplyFile"
                 :limit="limitNum"
                 :auto-upload="false"
                 accept="application/msword"
@@ -80,7 +80,7 @@
         <div>
           <el-form :model="form">
             <el-form-item label="上传推荐表" :label-width="formLabelWidth">
-              <el-upload ref="upload" action="http://localhost:8080/ssm_war_exploded/uploadApplyFile" :limit="limitNum"
+              <el-upload ref="upload" action="http://localhost:8088/uploadApplyFile" :limit="limitNum"
                 :auto-upload="false" accept=".pdf,.doc" :before-upload="beforeUploadFile" :on-change="fileChange"
                 :on-exceed="exceedFile" :on-success="handleSuccess" :on-error="handleError" :file-list="fileList"
                 :data="{ id: this.supplierId }">
@@ -115,7 +115,7 @@ export default {
     return {
       checkedCities: ["上海", "北京"],
       cities: [],
-      upUrl: "http://localhost:8080/ssm_war_exploded/uploadApplyFile",
+      upUrl: "http://localhost:8088/uploadApplyFile",
       supplierId: "",
       limitNum: 1,
       formLabelWidth: "100px",
@@ -281,7 +281,7 @@ export default {
     },
     //推荐表下载
     applyTableDown() {
-      window.open("http://localhost:8080/ssm_war_exploded/applyFileDown");
+      window.open("http://localhost:8088/applyFileDown");
     },
   },
 };
