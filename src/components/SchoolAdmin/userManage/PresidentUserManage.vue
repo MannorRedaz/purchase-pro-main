@@ -12,7 +12,9 @@
       <!--搜索-->
       <div class="buttons-box">
         <el-button type="primary" @click="searchByAcademyName">搜索</el-button>
-        <el-button type="primary" @click="dialogFormVisible = true">添加学院管理员</el-button>
+        <el-button type="primary" @click="dialogFormVisible = true"
+          >添加学院管理员</el-button
+        >
       </div>
       <div class="btnAdd">
         <!-- Form  button 的type属性primary和text  -->
@@ -23,14 +25,19 @@
         <el-dialog title="添加学院管理员" :visible.sync="dialogFormVisible">
           <el-form :model="form">
             <el-form-item label="学院名" :label-width="formLabelWidth">
-              <el-input v-model="form.academy_name" autocomplete="off"></el-input>
+              <el-input
+                v-model="form.academy_name"
+                autocomplete="off"
+              ></el-input>
             </el-form-item>
             <el-form-item label="用户名" :label-width="formLabelWidth">
               <el-input v-model="form.name" autocomplete="off"></el-input>
-
             </el-form-item>
             <el-form-item label="管理员姓名" :label-width="formLabelWidth">
-              <el-input v-model="form.contract_name" autocomplete="off"></el-input>
+              <el-input
+                v-model="form.contract_name"
+                autocomplete="off"
+              ></el-input>
             </el-form-item>
             <el-form-item label="联系电话" :label-width="formLabelWidth">
               <el-input v-model="form.tel" autocomplete="off"></el-input>
@@ -41,12 +48,17 @@
             <el-form-item label="学院预算" :label-width="formLabelWidth">
               <el-input v-model="form.budget" autocomplete="off"></el-input>
             </el-form-item>
-            <el-form-item label="学院最大单笔金额" :label-width="formLabelWidth">
-              <el-input v-model="form.maximum_order" autocomplete="off"></el-input>
+            <el-form-item
+              label="学院最大单笔金额"
+              :label-width="formLabelWidth"
+            >
+              <el-input
+                v-model="form.maximum_order"
+                autocomplete="off"
+              ></el-input>
             </el-form-item>
           </el-form>
           <div slot="footer" class="dialog-footer">
-
             <el-button @click="dialog(false)">取 消</el-button>
             <el-button type="primary" @click="dialog(true)">确 定</el-button>
           </div>
@@ -55,31 +67,54 @@
     </div>
     <!--显示相关的审核数据-->
     <div class="main-content">
-      <el-table :data="tableList" :key="tableList.id" style="width: 100%;font-size: 15px;" stripe>
+      <el-table
+        :data="tableList"
+        :key="tableList.id"
+        style="width: 100%; font-size: 15px"
+        stripe
+      >
         <el-table-column type="index"></el-table-column>
-        <el-table-column label="学院名称" prop="academy_name"> </el-table-column>
+        <el-table-column label="学院名称" prop="academy_name">
+        </el-table-column>
         <el-table-column label="账号" prop="name"> </el-table-column>
         <el-table-column label="联系人姓名" prop="contract_name">
         </el-table-column>
         <el-table-column label="联系人电话" prop="tel"> </el-table-column>
         <el-table-column label="重置密码">
           <template slot-scope="scope">
-            <el-button type="primary" icon="el-icon-edit" size="mini" @click="reset(scope.row.id)">重置密码</el-button>
+            <el-button
+              type="primary"
+              icon="el-icon-edit"
+              size="mini"
+              @click="reset(scope.row.id)"
+              >重置密码</el-button
+            >
           </template>
         </el-table-column>
         <el-table-column label="删除">
           <template slot-scope="scope">
-            <el-button type="primary" icon="el-icon-edit" size="mini" @click="deleteAdmin(scope.row.id)">删除</el-button>
+            <el-button
+              type="primary"
+              icon="el-icon-edit"
+              size="mini"
+              @click="deleteAdmin(scope.row.id)"
+              >删除</el-button
+            >
           </template>
         </el-table-column>
       </el-table>
 
-      <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
-        :current-page.sync="currentPage" :page-size="pagesize" :page-sizes="[50]"
-        layout="total,sizes, prev, pager, next" :total="tableList.length">
+      <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page.sync="currentPage"
+        :page-size="pagesize"
+        :page-sizes="[50]"
+        layout="total,sizes, prev, pager, next"
+        :total="tableList.length"
+        >``
       </el-pagination>
     </div>
-
   </div>
 </template>
 
@@ -87,6 +122,7 @@
 export default {
   data() {
     return {
+      pagesize:5,
       academyName: "",
       currentPage: 0,
       date: "",
@@ -136,22 +172,27 @@ export default {
         tel: "1584235035",
         count: "242364326435754725",
         name: "nihao",
-        budget: '',
-        maximum_order: '',
-        sid: ''
+        budget: "",
+        maximum_order: "",
+        sid: "",
       },
       formLabelWidth: "120px",
     };
   },
-  created() { },
+  created() {},
   mounted() {
     this.iniSearch();
     this.selectAcademy();
   },
   computed: {},
   methods: {
+    handleSizeChange(val) {
+      console.log(`每页 ${val} 条`);
+    },
+    handleCurrentChange(val) {
+      console.log(`当前页: ${val}`);
+    },
     async dialog(val) {
-
       if (val) {
         if (this.form.name == null || this.form.name == "") {
           this.$message.warning("请输入用户名");
@@ -166,7 +207,7 @@ export default {
           return;
         }
         this.dialogFormVisible = false;
-        const data = JSON.parse(window.sessionStorage.getItem('data'));
+        const data = JSON.parse(window.sessionStorage.getItem("data"));
         this.form.sid = data.sid;
         // console.log('shdi'+data.sid);
         const { data: res } = await this.$http.post(
@@ -193,7 +234,9 @@ export default {
       this.presidentAdminList = res.date;
       this.selectAcademy;
       this.handleList(res.date);
-      this.$message.success("查询到" + this.presidentAdminList.length + "条记录");
+      this.$message.success(
+        "查询到" + this.presidentAdminList.length + "条记录"
+      );
     },
 
     async reset(id) {
@@ -212,7 +255,8 @@ export default {
     async deleteAdmin(id) {
       // console.log("delete");
       const { data: res } = await this.$http.get(
-        `schoolAdmin/deletePresident?id=` + id);
+        `schoolAdmin/deletePresident?id=` + id
+      );
       if (res.success) {
         this.$message.success(res.msg);
         iniSearch();
@@ -221,7 +265,6 @@ export default {
       }
     },
     async iniSearch() {
-
       //查询数据
       const { data: res } = await this.$http.get(
         `schoolAdmin/SearchByAcademyName?name=`
@@ -290,7 +333,7 @@ export default {
   width: 100px;
 }
 
-.dialog>.el-dialog {
+.dialog > .el-dialog {
   overflow-y: auto !important;
   height: 500px !important;
 }

@@ -7,7 +7,11 @@
         <div class="headers">
           <template>
             <el-select placeholder="请选择" v-model="access_value">
-              <el-option v-for="item in access" :key="item.id" :value="item.value">
+              <el-option
+                v-for="item in access"
+                :key="item.id"
+                :value="item.value"
+              >
               </el-option>
             </el-select>
           </template>
@@ -15,36 +19,58 @@
         <div class="headers">申请时间:</div>
         <div class="headers">
           <template>
-             
+            
             <div>
-                            <el-date-picker v-model="time_value" type="datetimerange" range-separator="至"
-                start-placeholder="开始日期" end-placeholder="结束日期">
-                              </el-date-picker>
-                        
+              <el-date-picker
+                v-model="time_value"
+                type="datetimerange"
+                range-separator="至"
+                start-placeholder="开始日期"
+                end-placeholder="结束日期"
+              >
+              </el-date-picker>
             </div>
           </template>
         </div>
       </div>
     </div>
     <div>
-      <el-table :data="tableData" :key="tableData.id" style="width: 100%;font-size: 15px;" stripe>
+      <el-table
+        :data="tableData"
+        :key="tableData.id"
+        style="width: 100%; font-size: 15px"
+        stripe
+      >
         <el-table-column type="index" label="序号"> </el-table-column>
         <el-table-column prop="academy" label="采购院系"> </el-table-column>
-        <el-table-column prop="product_name" label="采购产品"> </el-table-column>
+        <el-table-column prop="product_name" label="采购产品">
+        </el-table-column>
         <el-table-column prop="category" label="所属类别"> </el-table-column>
         <el-table-column prop="tag" label="采购数量"> </el-table-column>
-        <el-table-column prop="highest_price" label="预估金额"> </el-table-column>
+        <el-table-column prop="highest_price" label="预估金额">
+        </el-table-column>
 
         <el-table-column align="right" label="操作">
           <template slot-scope="scope">
-            <el-button size="mini" @click="handleEdit(scope.row)">详情</el-button>
-            <el-button size="mini" type="danger" :disabled="scope.row.acceess == 11"
-              @click="handleApprove(scope.row)">{{ fun1(scope.row) }}</el-button>
+            <el-button size="mini" @click="handleEdit(scope.row)"
+              >详情</el-button
+            >
+            <el-button
+              size="mini"
+              type="danger"
+              :disabled="scope.row.acceess == 11"
+              @click="handleApprove(scope.row)"
+              >{{ fun1(scope.row) }}</el-button
+            >
           </template>
         </el-table-column>
       </el-table>
-      <el-pagination :current-page.sync="currentPage" :page-size="50" layout="total,sizes, prev, pager, next"
-        :total="tableData.length">
+      <el-pagination
+        :current-page.sync="currentPage"
+        :page-size="50"
+        layout="total,sizes, prev, pager, next"
+        :total="tableData.length"
+      >
       </el-pagination>
     </div>
     <el-dialog title="采购详情" :visible.sync="dialogFormVisible">
@@ -53,24 +79,37 @@
           <el-input v-model="clickTarget.reason" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="产品名称" :label-width="formLabelWidth">
-          <el-input v-model="clickTarget.product_name" autocomplete="off"></el-input>
+          <el-input
+            v-model="clickTarget.product_name"
+            autocomplete="off"
+          ></el-input>
         </el-form-item>
         <el-form-item label="型号或规格" prop="" :label-width="formLabelWidth">
-          <el-input auto-complete="off" v-model="clickTarget.purpose"></el-input></el-form-item>
+          <el-input auto-complete="off" v-model="clickTarget.purpose"></el-input
+        ></el-form-item>
         <el-form-item label="产品类别" :label-width="formLabelWidth">
-          <el-input v-model="clickTarget.category" autocomplete="off"></el-input>
+          <el-input
+            v-model="clickTarget.category"
+            autocomplete="off"
+          ></el-input>
         </el-form-item>
         <el-form-item label="发布学院" :label-width="formLabelWidth">
           <el-input v-model="clickTarget.academy" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="预估价格" :label-width="formLabelWidth">
-          <el-input v-model="clickTarget.highest_price" autocomplete="off"></el-input>
+          <el-input
+            v-model="clickTarget.highest_price"
+            autocomplete="off"
+          ></el-input>
         </el-form-item>
         <el-form-item label="需求数量" :label-width="formLabelWidth">
           <el-input v-model="clickTarget.tag" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="申请时间" :label-width="formLabelWidth">
-          <el-input v-model="clickTarget.apply_time1" autocomplete="off"></el-input>
+          <el-input
+            v-model="clickTarget.apply_time1"
+            autocomplete="off"
+          ></el-input>
         </el-form-item>
         <el-form-item label="附件下载" :label-width="formLabelWidth">
           <el-button @click="downLoad()">【附件下载】</el-button>
@@ -88,6 +127,7 @@
 export default {
   data() {
     return {
+      currentPage:1,
       access_list: [],
       access_value: "",
       time_value: [new Date(), new Date()],
@@ -129,8 +169,6 @@ export default {
     time_value: function () {
       // console.log(this.time_value[0]+"fa"+this.time_value[1]);
       if (this.time_value[0] > this.time_value[1]) {
-
-
         this.tableData = this.tmp;
       } else {
         let l = [];
@@ -197,7 +235,6 @@ export default {
         // console.log(res.date.length);
 
         this.handleList();
-
       } else {
         // console.log("purchasingList请求失败！");
       }
@@ -261,13 +298,13 @@ export default {
     handleList() {
       for (let i = 0; i < this.purchaseList.length; i++) {
         this.tableData[i] = this.purchaseList[i];
-        this.tableData[i].publish_time1 = this.$moment(this.purchaseList[i].publish_time).format("YYYY-MM-DD");
-        this.tableData[i].academy = this.academyList[
-          this.purchaseList[i].cid
-        ].academy_name;
-        this.tableData[i].category = this.categorieList[
-          this.purchaseList[i].pid
-        ].product_name;
+        this.tableData[i].publish_time1 = this.$moment(
+          this.purchaseList[i].publish_time
+        ).format("YYYY-MM-DD");
+        this.tableData[i].academy =
+          this.academyList[this.purchaseList[i].cid].academy_name;
+        this.tableData[i].category =
+          this.categorieList[this.purchaseList[i].pid].product_name;
       }
       //触发更新问题
       this.tableData.push(null);
@@ -295,10 +332,8 @@ export default {
       //this.clickTarget =row;
     },
     async downLoad() {
-
       window.open(
-        "http://localhost:8088/downLoadPurchaseFile/?id=" +
-        this.clickTarget.id
+        "http://localhost:8088/downLoadPurchaseFile/?id=" + this.clickTarget.id
       );
     },
   },

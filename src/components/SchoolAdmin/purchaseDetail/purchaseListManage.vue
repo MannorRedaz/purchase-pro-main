@@ -8,7 +8,11 @@
           <div>
             <template>
               <el-select v-model="selects.academy" placeholder="请选择">
-                <el-option v-for="item in academyListLi" :key="item.cid" :value="item.academy_name">
+                <el-option
+                  v-for="item in academyListLi"
+                  :key="item.cid"
+                  :value="item.academy_name"
+                >
                 </el-option>
               </el-select>
             </template>
@@ -22,7 +26,11 @@
           <template>
             <div>
               <div class="block">
-                <el-date-picker v-model="selects.value1[0]" type="year" placeholder="选择年">
+                <el-date-picker
+                  v-model="selects.value1[0]"
+                  type="year"
+                  placeholder="选择年"
+                >
                 </el-date-picker>
               </div>
             </div>
@@ -30,11 +38,17 @@
         </div>
 
         <div class="headers">
-          <el-button type="primary" @click="search" style="margin_left: 100px">搜索</el-button>
+          <el-button type="primary" @click="search" style="margin_left: 100px"
+            >搜索</el-button
+          >
         </div>
         <div class="headers">采购金额：</div>
         <div class="headers">
-          <el-input :disabled="true" v-model="count" autocomplete="off"></el-input>
+          <el-input
+            :disabled="true"
+            v-model="count"
+            autocomplete="off"
+          ></el-input>
         </div>
       </div>
     </div>
@@ -56,14 +70,25 @@
       </el-table-column>
       <el-table-column align="right" label="是否通过">
         <template slot-scope="scope">
-          <el-button size="mini" type="danger" :disabled="scope.row.acceess == 11" @click="handleApprove(scope.row)">{{
-            fun1(scope.row) }}</el-button>
+          <el-button
+            size="mini"
+            type="danger"
+            :disabled="scope.row.acceess == 11"
+            @click="handleApprove(scope.row)"
+            >{{ fun1(scope.row) }}</el-button
+          >
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
-      :current-page.sync="currentPage" :page-size="pagesize" :page-sizes="[50]" layout="total,sizes, prev, pager, next"
-      :total="tableData.length">
+    <el-pagination
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :current-page.sync="currentPage"
+      :page-size="pagesize"
+      :page-sizes="[50]"
+      layout="total,sizes, prev, pager, next"
+      :total="tableData.length"
+    >
     </el-pagination>
 
     <el-dialog title="采购详情" :visible.sync="dialogFormVisible">
@@ -72,30 +97,49 @@
           <el-input v-model="clickTarget.reason" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="产品名称" :label-width="formLabelWidth">
-          <el-input v-model="clickTarget.product_name" autocomplete="off"></el-input>
+          <el-input
+            v-model="clickTarget.product_name"
+            autocomplete="off"
+          ></el-input>
         </el-form-item>
         <el-form-item label="型号或规格" prop="" :label-width="formLabelWidth">
-          <el-input auto-complete="off" v-model="clickTarget.purpose"></el-input></el-form-item>
+          <el-input auto-complete="off" v-model="clickTarget.purpose"></el-input
+        ></el-form-item>
         <el-form-item label="产品类别" :label-width="formLabelWidth">
-          <el-input v-model="clickTarget.category" autocomplete="off"></el-input>
+          <el-input
+            v-model="clickTarget.category"
+            autocomplete="off"
+          ></el-input>
         </el-form-item>
         <el-form-item label="发布学院" :label-width="formLabelWidth">
           <el-input v-model="clickTarget.academy" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="预估价格" :label-width="formLabelWidth">
-          <el-input v-model="clickTarget.highest_price" autocomplete="off"></el-input>
+          <el-input
+            v-model="clickTarget.highest_price"
+            autocomplete="off"
+          ></el-input>
         </el-form-item>
         <el-form-item label="需求数量" :label-width="formLabelWidth">
           <el-input v-model="clickTarget.tag" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="申请时间" :label-width="formLabelWidth">
-          <el-input v-model="clickTarget.publish_time1" autocomplete="off"></el-input>
+          <el-input
+            v-model="clickTarget.publish_time1"
+            autocomplete="off"
+          ></el-input>
         </el-form-item>
         <el-form-item label="中标公司" :label-width="formLabelWidth">
-          <el-input v-model="clickTarget.company_name" autocomplete="off"></el-input>
+          <el-input
+            v-model="clickTarget.company_name"
+            autocomplete="off"
+          ></el-input>
         </el-form-item>
         <el-form-item label="成交价格" :label-width="formLabelWidth">
-          <el-input v-model="clickTarget.reality_price" autocomplete="off"></el-input>
+          <el-input
+            v-model="clickTarget.reality_price"
+            autocomplete="off"
+          ></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -111,6 +155,8 @@ import { purchaseListManagejs } from "./purchaseListManage";
 export default {
   data() {
     return {
+      pagesize:5,
+      currentPage:1,
       //某某年的消费钱
       count: "",
       selects: {
@@ -164,6 +210,12 @@ export default {
   },
 
   methods: {
+    handleSizeChange(val) {
+      console.log(`每页 ${val} 条`);
+    },
+    handleCurrentChange(val) {
+      console.log(`当前页: ${val}`);
+    },
     async getAcademyList() {
       // console.log(2);
       const { data: res } = await this.$http.post("academys");
@@ -348,8 +400,7 @@ export default {
     },
     async downLoad() {
       window.open(
-        "http://localhost:8088/downLoadSupplierFile/?id=" +
-        this.clickTarget.sid
+        "http://localhost:8088/downLoadSupplierFile/?id=" + this.clickTarget.sid
       );
     },
   },
