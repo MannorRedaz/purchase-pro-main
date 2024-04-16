@@ -122,10 +122,11 @@ export default {
             });
         },
         async loginAction() {
-            if (this.loginForm.value == 1) {
+            const { name, pwd } = this.loginForm
+            if (this.value == 1) {
                 const { data: res } = await this.$http.post(
                     "administerLogin",
-                    this.loginForm
+                    { name, pwd }
                 );
                 if (!res.success) {
                     return this.$message.error("登陆失败!");

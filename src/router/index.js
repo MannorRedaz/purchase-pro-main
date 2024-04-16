@@ -89,7 +89,6 @@ export const routes = [
     children: [
       { path: '/supplier/basicInfo', component: BasicInfo },
       { path: '/supplier/board', component: SupBoard },
-
       { path: '/supplier/applyManage', component: ApplyManage },
       { path: '/supplier/applyForlistBoard', component: applyForlistBoard },
       { path: '/supplier/applyForList', component: ApplyForList },

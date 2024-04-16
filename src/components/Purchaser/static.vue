@@ -101,7 +101,7 @@ export default {
     async getChartList() {
       // console.log("getChartList");
       const data1 = JSON.parse(window.sessionStorage.getItem("data"));
-      const { data: res } = await this.$http.get('getChartList?id=' + data1.id);
+      const { data: res } = await this.$http.get('getChartList?id=' + data1.data[0].id);
       let str = this.$moment(this.date).format("YYYY-MM");
       //x坐标
       this.xlist[0] = str + "-06";

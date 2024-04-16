@@ -105,7 +105,7 @@ export default {
     async setBasicInfo() {
       if (this.loginForm.pwd != null && this.loginForm.pwd != "") {
         const data = JSON.parse(window.sessionStorage.getItem("data"));
-        this.loginForm.name = data.name;
+        this.loginForm.name = data.data[0].name;
 
         const { data: res1 } = await this.$http.post(
           "administerLogin",

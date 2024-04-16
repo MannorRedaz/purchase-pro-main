@@ -96,7 +96,6 @@ export default {
           this.supplierList.push(res.date[i].sid);
         }
       }
-      // console.log(this.supplierList);
       this.tableData = [];
       for (let j = 0; j < this.supplierList.length; j++) {
         const { data: res } = await this.$http.get(
@@ -106,10 +105,6 @@ export default {
         obj.name = res.date[0].name;
         obj.money = res.date[0].sid; //钱
         obj.count = res.date[0].id; //次数
-        // console.log("time"+res.date[0].last_time);
-        // console.log(res.date[0].last_time - 30 * 24 * 60 * 60 * 1000 < this.value2);
-        // console.log(res.date[0].last_time > this.value2);
-
         if (
           res.date[0].last_time - 30 * 24 * 60 * 60 * 1000 < this.value2 &&
           res.date[0].last_time > this.value2
@@ -138,7 +133,6 @@ export default {
           this.supplierList.push(res.date[i].sid);
         }
       }
-      // console.log(this.supplierList);
       this.tableData = [];
       for (let j = 0; j < this.supplierList.length; j++) {
         const { data: res } = await this.$http.get(
@@ -148,11 +142,6 @@ export default {
         obj.name = res.date[0].name;
         obj.money = res.date[0].sid; //钱
         obj.count = res.date[0].id; //次数
-        // console.log( "res.date[0].last_time > this.value2[0]");
-        // console.log(this.value1[0].getTime());
-
-        // console.log(res.date[0].last_time - 30 * 24 * 60 * 60 * 1000 < this.value1[1].getTime());
-        // console.log( res.date[0].last_time > this.value1[0].getTime());
         let t1 = res.date[0].last_time - 30 * 24 * 60 * 60 * 1000 < this.value1[1].getTime();
         let t2 = res.date[0].last_time > this.value1[0].getTime();
         if (
@@ -182,7 +171,6 @@ export default {
           this.supplierList.push(res.date[i].sid);
         }
       }
-      // console.log(this.supplierList);
       this.tableData = [];
       for (let j = 0; j < this.supplierList.length; j++) {
         const { data: res } = await this.$http.get(
@@ -195,9 +183,6 @@ export default {
 
         let t1 = res.date[0].last_time - 12 * 30 * 24 * 60 * 60 * 1000 < this.value3.getTime();
         let t2 = res.date[0].last_time > this.value3.getTime();
-
-        // console.log(t1);
-        // console.log(t2);
         if (
           t1 && t2
         ) {
