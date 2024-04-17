@@ -243,7 +243,7 @@ export default {
       await this.getCategoryList();
       await this.getResultList();
       await this.getSupplierList();
-      const data = JSON.parse(window.sessionStorage.getItem("data"));
+      const data = JSON.parse(window.sessionStorage.getItem("data")).data[0];
       const { data: res } = await this.$http.get(
         "president/getPurchaseList?cid=" + data.cid
       );
@@ -313,7 +313,7 @@ export default {
       this.getPurchaseList();
     },
     async search() {
-      const data = JSON.parse(window.sessionStorage.getItem("data"));
+      const data = JSON.parse(window.sessionStorage.getItem("data")).data[0];
       this.selects.academy = this.academyList[data.cid].academy_name;
       const { data: res } = await this.$http.post(
         "president/selectDetail",

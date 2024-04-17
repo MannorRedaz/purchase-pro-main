@@ -117,7 +117,7 @@ export default {
     this.getUsedMoney();
   },
   mounted() {
-    const data = JSON.parse(window.sessionStorage.getItem("data"));
+    const data = JSON.parse(window.sessionStorage.getItem("data")).data[0];
     this.userName = data.data[0].contract_name;
   },
   computed: {
@@ -135,14 +135,14 @@ export default {
       this.activePath = activePath;
     },
     async getBudget() {
-      const data = JSON.parse(window.sessionStorage.getItem("data"));
+      const data = JSON.parse(window.sessionStorage.getItem("data")).data[0];
       const { data: res } = await this.$http.get(
         "president/getBudget?sid=" + data.data[0].cid
       );
       this.budge = res.date[0].budget;
     },
     async getUsedMoney() {
-      const data = JSON.parse(window.sessionStorage.getItem("data"));
+      const data = JSON.parse(window.sessionStorage.getItem("data")).data[0];
       const { data: res } = await this.$http.get(
         "president/getUsedMoney?cid=" + data.data[0].cid
       );

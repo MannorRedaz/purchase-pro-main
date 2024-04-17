@@ -221,7 +221,7 @@ export default {
       await this.selectAcademy();
       //查询数据
       const { data: res } = await this.$http.get(
-        `schoolAdmin/searchPurchaserByAcademyName?name=`
+        `schoolAdmin/searchPurchaserByAcademyName`
       );
       if (res.success) {
         this.presidentAdminList = res.date;

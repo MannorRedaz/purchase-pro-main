@@ -108,7 +108,7 @@ export default {
     },
     async getChartList() {
       // console.log("getChartList");
-      const data1 = JSON.parse(window.sessionStorage.getItem("data"));
+      const data1 = JSON.parse(window.sessionStorage.getItem("data")).data[0];
       const { data: res } = await this.$http.get("getChartAllList");
       let str = this.$moment(this.date).format("YYYY-MM");
       const year = this.date.getFullYear();

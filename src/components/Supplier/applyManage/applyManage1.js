@@ -7,7 +7,7 @@ export class applyManage1JS {
     this.getCategoryList();
   }
   static getbiddingList() {
-    const data = JSON.parse(window.sessionStorage.getItem("data"));
+    const data = JSON.parse(window.sessionStorage.getItem("data")).data[0];
     let res = axios.get(
       "supplier/getApplyResultList?sid=" + data.data[0].id
     );
@@ -16,7 +16,7 @@ export class applyManage1JS {
 
   static handleList2() {
     this.$message.success("188");
-    const data = JSON.parse(window.sessionStorage.getItem("data"));
+    const data = JSON.parse(window.sessionStorage.getItem("data")).data[0];
     this.$message.success("191");
 
     const res = axios.get(
@@ -27,7 +27,7 @@ export class applyManage1JS {
   }
   static search(val) {
 
-    const data = JSON.parse(window.sessionStorage.getItem("data"));
+    const data = JSON.parse(window.sessionStorage.getItem("data")).data[0];
 
     let res = axios.post(
       "supplier/getSearchBidingList",
@@ -55,7 +55,7 @@ export class applyManage1JS {
   static getPurchaseList() {
     // console.log("gjuaoguwaoghweog");
 
-    const data = JSON.parse(window.sessionStorage.getItem("data"));
+    const data = JSON.parse(window.sessionStorage.getItem("data")).data[0];
     let res = axios.post("supplier/getPurchaseList?");
     // console.log("gjuaoguwaoghweog");
 
@@ -63,7 +63,7 @@ export class applyManage1JS {
   }
   //通过供应商id查询结果列表
   async getResultListBySupplierId() {
-    const data = JSON.parse(window.sessionStorage.getItem("data"));
+    const data = JSON.parse(window.sessionStorage.getItem("data")).data[0];
     let res = axios.get(
       "supplier/getResultListBySupplierId?sid=" + data.id
     );
@@ -74,7 +74,7 @@ export class applyManage1JS {
   //获取申请列表
   static getApplyList() {
 
-    const data = JSON.parse(window.sessionStorage.getItem("data"));
+    const data = JSON.parse(window.sessionStorage.getItem("data")).data[0];
     let res = axios.get(
       "supplier/getApplyList?id=" + data.id
     );

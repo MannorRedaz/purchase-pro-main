@@ -90,13 +90,13 @@ export default {
     };
   },
   mounted() {
-    const data = JSON.parse(window.sessionStorage.getItem("data"));
+    const data = JSON.parse(window.sessionStorage.getItem("data")).data[0];
     this.dataForm = data.data[0];
   },
   methods: {
     async setBasicInfo() {
       if (this.loginForm.pwd != null && this.loginForm.pwd != "") {
-        const data = JSON.parse(window.sessionStorage.getItem("data"));
+        const data = JSON.parse(window.sessionStorage.getItem("data")).data[0];
         this.loginForm.name = data.data[0].name;
         const { data: res1 } = await this.$http.post(
           "supplierLogin",

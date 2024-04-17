@@ -216,7 +216,7 @@ export default {
     async search() {
       console.log(this.selects.value1 + "time");
 
-      const data = JSON.parse(window.sessionStorage.getItem("data"));
+      const data = JSON.parse(window.sessionStorage.getItem("data")).data[0];
       for (let i = 0; i < this.academyListLi.length; i++) {
         if (this.academyListLi[i].cid == data.cid) {
           this.selects.academy = this.academyListLi[i].academy_name;
@@ -256,7 +256,7 @@ export default {
     async getPurchaseList() {
       await this.getAcademyList();
       await this.getCategoryList();
-      const data = JSON.parse(window.sessionStorage.getItem("data"));
+      const data = JSON.parse(window.sessionStorage.getItem("data")).data[0];
       const { data: res } = await this.$http.get(
         "president/getPurchaseList1?cid=" + data.cid
       );

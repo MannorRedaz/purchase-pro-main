@@ -207,7 +207,7 @@ export default {
           return;
         }
         this.dialogFormVisible = false;
-        const data = JSON.parse(window.sessionStorage.getItem("data"));
+        const data = JSON.parse(window.sessionStorage.getItem("data")).data[0];
         this.form.sid = data.sid;
         // console.log('shdi'+data.sid);
         const { data: res } = await this.$http.post(
@@ -259,7 +259,7 @@ export default {
       );
       if (res.success) {
         this.$message.success(res.msg);
-        iniSearch();
+        this.iniSearch();
       } else {
         this.$message.error(res.msg);
       }
@@ -267,7 +267,7 @@ export default {
     async iniSearch() {
       //查询数据
       const { data: res } = await this.$http.get(
-        `schoolAdmin/SearchByAcademyName?name=`
+        `schoolAdmin/SearchByAcademyName`
       );
       if (res.success) {
         this.presidentAdminList = res.date;

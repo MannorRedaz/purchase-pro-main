@@ -1066,7 +1066,7 @@ export default {
     async getBoardList() {
       await this.getAcademyList();
       await this.getCategoriesList();
-      const data = JSON.parse(window.sessionStorage.getItem("data"));
+      const data = JSON.parse(window.sessionStorage.getItem("data")).data[0];
       this.addModel.cid = data.data[0].cid;
       const { data: res } = await this.$http.get(
         "getAllBoardListByCid?cid=" + this.addModel.cid

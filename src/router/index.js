@@ -173,7 +173,7 @@ router.beforeEach((to, from, next) => {
   } else {
     //let token = localStorage.getItem('Authorization');
 
-    const data1 = JSON.parse(window.sessionStorage.getItem("data"));
+    const data1 = JSON.parse(window.sessionStorage.getItem("data")).data[0];
     if (data1 === null || data1 === '') {
       this.$message.error("你还未登录!");
       next('/login');

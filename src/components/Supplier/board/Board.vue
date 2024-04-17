@@ -1224,7 +1224,7 @@ export default {
   },
   methods: {
     showAddDialog(val) {
-      const data1 = JSON.parse(window.sessionStorage.getItem("data"));
+      const data1 = JSON.parse(window.sessionStorage.getItem("data")).data[0];
       // console.log(data1.access);
       if (data1.access == 1) {
         this.addForm.id = val.id;
@@ -1239,7 +1239,7 @@ export default {
 
       // 隐藏添加用户的对话框
       this.addDialogVisible = false;
-      const data = JSON.parse(window.sessionStorage.getItem("data"));
+      const data = JSON.parse(window.sessionStorage.getItem("data")).data[0];
       this.addForm.sid = data.id;
       this.addForm.data = new Date();
       this.addForm.purid = this.tmpId;

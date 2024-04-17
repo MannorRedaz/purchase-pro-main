@@ -1160,7 +1160,6 @@ export default {
         obj.minimumPrice = await this.getMinimumPrice(arry[i].id);
 
         if (obj.purchase_name != null && obj.purchase_name != "") {
-          console.log("fsahghas" + obj.product_name);
           this.List.push(obj);
         }
       }
@@ -1202,7 +1201,7 @@ export default {
       // this.$refs.addFormRef.resetFields()
     },
     async search() {
-      const data = JSON.parse(window.sessionStorage.getItem("data"));
+      const data = JSON.parse(window.sessionStorage.getItem("data")).data[0];
 
       this.selects.academy = "攀枝花学院";
       const { data: res } = await this.$http.post("boardScreen", this.selects);

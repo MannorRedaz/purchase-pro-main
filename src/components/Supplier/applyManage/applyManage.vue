@@ -135,7 +135,7 @@ export default {
     async handleList2() {
       // this.$message.success("188");
 
-      // const data = JSON.parse(window.sessionStorage.getItem("data"));
+      // const data = JSON.parse(window.sessionStorage.getItem("data")).data[0];
       //  this.$message.success("191");
 
       // //  const { data: res }=  this.$http.get(
@@ -157,7 +157,7 @@ export default {
     async search() {
       // console.log(this.selects.value1 + "time");
 
-      const data = JSON.parse(window.sessionStorage.getItem("data"));
+      const data = JSON.parse(window.sessionStorage.getItem("data")).data[0];
       // for (let i = 0; i < this.academyListLi.length; i++) {
       //   if (this.academyListLi[i].cid == data.cid) {
       //     this.selects.academy = this.academyListLi[i].academy_name;
@@ -214,7 +214,7 @@ export default {
     //使用学院号获得该学院的采购信息
 
     async getPurchaseList() {
-      const data = JSON.parse(window.sessionStorage.getItem("data"));
+      const data = JSON.parse(window.sessionStorage.getItem("data")).data[0];
       const { data: res } = await this.$http.post("supplier/getPurchaseList?");
       // console.log("getGoogsList");
       if (res.success) {
@@ -228,7 +228,7 @@ export default {
     },
     //通过供应商id查询结果列表
     async getResultListBySupplierId() {
-      const data = JSON.parse(window.sessionStorage.getItem("data"));
+      const data = JSON.parse(window.sessionStorage.getItem("data")).data[0];
       const { data: res } = await this.$http.get(
         "supplier/getResultListBySupplierId?sid=" + data.id
       );
@@ -253,7 +253,7 @@ export default {
       await this.getCategoryList();
       await this.getPurchaseList();
       await this.getResultListBySupplierId();
-      const data = JSON.parse(window.sessionStorage.getItem("data"));
+      const data = JSON.parse(window.sessionStorage.getItem("data")).data[0];
       const { data: res } = await this.$http.get(
         "supplier/getApplyList?id=" + data.id
       );

@@ -370,6 +370,7 @@ export default {
         //初始化时，有的商品还没有结果
         this.tableData[i].reality_price =
           this.resultList[this.purchaseList[i].id].reality_price;
+          // console.log(this.tableData[i]);
         this.tableData[i].company_name =
           this.supplierList[
             this.resultList[this.purchaseList[i].id].sid

@@ -122,7 +122,7 @@ export default {
     this.getUsedMoney();
   },
   mounted() {
-    const data = JSON.parse(window.sessionStorage.getItem("data"));
+    const data = JSON.parse(window.sessionStorage.getItem("data")).data[0];
     this.userName = data.contract_name;
   },
   computed: {
@@ -142,14 +142,14 @@ export default {
 
     },
     async getBudget() {
-      const data = JSON.parse(window.sessionStorage.getItem("data"));
+      const data = JSON.parse(window.sessionStorage.getItem("data")).data[0];
       const { data: res } = await this.$http.get(
         "president/getBudget?sid=" + data.cid
       );
       this.budge = res.date[0].budget;
     },
     async getUsedMoney() {
-      const data = JSON.parse(window.sessionStorage.getItem("data"));
+      const data = JSON.parse(window.sessionStorage.getItem("data")).data[0];
       console.log('data.data[0].cid');
       console.log(data.data[0].cid);
       const { data: res } = await this.$http.get(

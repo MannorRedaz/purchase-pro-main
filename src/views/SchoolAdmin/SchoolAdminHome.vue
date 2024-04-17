@@ -102,7 +102,7 @@ export default {
         },
         {
           authName: "订单管理",
-          id: 16,
+          id: 17,
           ico: "el-icon-document",
           path: "",
           children: [

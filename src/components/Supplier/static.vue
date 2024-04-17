@@ -102,7 +102,7 @@ export default {
       this.chartLine.setOption(option);
     },
     async getChartList() {
-      const data1 = JSON.parse(window.sessionStorage.getItem("data"));
+      const data1 = JSON.parse(window.sessionStorage.getItem("data")).data[0];
       const { data: res } = await this.$http.get('getChartList?id=' + data1.data[0].id);
       let str = this.$moment(this.date).format("YYYY-MM");
       const year = this.date.getFullYear();
@@ -191,7 +191,7 @@ export default {
       return result;
     },
     async getChartList1() {
-      const data1 = JSON.parse(window.sessionStorage.getItem("data"));
+      const data1 = JSON.parse(window.sessionStorage.getItem("data")).data[0];
 
       const { data: res1 } = await this.$http.get('getChartList?id=' + data1.id);
 

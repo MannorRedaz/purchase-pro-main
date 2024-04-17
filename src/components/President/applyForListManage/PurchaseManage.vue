@@ -175,7 +175,7 @@ export default {
     async getPurchaseList() {
       await this.getAcademyList();
       await this.getCategoryList();
-      const data = JSON.parse(window.sessionStorage.getItem("data"));
+      const data = JSON.parse(window.sessionStorage.getItem("data")).data[0];
       const { data: res } = await this.$http.get(
         "president/getPurchaseList1?cid=" + data.cid
       );

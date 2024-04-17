@@ -358,7 +358,7 @@ export default {
     },
   },
   mounted() {
-    const data = JSON.parse(window.sessionStorage.getItem("data"));
+    const data = JSON.parse(window.sessionStorage.getItem("data")).data[0];
     //获取当前id最大值+1，并存储于errol_type
     this.purchaserId = data.data[0].id;
   },
@@ -422,7 +422,7 @@ export default {
       this.$refs.upload.submit();
     },
     async search() {
-      const data = JSON.parse(window.sessionStorage.getItem("data"));
+      const data = JSON.parse(window.sessionStorage.getItem("data")).data[0];
       for (let i = 0; i < this.academyListLi.length; i++) {
         if (this.academyListLi[i].cid == data.cid) {
           this.selects.academy = this.academyListLi[i].academy_name;
@@ -466,7 +466,7 @@ export default {
     async getPurchaseList() {
       await this.getAcademyList();
       await this.getCategoryList();
-      const data = JSON.parse(window.sessionStorage.getItem("data"));
+      const data = JSON.parse(window.sessionStorage.getItem("data")).data[0];
       const { data: res } = await this.$http.get(
         "president/getPurchaseList1?cid=" + data.data[0].cid
       );
@@ -528,7 +528,7 @@ export default {
         return;
       }
 
-      const data = JSON.parse(window.sessionStorage.getItem("data"));
+      const data = JSON.parse(window.sessionStorage.getItem("data")).data[0];
       let tmp = {};
       tmp.id = null;
       tmp.cid = data.data[0].cid;
@@ -562,7 +562,7 @@ export default {
       this.showDetailPurchase = false;
     },
     async delete1(val) {
-      const data = JSON.parse(window.sessionStorage.getItem("data"));
+      const data = JSON.parse(window.sessionStorage.getItem("data")).data[0];
       const { data: res } = await this.$http.get(
         "purchaser/deletePurchase?id=" + val.id
       );
@@ -597,7 +597,7 @@ export default {
           break;
         }
       }
-      const data = JSON.parse(window.sessionStorage.getItem("data"));
+      const data = JSON.parse(window.sessionStorage.getItem("data")).data[0];
 
       this.addModel.cid = data.cid;
       const { data: res } = await this.$http.post("addPurBoard", this.addModel);

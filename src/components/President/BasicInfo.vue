@@ -76,7 +76,7 @@ export default {
     };
   },
   mounted() {
-    const data = JSON.parse(window.sessionStorage.getItem("data"));
+    const data = JSON.parse(window.sessionStorage.getItem("data")).data[0];
     this.dataForm = data;
     this.inital();
     // this.dataForm.id = data.id;
