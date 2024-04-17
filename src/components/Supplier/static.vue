@@ -1,9 +1,6 @@
 <template>
   <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
   <div id="chartLine" class="line-wrap"></div>
-  <!-- <div>
-        <p >1{{message}}nihao1</p> 
-    </div> -->
 </template>
 
 <script>
@@ -36,13 +33,13 @@ export default {
     message1: function (newData) {
       this.date2 = newData;
       // this.getPhotoList(this.newPhotoList)
-      this.getChartList1();
+      this.getChartList();
     },
   },
   mounted() {
     this.inital();
     this.$nextTick(() => {
-      this.drawLineChart();
+      this.getChartList();
     });
 
   },
@@ -108,55 +105,60 @@ export default {
       const data1 = JSON.parse(window.sessionStorage.getItem("data"));
       const { data: res } = await this.$http.get('getChartList?id=' + data1.data[0].id);
       let str = this.$moment(this.date).format("YYYY-MM");
+      const year = this.date.getFullYear();
+      const month = this.date.getMonth() + 1;
+      // 获得当前月的总天数
+      const day = new Date(year, month, 0).getDate()
       //x坐标
       this.xlist[0] = str + "-06";
       this.xlist[1] = str + "-11";
       this.xlist[2] = str + "-16";
       this.xlist[3] = str + "-21";
       this.xlist[4] = str + "-26";
-      this.xlist[5] = str + "-";
-      //y坐标
-
+      this.xlist[5] = str + `-${day}`;
       //钱和时间
       if (res.success) {
         //时间，交易金额
         this.chartList = res.date;
-        // console.log('this.chartList');
-        // console.log(this.chartList);
+        // 初始化
         for (let i = 0; i < 7; i++) {
           this.ylist1[i] = 0;
           this.ylist2[i] = 0;
         }
-        for (let i = 0; i < this.chartList.length; i++) {
-          //在这个月的
-          if (((this.chartList[i].date - 30 * 24 * 60 * 60 * 1000) < (this.date)) && (
-            this.chartList[i].date > (this.date)
-          )) {
-            if ((this.chartList[i].date - 5 * 24 * 60 * 60 * 1000 < this.date)) {
-              this.ylist1[0]++;
-              this.ylist2[0] += this.chartList[i].reality_price;
-            } else if ((this.chartList[i].date - 10 * 24 * 60 * 60 * 1000 < this.date)) {
-              this.ylist1[1]++;
-              this.ylist2[1] += this.chartList[i].reality_price;
-            } else if ((this.chartList[i].date - 15 * 24 * 60 * 60 * 1000 < this.date)) {
-              this.ylist1[2]++;
-              this.ylist2[2] += this.chartList[i].reality_price;
-            } else if ((this.chartList[i].date - 20 * 24 * 60 * 60 * 1000 < this.date)) {
-              this.ylist1[3]++;
-              this.ylist2[3] += this.chartList[i].reality_price;
-            } else if ((this.chartList[i].date - 25 * 24 * 60 * 60 * 1000 < this.date)) {
-              this.ylist1[4]++;
-              this.ylist2[4] += this.chartList[i].reality_price;
-            } else {
-              this.ylist1[5]++;
-              this.ylist2[5] += this.chartList[i].reality_price;
-            }
-          }
-        }
+        // 转换数据格式
+        const data = this.chartList.map(item => ({
+          date: item.date,
+          amount: item.reality_price
+        }));
+        const result = this.calculateTotalAmountForSpecificDates(data);
+        Object.entries(result).forEach(([date, amount], id) => {
+          this.ylist2[id] += amount;
+        });
       }
       this.drawLineChart();
     },
+    calculateTotalAmountForSpecificDates(data) {
+      const currentDate = this.date;
+      const currentMonth = currentDate.getMonth();
+      const currentYear = currentDate.getFullYear();
+      const lastDayOfMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
 
+      const specificDates = [6, 11, 16, 21, 26, lastDayOfMonth]; // 每个月的特定日期
+      const result = {};
+      let index = 0;
+      for (const date of specificDates) {
+        const targetDate = new Date(currentYear, currentMonth, date);
+        // 找到小于等于目标日期的数据
+        const filteredData = data.filter(item => new Date(item.date) <= targetDate);
+        // 计算金额总量
+        const totalAmount = filteredData.reduce((acc, curr) => acc + curr.amount, 0);
+        // 计算数据条目数量
+        const itemCount = filteredData.length;
+        this.ylist1[index++] = itemCount;
+        result[targetDate.toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' })] = totalAmount;
+      }
+      return result;
+    },
     async getChartList1() {
       const data1 = JSON.parse(window.sessionStorage.getItem("data"));
 
