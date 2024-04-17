@@ -24,13 +24,13 @@
       <div style="right: 25%; position: absolute; width: 60%;">
         <static-chart v-bind:message="value2" v-bind:message1="value1" v-bind:message2="value3"></static-chart>
       </div>
-      <div style="right: 5%; position: absolute; width: 25%">
+      <!-- <div style="right: 5%; position: absolute; width: 25%">
         <el-table :data="tableData" :key="tableData.id" style="font-size: 15px; left: 10%" stripe>
-          <el-table-column prop="name" label="公司名称"> </el-table-column>
-          <el-table-column prop="count" label="单数"> </el-table-column>
-          <el-table-column prop="money" label="总金额（元）"> </el-table-column>
+          <el-table-column prop="name" label="公司名称">{{ tableData.name }}</el-table-column>
+          <el-table-column prop="count" label="单数">{{ tableData.count }} </el-table-column>
+          <el-table-column prop="money" label="总金额（元）">{{ tableData.money }} </el-table-column>
         </el-table>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -76,121 +76,154 @@ export default {
       value3: "",
     };
   },
+  // methods: {
+  //   async change() {
+  //     StaticChart.methods.test();
+  //     const { data: res } = await this.$http.get("getChartAllList");
+
+  //     //查询每位供应商给与的数据 获取到supplierid
+  //     let flag = 0;
+  //     let m = 0;
+  //     for (let i = 0; i < res.date.length; i++) {
+  //       for (let j = 0; j < this.supplierList.length; j++) {
+  //         if (res.date[i].sid == this.supplierList[j]) {
+  //           flag = 1;
+  //           break;
+  //         }
+  //       }
+  //       if (flag == 1) flag = 0;
+  //       else {
+  //         this.supplierList.push(res.date[i].sid);
+  //       }
+  //     }
+  //     this.tableData = [];
+  //     for (let j = 0; j < this.supplierList.length; j++) {
+  //       const { data: res } = await this.$http.get("getSupplierChart?id=" + this.supplierList[j]);
+  //       let obj = {};
+  //       obj.name = res.date[0].name;
+  //       obj.money = res.date[0].sid; //钱
+  //       obj.count = res.date[0].id; //次数
+
+  //       if (res.date[0].last_time - 30 * 24 * 60 * 60 * 1000 < this.value2 && res.date[0].last_time > this.value2) {
+  //         this.tableData.push(obj);
+  //         // console.log("push");
+  //         // console.log(this.tableData);
+  //       }
+  //     }
+  //   },
+  //   async change1() {
+  //     StaticChart.methods.test();
+  //     const { data: res } = await this.$http.get("getChartAllList");
+
+  //     //查询每位供应商给与的数据 获取到supplierid
+  //     let flag = 0;
+  //     let m = 0;
+  //     //获取供应商
+  //     for (let i = 0; i < res.date.length; i++) {
+  //       for (let j = 0; j < this.supplierList.length; j++) {
+  //         if (res.date[i].sid == this.supplierList[j]) {
+  //           flag = 1;
+  //           break;
+  //         }
+  //       }
+  //       if (flag == 1) flag = 0;
+  //       else {
+  //         this.supplierList.push(res.date[i].sid);
+  //       }
+  //     }
+  //     this.tableData = [];
+  //     for (let j = 0; j < this.supplierList.length; j++) {
+  //       const { data: res } = await this.$http.get(
+  //         "getSupplierChart?id=" + this.supplierList[j]
+  //       );
+  //       let obj = {};
+  //       obj.name = res.date[0].name;
+  //       obj.money = res.date[0].sid; //钱
+  //       obj.count = res.date[0].id; //次数
+  //       let t1 = res.date[0].last_time - 30 * 24 * 60 * 60 * 1000 < this.value1[1].getTime();
+  //       let t2 = res.date[0].last_time > this.value1[0].getTime();
+  //       if (
+  //         t1 && t2
+  //       ) {
+  //         this.tableData.push(obj);
+  //       }
+  //     }
+  //   },
+  //   async change2() {
+
+  //     const { data: res } = await this.$http.get("getChartAllList");
+  //     //查询每位供应商给与的数据 获取到supplierid
+  //     // console.log("change2")
+  //     let flag = 0;
+  //     let m = 0;
+  //     //获取供应商
+  //     for (let i = 0; i < res.date.length; i++) {
+  //       for (let j = 0; j < this.supplierList.length; j++) {
+  //         if (res.date[i].sid == this.supplierList[j]) {
+  //           flag = 1;
+  //           break;
+  //         }
+  //       }
+  //       if (flag == 1) flag = 0;
+  //       else {
+  //         this.supplierList.push(res.date[i].sid);
+  //       }
+  //     }
+  //     this.tableData = [];
+  //     for (let j = 0; j < this.supplierList.length; j++) {
+  //       const { data: res } = await this.$http.get(
+  //         "getSupplierChart?id=" + this.supplierList[j]
+  //       );
+  //       let obj = {};
+  //       obj.name = res.date[0].name;
+  //       obj.money = res.date[0].sid; //钱
+  //       obj.count = res.date[0].id; //次数
+
+  //       let t1 = res.date[0].last_time - 12 * 30 * 24 * 60 * 60 * 1000 < this.value3.getTime();
+  //       let t2 = res.date[0].last_time > this.value3.getTime();
+  //       if (
+  //         t1 && t2
+  //       ) {
+  //         this.tableData.push(obj);
+  //       }
+  //     }
+  //   },
+  // },
+
   methods: {
-    async change() {
-      StaticChart.methods.test();
+    async change() { await this.processSupplierData(30, this.value2); },
+    async change1() { await this.processSupplierData(30, this.value1[0], this.value1[1]); },
+    async change2() { await this.processSupplierData(12 * 30, this.value3); },
+    async processSupplierData(daysAgo, value1, value2) {
       const { data: res } = await this.$http.get("getChartAllList");
+      const supplierIds = this.getUniqueSupplierIds(res.date);
 
-      //查询每位供应商给与的数据 获取到supplierid
-      let flag = 0;
-      let m = 0;
-      for (let i = 0; i < res.date.length; i++) {
-        for (let j = 0; j < this.supplierList.length; j++) {
-          if (res.date[i].sid == this.supplierList[j]) {
-            flag = 1;
-            break;
-          }
-        }
-        if (flag == 1) flag = 0;
-        else {
-          this.supplierList.push(res.date[i].sid);
-        }
-      }
       this.tableData = [];
-      for (let j = 0; j < this.supplierList.length; j++) {
-        const { data: res } = await this.$http.get(
-          "getSupplierChart?id=" + this.supplierList[j]
-        );
-        let obj = {};
-        obj.name = res.date[0].name;
-        obj.money = res.date[0].sid; //钱
-        obj.count = res.date[0].id; //次数
-        if (
-          res.date[0].last_time - 30 * 24 * 60 * 60 * 1000 < this.value2 &&
-          res.date[0].last_time > this.value2
-        ) {
-          this.tableData.push(obj);
+      for (let j = 0; j < supplierIds.length; j++) {
+        const { data: supplierData } = await this.$http.get("getSupplierChart?id=" + supplierIds[j]);
+        const lastTime = supplierData.date[0].last_time;
+
+        if (lastTime - daysAgo * 24 * 60 * 60 * 1000 < value1.getTime() && lastTime > value2.getTime()) {
+          this.tableData.push({
+            name: supplierData.date[0].name,
+            money: supplierData.date[0].sid,
+            count: supplierData.date[0].id
+          });
         }
       }
     },
-    async change1() {
-      StaticChart.methods.test();
-      const { data: res } = await this.$http.get("getChartAllList");
+    getUniqueSupplierIds(data) {
+      const supplierIds = [];
+      for (let i = 0; i < data.length; i++) {
+        if (!this.supplierList.includes(data[i].sid)) {
+          this.supplierList.push(data[i].sid);
+          supplierIds.push(data[i].sid);
+        }
+      }
+      return supplierIds;
+    }
+  }
 
-      //查询每位供应商给与的数据 获取到supplierid
-      let flag = 0;
-      let m = 0;
-      //获取供应商
-      for (let i = 0; i < res.date.length; i++) {
-        for (let j = 0; j < this.supplierList.length; j++) {
-          if (res.date[i].sid == this.supplierList[j]) {
-            flag = 1;
-            break;
-          }
-        }
-        if (flag == 1) flag = 0;
-        else {
-          this.supplierList.push(res.date[i].sid);
-        }
-      }
-      this.tableData = [];
-      for (let j = 0; j < this.supplierList.length; j++) {
-        const { data: res } = await this.$http.get(
-          "getSupplierChart?id=" + this.supplierList[j]
-        );
-        let obj = {};
-        obj.name = res.date[0].name;
-        obj.money = res.date[0].sid; //钱
-        obj.count = res.date[0].id; //次数
-        let t1 = res.date[0].last_time - 30 * 24 * 60 * 60 * 1000 < this.value1[1].getTime();
-        let t2 = res.date[0].last_time > this.value1[0].getTime();
-        if (
-          t1 && t2
-        ) {
-          this.tableData.push(obj);
-        }
-      }
-    },
-    async change2() {
-
-      const { data: res } = await this.$http.get("getChartAllList");
-      //查询每位供应商给与的数据 获取到supplierid
-      // console.log("change2")
-      let flag = 0;
-      let m = 0;
-      //获取供应商
-      for (let i = 0; i < res.date.length; i++) {
-        for (let j = 0; j < this.supplierList.length; j++) {
-          if (res.date[i].sid == this.supplierList[j]) {
-            flag = 1;
-            break;
-          }
-        }
-        if (flag == 1) flag = 0;
-        else {
-          this.supplierList.push(res.date[i].sid);
-        }
-      }
-      this.tableData = [];
-      for (let j = 0; j < this.supplierList.length; j++) {
-        const { data: res } = await this.$http.get(
-          "getSupplierChart?id=" + this.supplierList[j]
-        );
-        let obj = {};
-        obj.name = res.date[0].name;
-        obj.money = res.date[0].sid; //钱
-        obj.count = res.date[0].id; //次数
-
-        let t1 = res.date[0].last_time - 12 * 30 * 24 * 60 * 60 * 1000 < this.value3.getTime();
-        let t2 = res.date[0].last_time > this.value3.getTime();
-        if (
-          t1 && t2
-        ) {
-          this.tableData.push(obj);
-        }
-      }
-    },
-  },
 };
 </script>
 
