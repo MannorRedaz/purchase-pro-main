@@ -1212,6 +1212,9 @@ export default {
 </script>
 
 <style scoped lang='less'>
+.buttons-box{
+  margin-left: 80px;
+}
 .main-content {
   margin-top: 3%;
 }

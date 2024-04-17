@@ -4,7 +4,6 @@
     <!--功能分区 == 页面上的查询/审核-->
     <div class="function-part">
       <div class="headers">
-
         <el-button @click="release()">发布入围公告</el-button>
       </div>
     </div>
@@ -12,19 +11,27 @@
 
     <!--显示相关的审核数据-->
     <div class="main-content">
-      <el-table :data="applyForBoardList" :key="applyForBoardList.id" style="width: 100%;font-size: 15px;" border
-        stripe>
+      <el-table
+        :data="applyForBoardList"
+        :key="applyForBoardList.id"
+        style="width: 100%; font-size: 15px"
+        border
+        stripe
+      >
         <el-table-column label="序号" type="index"></el-table-column>
         <el-table-column label="公告名" prop="boardname"></el-table-column>
         <el-table-column label="开始时间" prop="startTime"></el-table-column>
         <el-table-column label="结束时间" prop="endTime"></el-table-column>
 
-        <el-table-column label="操作"> <template slot-scope="scope">
-            <el-button type="primary" size="mini" @click="delete1(scope.row)">删除</el-button>
-          </template></el-table-column>
+        <el-table-column label="操作">
+          <template slot-scope="scope">
+            <el-button type="primary" size="mini" @click="delete1(scope.row)"
+              >删除</el-button
+            >
+          </template></el-table-column
+        >
       </el-table>
     </div>
-
 
     <!-- jieguo -->
     <el-dialog title="添加申请" :visible.sync="showDialogVisible">
@@ -32,26 +39,31 @@
         <div>
           <el-form :model="applyForm">
             <label>公告名</label>
-            <el-input v-model="applyForm.boardname" prefix-icon="iconfont icon-3702mima"></el-input>
+            <el-input
+              v-model="applyForm.boardname"
+              prefix-icon="iconfont icon-3702mima"
+            ></el-input>
 
             <span class="demonstration">时间选择</span>
-            <el-date-picker v-model="value1" type="daterange" range-separator="至" start-placeholder="开始日期"
-              end-placeholder="结束日期">
+            <el-date-picker
+              v-model="value1"
+              type="daterange"
+              range-separator="至"
+              start-placeholder="开始日期"
+              end-placeholder="结束日期"
+            >
             </el-date-picker>
-
           </el-form>
         </div>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="addApplyForList(false)">取 消</el-button>
-        <el-button type="primary" @click="addApplyForList(true)">确定添加</el-button>
+        <el-button type="primary" @click="addApplyForList(true)"
+          >确定添加</el-button
+        >
       </div>
     </el-dialog>
-
-
-
   </div>
-
 </template>
 
 <script>
@@ -95,17 +107,16 @@ export default {
           "拍卖物的拆卸费、运输费、建筑物破坏恢复、垃圾清运及其它一切相关费用均由中标人自行承担。",
         acceess: null,
       },
-      value1: '',
+      value1: "",
       applyForm: {
-        boardname: '',
+        boardname: "",
         startTime: new Date(),
         endTime: new Date(),
-
       },
       showResultDialog: false,
       showAddResultDialog: false,
       processVisible: false,
-      supplierId: '',
+      supplierId: "",
       applyForBoardList: [],
       editModel: {},
       showEditDialog: false,
@@ -178,7 +189,10 @@ export default {
     },
     async addApplyForList(val) {
       if (val) {
-        if (this.applyForm.boardname == null || this.applyForm.boardname == "") {
+        if (
+          this.applyForm.boardname == null ||
+          this.applyForm.boardname == ""
+        ) {
           this.$message.warning("请输入完整信息");
           return;
         }
@@ -191,6 +205,7 @@ export default {
         );
         if (res.success) {
           this.$message.success(res.msg);
+          this.getApplyBoard();
         } else {
           this.$message.error(res.msg);
         }
@@ -206,8 +221,9 @@ export default {
     exceedFile(files, fileList) {
       this.$notify.warning({
         title: "警告",
-        message: `只能选择 ${this.limitNum} 个文件，当前共选择了 ${files.length + fileList.length
-          } 个`,
+        message: `只能选择 ${this.limitNum} 个文件，当前共选择了 ${
+          files.length + fileList.length
+        } 个`,
       });
     },
     // 文件状态改变时的钩子
@@ -259,15 +275,16 @@ export default {
     },
 
     async addResultBoard() {
-
-      const { data: res } = await this.$http.get("addResultBoard?id=" + this.supplierId);
+      const { data: res } = await this.$http.get(
+        "addResultBoard?id=" + this.supplierId
+      );
       if (res.success) {
         this.$message.success(res.msg);
+        this.getBoardList();
+        // this.getApplyBoard();
       } else {
         this.$message.error(res.msg);
       }
-
-
     },
     showAddResult(val) {
       this.clickTarget = val;
@@ -329,10 +346,14 @@ export default {
       this.showEditDialog = false;
     },
     async delete1(val) {
-      const { data: res } = await this.$http.get("schoolAdmin/deleteApplyBoard?id=" + val.id);
+      const { data: res } = await this.$http.get(
+        "schoolAdmin/deleteApplyBoard?id=" + val.id
+      );
       if (res.success) {
         this.$message.success(res.msg);
         this.boardListDeal(res.date);
+        // this.getBoardList();
+        this.getApplyBoard();
       } else {
         this.$message.error(res.msg);
       }
@@ -377,7 +398,7 @@ export default {
     async downLoad() {
       window.open(
         "http://localhost:8088/downloadResultFile/?id=" +
-        this.clickTarget.result_id
+          this.clickTarget.result_id
       );
     },
 
@@ -488,12 +509,11 @@ export default {
         }
       }
     },
-    handleSizeChange(res) { },
-    handleCurrentChange() { },
+    handleSizeChange(res) {},
+    handleCurrentChange() {},
     async showDialog(val) {
       if (val.errol_type === 3) {
         // console.log(val.errol_type);
-
 
         const { data: res } = await this.$http.get("getResult?id=" + val.id);
         val.realy_price = res.date[0].reality_price;
@@ -524,8 +544,7 @@ export default {
       // this.$refs.addFormRef.resetFields()
     },
     async search() {
-
-      const data = JSON.parse(window.sessionStorage.getItem('data'));
+      const data = JSON.parse(window.sessionStorage.getItem("data"));
 
       this.selects.academy = "攀枝花学院";
       const { data: res } = await this.$http.post("boardScreen", this.selects);
@@ -557,7 +576,7 @@ export default {
   width: 100px;
 }
 
-.dialog>.el-dialog {
+.dialog > .el-dialog {
   overflow-y: auto !important;
   height: 500px !important;
 }
