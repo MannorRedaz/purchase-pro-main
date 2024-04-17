@@ -8,10 +8,10 @@
       <span class="demonstration">按月选择</span>
       <el-date-picker v-model="value2" @change="change()" type="month" placeholder="选择月">
       </el-date-picker>
-      <span class="demonstration">时间段选择</span>
+      <!-- <span class="demonstration">时间段选择</span>
       <el-date-picker v-model="value1" type="monthrange" align="right" unlink-panels range-separator="至"
         start-placeholder="开始月份" end-placeholder="结束月份" :picker-options="pickerOptions">
-      </el-date-picker>
+      </el-date-picker> -->
     </div>
     <br>
     <!-- <static-chart ></static-chart> -->

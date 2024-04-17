@@ -137,6 +137,29 @@ export default {
       }
       this.drawLineChart();
     },
+    // calculateTotalAmountForSpecificDates(data) {
+    //   const currentDate = this.date;
+    //   const currentMonth = currentDate.getMonth();
+    //   const currentYear = currentDate.getFullYear();
+    //   const lastDayOfMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+    //   const specificDates = [6, 11, 16, 21, 26, lastDayOfMonth]; // 每个月的特定日期
+    //   const result = {};
+    //   let index = 0;
+    //   for (const date of specificDates) {
+    //     const targetDate = new Date(currentYear, currentMonth, date);
+    //     // 找到小于等于目标日期的数据
+    //     const filteredData = data.filter(item => new Date(item.date) <= targetDate);
+    //     // 计算金额总量
+    //     const totalAmount = filteredData.reduce((acc, curr) => acc + curr.amount, 0);
+    //     // 计算数据条目数量
+    //     const itemCount = filteredData.length;
+    //     this.ylist1[index++] = itemCount;
+    //     result[targetDate.toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' })] = totalAmount;
+    //   }
+    //   return result;
+    // },
+
     calculateTotalAmountForSpecificDates(data) {
       const currentDate = this.date;
       const currentMonth = currentDate.getMonth();
@@ -148,12 +171,20 @@ export default {
       let index = 0;
       for (const date of specificDates) {
         const targetDate = new Date(currentYear, currentMonth, date);
-        // 找到小于等于目标日期的数据
-        const filteredData = data.filter(item => new Date(item.date) <= targetDate);
+        const thirtyDaysAgo = new Date(targetDate);
+        thirtyDaysAgo.setDate(targetDate.getDate() - 30);
+
+        // 找到小于等于目标日期并在30天范围内的数据
+        const filteredData = data.filter(item => {
+          const itemDate = new Date(item.date);
+          return itemDate <= targetDate && itemDate >= thirtyDaysAgo;
+        });
+
         // 计算金额总量
         const totalAmount = filteredData.reduce((acc, curr) => acc + curr.amount, 0);
         // 计算数据条目数量
         const itemCount = filteredData.length;
+
         this.ylist1[index++] = itemCount;
         result[targetDate.toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' })] = totalAmount;
       }
