@@ -9,7 +9,7 @@ export class applyManage1JS {
   static getbiddingList() {
     const data = JSON.parse(window.sessionStorage.getItem("data")).data[0];
     let res = axios.get(
-      "supplier/getApplyResultList?sid=" + data.data[0].id
+      "supplier/getApplyResultList?sid=" + data.id
     );
     return res;
   }

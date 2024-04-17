@@ -105,20 +105,8 @@ export default {
   },
   mounted() {
     const data = JSON.parse(window.sessionStorage.getItem("data")).data[0];
-    this.dataForm = data.data[0];
-    
-    // this.dataForm.id = data.id;
-    // this.dataForm.contract_name = data.contract_name;
-    // this.dataForm.tel = data.tel;
-    // console.log(this.dataForm);
-    // this.dataForm.company_name = data.company_name;
-    //  this.dataForm.sid=data.sid,
-    //     this.dataForm.cid=,
-    //     this.dataForm.name: "",
-    //     this.dataForm.pwd: "",
-    //     this.dataForm.account: "",
-    //     this.dataForm.company_place: "",
-    //     this.dataForm.access: "",
+    this.dataForm = data;
+
   },
   methods: {
     async setBasicInfo() {

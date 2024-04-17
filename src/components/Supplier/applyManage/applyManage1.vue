@@ -171,7 +171,7 @@ export default {
       const data = JSON.parse(window.sessionStorage.getItem("data")).data[0];
 
       this.$http
-        .get("supplier/getApplyResultList?sid=" + data.data[0].id)
+        .get("supplier/getApplyResultList?sid=" + data.id)
         .then((res) => {
           // console.log("res");
 

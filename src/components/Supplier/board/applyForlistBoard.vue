@@ -155,7 +155,7 @@ export default {
     },
     async getApplyForList() {
       const data = JSON.parse(window.sessionStorage.getItem("data")).data[0];
-      this.supplierId = data.data[0].id;
+      this.supplierId = data.id;
       const res = await this.$http.get(
         "supplier/getApplyForList?sid=" + this.supplierId
       );
@@ -300,7 +300,7 @@ export default {
     },
     ShowApplyDialog(val) {
       const data = JSON.parse(window.sessionStorage.getItem("data")).data[0];
-      if (data.data[0].access) {
+      if (data.access) {
         this.$message.warning("你已经通过申请");
         return;
       }

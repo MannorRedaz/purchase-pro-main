@@ -102,7 +102,7 @@ export default {
   },
   mounted() {
     const data = JSON.parse(window.sessionStorage.getItem('data'));
-    this.userName = data.data[0].contract_name;
+    this.userName = data.contract_name;
   },
   components: {
     baseDiv

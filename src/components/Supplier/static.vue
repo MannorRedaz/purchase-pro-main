@@ -103,7 +103,7 @@ export default {
     },
     async getChartList() {
       const data1 = JSON.parse(window.sessionStorage.getItem("data")).data[0];
-      const { data: res } = await this.$http.get('getChartList?id=' + data1.data[0].id);
+      const { data: res } = await this.$http.get('getChartList?id=' + data1.id);
       let str = this.$moment(this.date).format("YYYY-MM");
       const year = this.date.getFullYear();
       const month = this.date.getMonth() + 1;

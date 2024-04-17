@@ -360,7 +360,7 @@ export default {
   mounted() {
     const data = JSON.parse(window.sessionStorage.getItem("data")).data[0];
     //获取当前id最大值+1，并存储于errol_type
-    this.purchaserId = data.data[0].id;
+    this.purchaserId = data.id;
   },
   computed: {
     paginatedData() {
@@ -468,7 +468,7 @@ export default {
       await this.getCategoryList();
       const data = JSON.parse(window.sessionStorage.getItem("data")).data[0];
       const { data: res } = await this.$http.get(
-        "president/getPurchaseList1?cid=" + data.data[0].cid
+        "president/getPurchaseList1?cid=" + data.cid
       );
       // console.log("getGoogsList");
       if (res.success) {
@@ -531,8 +531,8 @@ export default {
       const data = JSON.parse(window.sessionStorage.getItem("data")).data[0];
       let tmp = {};
       tmp.id = null;
-      tmp.cid = data.data[0].cid;
-      tmp.sid = data.data[0].sid;
+      tmp.cid = data.cid;
+      tmp.sid = data.sid;
       tmp.tag = this.addTarget.tag;
       tmp.highest_price = this.addTarget.highest_price;
       tmp.product_name = this.addTarget.product_name;

@@ -175,7 +175,7 @@ export default {
     },
     async getApplyForList() {
       const data = JSON.parse(window.sessionStorage.getItem("data")).data[0];
-      this.supplierId = data.data[0].id;
+      this.supplierId = data.id;
       // const { data: res } = await this.$http.get("supplier/getApplyForList?sid=" + this.supplierId);
       const { data: res } = await this.$http.get("supplier/getApplyForList?sid=" + this.supplierId);
       if (res.success) {

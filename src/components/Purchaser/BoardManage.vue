@@ -964,7 +964,7 @@ export default {
       }
 
       const data = JSON.parse(window.sessionStorage.getItem('data'));
-      this.addModel.cid = data.data[0].cid;
+      this.addModel.cid = data.cid;
       this.addModel.apply_time = new Date();
       this.addModel.acceess = 0;
       const { data: res } = await this.$http.post("addPurBoard", this.addModel);
@@ -1067,7 +1067,7 @@ export default {
       await this.getAcademyList();
       await this.getCategoriesList();
       const data = JSON.parse(window.sessionStorage.getItem("data")).data[0];
-      this.addModel.cid = data.data[0].cid;
+      this.addModel.cid = data.cid;
       const { data: res } = await this.$http.get(
         "getAllBoardListByCid?cid=" + this.addModel.cid
       );
