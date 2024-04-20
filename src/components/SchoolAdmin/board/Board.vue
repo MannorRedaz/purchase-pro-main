@@ -226,7 +226,7 @@
         </div>
         <div id="vsb_content" class="content">
           <p><span style="font-size: 16px"></span></p>
-          <!-- <p class="MsoNormal" style="margin: 0cm 0cm 0px;text-align: center;line-height: 35px;mso-line-height-rule: exactly"><span style="color: rgb(51, 51, 51);font-family: 黑体;font-size: 24px;">攀枝花学院废旧铁窗处置拍卖公告<span > -->
+          <!-- <p class="MsoNormal" style="margin: 0cm 0cm 0px;text-align: center;line-height: 35px;mso-line-height-rule: exactly"><span style="color: rgb(51, 51, 51);font-family: 黑体;font-size: 24px;">某大学废旧铁窗处置拍卖公告<span > -->
           <!--?xml:namespace prefix="o" ns="urn:schemas-microsoft-com:office:office" /-->
 
           <!-- </span></p> -->
@@ -577,7 +577,7 @@
                   font-family: 宋体;
                   font-size: 20px;
                 "> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;攀枝花学院</span></span><span lang="EN-US" style="
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;某大学</span></span><span lang="EN-US" style="
                 color: rgb(51, 51, 51);
                 font-family: 'ˎ̥', 'serif';
                 font-size: 20px;
@@ -865,7 +865,7 @@ export default {
 
       // const data=JSON.parse(window.sessionStorage.getItem('data'));
 
-      //     this.selects.academy="攀枝花学院";
+      //     this.selects.academy="某大学";
 
 
       const { data: res } = await this.$http.post(

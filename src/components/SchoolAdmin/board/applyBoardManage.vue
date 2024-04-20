@@ -81,14 +81,14 @@ export default {
         specified: 0,
         reason: "需要一台平板用于显示实时数据",
         tag: "10",
-        purchase_name: "攀枝花学院采购手机公告3",
+        purchase_name: "某大学采购手机公告3",
         publish_time: 1619869906000,
         start_time: 1619783444000,
         end_time: 1619783444000,
         title:
           "我校拟对一批拆下的 废旧铁窗做 公开处置拍卖，现将有关事项公告如下：",
         purpose: "出售废旧铁门铁窗等",
-        site: "攀枝花学院分册中心",
+        site: "某大学分册中心",
         site_inspection_time: 1620215518000,
         qualifications: "有正规营业执照，身份证复印件及其他资质证明",
         notifiedcation: "2021-05-05 19:51:58",
@@ -101,7 +101,7 @@ export default {
         file_place: "http：//baidu。com",
         rules:
           "本次固定资产成批拍卖，轮番报价，报价最高者中标，中标者需要在中标后签订合同，并在两个工作日内付清全部价款才能进行搬运。",
-        auction_site: "攀枝花学院办公楼403",
+        auction_site: "某大学办公楼403",
         is_result: 0,
         others:
           "拍卖物的拆卸费、运输费、建筑物破坏恢复、垃圾清运及其它一切相关费用均由中标人自行承担。",
@@ -546,7 +546,7 @@ export default {
     async search() {
       const data = JSON.parse(window.sessionStorage.getItem("data"));
 
-      this.selects.academy = "攀枝花学院";
+      this.selects.academy = "某大学";
       const { data: res } = await this.$http.post("boardScreen", this.selects);
       this.boardListDeal(res);
     },
