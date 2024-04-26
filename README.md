@@ -1,10 +1,10 @@
-# PurchasePro
+# 实验耗材采购系统--部署文档
 
 ## 简介
 
 项目名称为 采购系统，是一个前后端分离项目，前后端分别使用ssm和Vue框架，数据库使用mysql5.8稳定版本。
 
-其他工具
+## 使用工具
 
 - 使用了maven包管理工具
 - Mybatis-Generator生成sql代码
@@ -13,22 +13,19 @@
 - 后端tomcat 作为服务器
 - 前端使用Node.js
 
-## 主要功能
-
-- 采购申请的审核
-- 公告管理
-- 竞标管理
-- 消息通知
-
 ## 项目结构
 
--- backend后端源码
+-- backend 后端源码
 
--- front前端源码
+-- front 前端源码
 
 -- purchase.sql 数据库源码
 
 ## 如何使用
+
+### 数据库
+
+创建数据库purchase，并在数据库中运行purchase.sql 数据库脚本文件
 
 ### 后端（JAVA1.8）
 
@@ -40,21 +37,15 @@
 
 4、配置好tomcat
 
-5、运行
+5、运行PurchaseApplication启动类
 
 ### 前端
 
 1、安装好node.js
 
-2、使用cnpm install 安装需要的包
+2、使用`npm install `安装需要的包
 
-3、使用 npm run dev 运行
+3、使用` npm run dev`运行
 
-### 数据库
 
-将数据库文件purchase.sql拿过去运行即可
-
-## GIt地址
-
-[https://gitee.com/rediaz/purchase-pro-main](https://gitee.com/rediaz/purchase-pro-main)
 
